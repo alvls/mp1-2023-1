@@ -1,6 +1,6 @@
 #include "length_converter.h"
 
-int main() {
+int main(int argc, char* argv[]) {
     std::cout << "Creating an object of class LengthConverter" << std::endl;
     LengthConverter lc{};
     std::cout << "Current length in meters: " << lc.get_length() << std::endl;  // 0 by default
@@ -19,6 +19,7 @@ int main() {
     std::cout << "Current length in yards: " << lc.GetLengthInYards() << std::endl;
     std::cout << "Current length in fathoms: " << lc.GetLengthInFathoms() << std::endl;
     lc.PrintInformation();
+
     system("pause");
-    return 0;
+    return EXIT_SUCCESS;
 }
