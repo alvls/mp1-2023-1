@@ -81,21 +81,18 @@ public:
 			{
 				step_over_time(args[0], args[1], args[2]);
 			}
-
 			else if (hours == args[0])
 			{
 				if (minutes < args[1])
 				{
 					step_over_time(args[0], args[1], args[2]);
 				}
-
 				else if (minutes == args[1])
 				{
 					if (seconds < args[2])
 					{
 						step_over_time(args[0], args[1], args[2]);
 					}
-
 					else if (seconds = args[2])
 					{
 						hours = 0;
@@ -104,7 +101,6 @@ public:
 					}
 				}
 			}
-
 			else
 			{
 				vector<int> new_data = calculations(args[0], args[1], args[2]);
@@ -115,7 +111,6 @@ public:
 
 			cout << "\nВремя успешно изменено!\n\n" << endl;
 		}
-
 		else if (s == '+')
 		{
 			int cnt_m = 0, cnt_h = 0;
@@ -125,7 +120,6 @@ public:
 				seconds += args[2] - 60;
 				cnt_m++;
 			}
-
 			else
 			{
 				seconds += args[2];
@@ -136,7 +130,6 @@ public:
 				minutes += args[1] + cnt_m - 60;
 				cnt_h++;
 			}
-
 			else
 			{
 				minutes += args[1] + cnt_m;
@@ -151,7 +144,6 @@ public:
 
 			cout << "\nВремя успешно изменено!\n\n";
 		}
-
 		else
 		{
 			cin.ignore(cin.rdbuf()->in_avail());
@@ -200,8 +192,8 @@ private:
 		}
 		
 		int &user_hours_ref = user_hours;
-		int& user_minutes_ref = user_minutes;
-		int& user_seconds_ref = user_seconds;
+		int &user_minutes_ref = user_minutes;
+		int &user_seconds_ref = user_seconds;
 
 		return {user_hours_ref, user_minutes_ref, user_seconds_ref };
 	}
@@ -219,7 +211,6 @@ private:
 			user_seconds = switched[2];
 			flag = true;
 		}
-
 		else if (hours == user_hours)
 		{
 			if (minutes < user_minutes)
@@ -230,7 +221,6 @@ private:
 				user_seconds = switched[2];
 				flag = true;
 			}
-
 			else if (minutes == user_minutes)
 			{
 				if (seconds < user_seconds)
@@ -254,7 +244,6 @@ private:
 				new_seconds = 60 + seconds - user_seconds;
 				cnt_m++;
 			}
-
 			else
 			{
 				new_minutes = abs(minutes - user_minutes);
@@ -264,14 +253,12 @@ private:
 					new_seconds = 60 + seconds - user_seconds;
 					cnt_m++;
 				}
-
 				else
 				{
 					new_seconds = abs(seconds - user_seconds);
 				}
 			}
 		}
-
 		else
 		{
 			new_seconds = seconds - user_seconds;
@@ -284,13 +271,11 @@ private:
 				new_minutes = 60 + minutes - user_minutes - cnt_m;
 				new_hours--;
 			}
-
 			else
 			{
 				new_minutes = abs(minutes - cnt_m - user_minutes);
 			}
 		}
-
 		else
 		{
 			if ((minutes - user_minutes) == 0)
@@ -300,19 +285,16 @@ private:
 					new_seconds = abs(seconds - user_seconds);
 					new_minutes = 0;
 				}
-
 				else if (cnt_m == 0)
 				{
 					new_minutes = 0;
 				}
-
 				else
 				{
 					new_minutes = 59;
 					new_hours--;
 				}
 			}
-
 			else
 			{
 				new_minutes = abs(minutes - cnt_m - user_minutes);
@@ -354,6 +336,7 @@ private:
 		hours = new_data[0];
 		minutes = new_data[1];
 		seconds = new_data[2];
+
 		vector<int> new_data1 = calculations(24, 0, 0);
 		hours = new_data1[0];
 		minutes = new_data1[1];
@@ -364,9 +347,7 @@ private:
 };
 
 
-Time t;
-
-void choose_func()
+void choose_func(Time t)
 {
 	int function_number;
 
@@ -386,32 +367,33 @@ void choose_func()
 		switch (function_number)
 		{
 		case 1: t.set_time();
-			choose_func();
+			choose_func(t);
 
 		case 2: t.take_time();
-			choose_func();
+			choose_func(t);
 
 		case 3: t.difference();
-			choose_func();
+			choose_func(t);
 
 		case 4: t.move_time();
-			choose_func();
+			choose_func(t);
 
 		default:
-			choose_func();
+			choose_func(t);
 		}
 	}
-
 	else
 	{
 		cout << "\nОшибка ввода!\n\n" << endl;
-		choose_func();
+		choose_func(t);
 	}
 }
 
 void main() 
 {
 	setlocale(LC_ALL, "");
-	
-	choose_func();
+
+	Time t;
+
+	choose_func(t);
 }
