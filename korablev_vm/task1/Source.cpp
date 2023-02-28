@@ -98,16 +98,13 @@ public:
 	{
 		long num = fr.numerator;
 		long den = long (fr.denominator);
-		unsigned long num2;
 		if (num < 0)
 		{
 			den *= -1;
 			num *= -1;
-			num2 = unsigned long(num);
 		}
-		else
-			num2 = unsigned long(num);
-		MultipAndDiv(den,num2);
+		num = unsigned long(num);
+		MultipAndDiv(den,num);
 	}
 };
 RationalFraction SecondFraction()//загрузка следующей дроби для вычислений
@@ -115,7 +112,7 @@ RationalFraction SecondFraction()//загрузка следующей дроби для вычислений
 	long a;
 	unsigned long b;
 	RationalFraction EmptySecond;
-	cout << "\nВведите знаменатель дроби: ";
+	cout << "\nВведите числитель дроби: ";
 	cin >> a;
 	do
 	{
@@ -134,6 +131,7 @@ void main()
 {
 	setlocale(LC_ALL, "Russian");
 	system("title Калькулятор рациоенальных дробей");
+	hidecursor();
 	cout << "Добро пожаловать в калькулятор рациональных дробей!" << endl;
 	cout << "Для начала вам понадобится ввести числитель и знаменатель первой дроби," << endl;
 	cout << "затем выбрать операцию и, по необходимости, ввести данные следующей дроби. И так столько, сколько необходимо" << endl;
