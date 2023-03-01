@@ -124,7 +124,7 @@ RationalFraction SecondFraction()//загрузка следующей дроб�
 	return EmptySecond;
 }
 
-int menu_mode(char* arr[], int size, RationalFraction r);//интерактивное меню
+int menu_mode(string* arr, int size, RationalFraction r);//интерактивное меню
 void exit_prog();
 
 void main()
@@ -133,11 +133,11 @@ void main()
 	system("title Калькулятор рациоенальных дробей");
 	system("chcp 1251");
 	system("cls");
-	hidecursor();
 	cout << "Добро пожаловать в калькулятор рациональных дробей!" << endl;
 	cout << "Для начала вам понадобится ввести числитель и знаменатель первой дроби," << endl;
 	cout << "затем выбрать операцию и, по необходимости, ввести данные следующей дроби. И так столько, сколько необходимо" << endl;
 	cout << "Важно! Знак дроби указывается вместе с числителем." << endl;
+	hidecursor();
 	system("pause");
 	system("cls");
 start:
@@ -153,7 +153,7 @@ start:
 	} while (b == 0);
 	RationalFraction fraction(a, b);
 	system("cls");
-	char* functions[] = {"\t\tВыберите необходимую функцию:","> Сложение","> Вычитание", "> Умножение", "> Деление", "> Новое вычисление", "> Выйти из программы", };
+	string functions[] = {"\t\tВыберите необходимую функцию:","> Сложение","> Вычитание", "> Умножение", "> Деление", "> Новое вычисление", "> Выйти из программы",};
 	RationalFraction NextFraction;
 	int repeat = 1;
 	while (repeat == 1)
@@ -189,7 +189,7 @@ start:
 }
 
 
-int menu_mode(char* arr[], int size, RationalFraction r)
+int menu_mode(string* arr, int size, RationalFraction r)
 {
 	char ch = 0;
 	int choice = 1, i;
@@ -206,7 +206,7 @@ int menu_mode(char* arr[], int size, RationalFraction r)
 			{
 				textcolor(WHITE);
 			}
-			printf("%s \n", arr[i]);
+			cout << arr[i] << endl;
 		}
 		hidecursor();
 		textcolor(WHITE);
