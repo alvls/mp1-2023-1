@@ -195,6 +195,7 @@ int menu_mode(string* arr, int size, RationalFraction r)
 	int choice = 1, i;
 	while (ch != 13)
 	{
+		system("cls");
 		r.GetFraction();
 		for (i = 0; i < size; i++)
 		{
