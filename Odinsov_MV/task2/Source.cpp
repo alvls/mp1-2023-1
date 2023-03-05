@@ -29,6 +29,8 @@ class scales {
 			cout << weightfunt;
 			cout << "\n";
 		}
+
+
 };
 void main() {
 	double ans_1;

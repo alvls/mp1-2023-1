@@ -11,7 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\task1\Source.cpp">
+    <ClCompile Include="Scource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
