@@ -20,7 +20,7 @@ using namespace std;
 class Polinom
 {
 	int deg; //степень полинома
-	int mon[12] = { 0 };//массив коэффициентов
+	int mon[13] = { 0 };//массив коэффициентов
 public:
 	Polinom(int dg)
 	{
@@ -29,6 +29,8 @@ public:
 	void change_deg(int dg)//изменение степени
 	{
 		this->deg = dg;
+		if (mon[dg] == 0)
+			mon[dg] = 1;
 	}
 	void change_mon(int coef, int index)//задание коэффициента
 	{
@@ -86,12 +88,12 @@ public:
 				if (mon[1] == 1)
 					cout << "x";
 				else if (mon[1] != 0)
-					cout << mon[1] << "x";
+					cout << noshowpos << mon[1] << "x";
 				if (mon[0] != 0)
 					cout << showpos << mon[0];
 			}
 			else
-				cout << mon[0];
+				cout << noshowpos << mon[0];
 		}
 		cout << endl;
 	}
@@ -123,8 +125,7 @@ void main()
 	Polinom pol(0);
 	Polinom der(0);
 	string functions[] = { "\t\tВыберите желаемое действие:","> Задать новый полином","> Задать степень полинома","> Задать коэффициенты мономов", "> Узнать степень полинома", "> Узнать значение коэффициента", "> Вычислить значение полинома", "> Вычислить производную полинома", "> Выйти из программы" };
-	int repeat = 1;
-	while (repeat==1)
+	while (1)
 	{
 		pol_deg = 0;
 		int funct = menu_mode(functions, 9, pol);
