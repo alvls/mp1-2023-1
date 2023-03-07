@@ -23,6 +23,7 @@ public:
 
     DynamicArray(const DynamicArray &externalArr) {
         array = new double[externalArr.length];
+        length = externalArr.getLength();
         for (int i = 0; i < externalArr.length; i++) {
             array[i] = externalArr.array[i];
         }
