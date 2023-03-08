@@ -8,8 +8,8 @@ using namespace std;
 class dynamic_array
 {
 public:
-	int size, size2;
-	double *arr, *arr2;
+	int size;
+	double *arr;
 
 	void Create_arr() {
 		srand(time(NULL));
