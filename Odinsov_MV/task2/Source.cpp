@@ -1,72 +1,138 @@
-#include <iostream>
+﻿#include <iostream>
 #include <locale.h>
+#include <string.h>
 using namespace std;
-class scales {
-	double weightkg;
-	public:
-		scales(void) {
-			weightkg = 0.0;
+class strin {
+	char* str;
+	int size;
+public:
+	strin(const char* s) {
+		size = strlen(s);
+		str = new char[size + 1];
+		strcpy(str, s);
+	}
+	void getstr() {
+		cout << str << "\n";
+	}
+	void getsize() {
+		cout << size << "\n";
+	}
+	void getsymb(int ind) {
+		cout << str[ind];
+		cout << "\n";
+	}
+	void changesimb(int ind, char ans) {
+		str[ind] = ans;
+		cout << str << "\n";
+	}
+	char* substring(int start, int finish) {
+		char* str2;
+		int l = finish - start + 1;
+		str2 = new char[l + 1];
+		memset(str2, '\0', l + 1);
+		strncpy(str2, str + start, l);
+		cout << str2 << "\n";
+		return str2;
+	}
+	bool ispalindrom() {
+		for (int i = 0; i < size / 2; i++) {
+			if (str[i] != str[size - i - 1]) {
+				cout << "No\n";
+				return false;
+			}
 		}
-		void setkg(double weight) {
-			weightkg = weight;
+		cout << "Yes\n";
+		return true;
+	}
+	int countsymb() {
+		int c[40];
+		int count = 0;
+		for (int i = 0; i < size; i++) {
+			c[i] = 1;
 		}
-		void getkg() {
-			cout << weightkg;
-			cout << "\n";
+		for (int i = 0; i < size; i++) {
+			if ((int)str[i] >= 97 && (int)str[i] <= 122)
+			{
+				if (c[i] == 1) {
+					count++;
+				}
+			}
+			for (int j = i + 1; j < size; j++) {
+				if (str[i] == str[j]) {
+					c[j] = 0;
+				}
+			}
 		}
-		void getberkovets() {
-			double weightberkovets = weightkg / 163.8;
-			cout << weightberkovets;
-			cout << "\n";
-		}
-		void getpuds() {
-			double weightpuds = weightkg / 16.38;
-			cout << weightpuds;
-			cout << "\n";
-		}
-		void getfunt() {
-			double weightfunt = weightkg / 0.4095;
-			cout << weightfunt;
-			cout << "\n";
-		}
-
-
+		cout << count << "\n";
+		return count;
+	}
+	void changestr(char* s) {
+		size = strlen(s);
+		strcpy(str, s);
+		
+	}
+	~strin() {
+		delete[] str;
+	}
 };
 void main() {
-	double ans_1;
-	int ans_2,flag=1;
+	char s1[40];
+	int ind, flag = 1;
+	int start, finish;
+	int ans;
+	char ans1;
 	setlocale(LC_ALL, "Russian");
-	scales h;
-	cout << "������� ��� � �����������\n";
-	cin >> ans_1;
-	h.setkg(ans_1);
+	cout << "Введите строку\n";
+	cin >> s1;
+	strin h(s1);
 	while (flag) {
-		cout << "1 ������ ��� � � �����������\n";
-		cout << "2 ������ ��� � ���������\n";
-		cout << "3 ������ ��� � �����\n";
-		cout << "4 ������ ��� � ������ ��������\n";
-		cout << "5 ������� ��� � �����������\n";
-		cout << "6 �����\n";
-		cin >> ans_2;
-		switch (ans_2)
-		{
+		cout << "1 вывести строку \n";
+		cout << "2 узнать длину строки \n";
+		cout << "3 получить символ по его индексу \n";
+		cout << "4 изменить символ строки по заданному индексу \n";
+		cout << "5 выделить подстроку из строки \n";
+		cout << "6 проверить, является ли строка палиндромом \n";
+		cout << "7 найти сколько символов латинского алфавита находится в строке \n";
+		cout << "8 изменить строку \n";
+		cout << "9 выход \n";
+		cin >> ans;
+		switch (ans) {
 		case 1:
-			h.getkg();
+			h.getstr();
 			break;
 		case 2:
-			h.getberkovets();
+			h.getsize();
 			break;
 		case 3:
-			h.getpuds();
+			cout << "Введите индекс\n";
+			cin >> ind;
+			h.getsymb(ind);
 			break;
 		case 4:
-			h.getfunt();
+			cout << "Введите на какой символ вы хотите изменить\n";
+			cin >> ans1;
+			cout << "Введите индекс \n";
+			cin >> ind;
+			h.changesimb(ind, ans1);
 			break;
 		case 5:
-			cin >> ans_1;
-			h.setkg(ans_1);
+			cout << "Введите индекс начала и конца подстроки\n";
+			cin >> start;
+			cin >> finish;
+			h.substring(start, finish);
 			break;
 		case 6:
+			h.ispalindrom();
+			break;
+		case 7:
+			h.countsymb();
+			break;
+		case 8:
+			cout << "Введите строку\n";
+			cin >> s1;
+			h.changestr(s1);
+			break;
+		case 9:
 			flag = 0;
 			break;
 		}
