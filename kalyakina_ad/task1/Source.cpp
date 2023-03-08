@@ -278,6 +278,7 @@ void begining_ending(Weight w)
 		}
 	} while (num != -1);
 	std::cout << "До свидания! Хорошего Вам дня)" << std::endl << std::endl;
+	system("pause");
 }
 
 void main()
