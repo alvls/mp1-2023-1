@@ -118,7 +118,6 @@ int main()
 
 	dynamic_array a;
 	a.SetSize(size);
-	a.output();
 
 	cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
 	cin >> choice;
