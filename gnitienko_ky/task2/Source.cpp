@@ -212,5 +212,4 @@ void main() {
 
 		}
 	}
-	m.~Matrix();
 }
