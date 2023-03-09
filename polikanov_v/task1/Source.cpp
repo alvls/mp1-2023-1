@@ -51,7 +51,6 @@ void main() {
 	setlocale(LC_ALL, "Russian");
 
 	TemperatureConverter converter;
-
 	converter.set_degC(38.2);
 	cout << converter.toDegF() << endl;
 	cout << converter.get_degC() << endl;
