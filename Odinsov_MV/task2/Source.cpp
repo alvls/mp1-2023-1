@@ -111,12 +111,13 @@ void main() {
 		case 4:
 			cout << "Введите на какой символ вы хотите изменить\n";
 			cin >> ans1;
-			cout << "Введите индекс \n";
+			cout << " \n";
+			cout << "ведите индекс \n";
 			cin >> ind;
 			h.changesimb(ind, ans1);
 			break;
 		case 5:
-			cout << "Введите индекс начала и конца подстроки\n";
+			cout << "введите индекс начала и конца подстроки\n";
 			cin >> start;
 			cin >> finish;
 			h.substring(start, finish);
