@@ -1,5 +1,4 @@
 ﻿#include <iostream>
-#include <locale.h>
 #include <string.h>
 using namespace std;
 class strin {
@@ -81,20 +80,19 @@ void main() {
 	int start, finish;
 	int ans;
 	char ans1;
-	setlocale(LC_ALL, "Russian");
-	cout << "Введите строку\n";
+	cout << "Enter the string\n";
 	cin >> s1;
 	strin h(s1);
 	while (flag) {
-		cout << "1 вывести строку \n";
-		cout << "2 узнать длину строки \n";
-		cout << "3 получить символ по его индексу \n";
-		cout << "4 изменить символ строки по заданному индексу \n";
-		cout << "5 выделить подстроку из строки \n";
-		cout << "6 проверить, является ли строка палиндромом \n";
-		cout << "7 найти сколько символов латинского алфавита находится в строке \n";
-		cout << "8 изменить строку \n";
-		cout << "9 выход \n";
+		cout << "1 output a string \n";
+		cout << "2 find the length of a string \n";
+		cout << "3 get character by its index \n";
+		cout << "4 change character of string at given index \n";
+		cout << "5 extract a substring from a string \n";
+		cout << "6 check if a string is a palindrome \n";
+		cout << "7 find how many characters of the latin alphabet are in a string \n";
+		cout << "8 change string \n";
+		cout << "9 exit \n";
 		cin >> ans;
 		switch (ans) {
 		case 1:
@@ -104,20 +102,20 @@ void main() {
 			h.getsize();
 			break;
 		case 3:
-			cout << "Введите индекс\n";
+			cout << "Enter index\n";
 			cin >> ind;
 			h.getsymb(ind);
 			break;
 		case 4:
-			cout << "Введите на какой символ вы хотите изменить\n";
+			cout << "Enter which character you want to change to\n";
 			cin >> ans1;
 			cout << " \n";
-			cout << "ведите индекс \n";
+			cout << "Enter index \n";
 			cin >> ind;
 			h.changesimb(ind, ans1);
 			break;
 		case 5:
-			cout << "введите индекс начала и конца подстроки\n";
+			cout << "enter index of start and end of substring\n";
 			cin >> start;
 			cin >> finish;
 			h.substring(start, finish);
@@ -129,7 +127,7 @@ void main() {
 			h.countsymb();
 			break;
 		case 8:
-			cout << "Введите строку\n";
+			cout << "Enter the strin\n";
 			cin >> s1;
 			h.changestr(s1);
 			break;
