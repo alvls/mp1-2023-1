@@ -6,28 +6,28 @@ using namespace std;
 const int MAX_SIZE = 20;
 const int MIN_SIZE = 1;
 
+inline void validate_vector_size(int size)
+{
+	if (size < MIN_SIZE || size > MAX_SIZE)
+	{
+		throw std::invalid_argument("Указанный размер вектора не соответствует допустимому диапазону (от 1 до 20)");
+	}
+}
+
+inline void validate_vector_component(int size, int index)
+{
+	if (index < MIN_SIZE || index > size)
+	{
+		throw std::invalid_argument("Указанный номер компоненты некорректен");
+	}
+}
+
 class Vector
 {
 private:
 	int* arr;
 	int size;
 public:
-	inline void validate_vector_size(int size)
-	{
-		if (size < MIN_SIZE || size > MAX_SIZE)
-		{
-			throw std::invalid_argument("Указанный размер вектора не соответствует допустимому диапазону (от 1 до 20)");
-		}
-	}
-
-	inline void validate_vector_component(int size, int index)
-	{
-		if (index < MIN_SIZE || index > size)
-		{
-			throw std::invalid_argument("Указанный номер компоненты некорректен");
-		}
-	}
-
 	Vector(int size) // Конструктор
 	{
 		validate_vector_size(size);
@@ -48,7 +48,7 @@ public:
 		if (this == &vec)
 			return *this;
 
-		if (size < vec.size)
+		if (size != vec.size)
 		{
 			delete[] arr;
 			arr = new int[vec.size];
@@ -176,10 +176,10 @@ int main()
 	vec2.SetComponent(4, 2);
 	
 
-	cout <<"Первый вектор:" << endl;
+	cout <<"Первый вектор" << endl;
 	vec1.Print();
 
-	cout << endl << "Второй вектор:" << endl;
+	cout << endl << "Второй вектор" << endl;
 	vec2.Print();
 
 
