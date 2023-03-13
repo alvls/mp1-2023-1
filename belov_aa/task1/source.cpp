@@ -40,11 +40,6 @@ public:
     }
     void multiply(RationalFraction fraction)
     {
-        if (fraction.denominator == 0)
-        {
-            throw std::invalid_argument("Incorrect fraction. The denominator must not contain zero");
-        }
-
         this->numerator *= fraction.numerator;
         this->denominator *= fraction.denominator;
 
@@ -52,9 +47,9 @@ public:
     }
     void divide(RationalFraction fraction)
     {
-        if (fraction.numerator * fraction.denominator == 0) // если хотя бы один из двух множителей = 0, то и их произведение = 0
+        if (fraction.numerator == 0)
         {
-            throw std::invalid_argument("Incorrect fraction. The denominator must not contain zero");
+            throw std::invalid_argument("Incorrect fraction");
         }
 
         this->numerator *= fraction.denominator;
@@ -92,10 +87,10 @@ public:
     }
 };
 
-int main() // функция использовалась для отладки
+int main()
 {
     RationalFraction fraction(2, 3);
-    fraction.divide({ 3, 14 });
+    fraction.divide({ 0, 5 });
     fraction.print();
 
     system("PAUSE");

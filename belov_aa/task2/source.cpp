@@ -15,7 +15,7 @@ public:
     {
         if ((degree < 0) || (degree > 12))
         {
-            throw std::invalid_argument("Incorrect degree");;
+            throw std::invalid_argument("Incorrect degree");
         }
 
         max_degree = degree + 1;
@@ -69,22 +69,22 @@ public:
         return os;
     } 
 
-    double get_coeff(int power) // узнать значение коэффициента по его номеру
+    double get_coeff(int power) // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     {
         return coeffs[power];
     }
 
-    void set_coeff(int power, double value) // задать коэффициент для монома степени power
+    void set_coeff(int power, double value) // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ power
     { 
         coeffs[power] = value;
     } 
 
-    int get_degree() // узнать степень полинома
+    int get_degree() // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     { 
         return max_degree - 1; 
     } 
 
-    void set_degree(int degree) // задать степень полинома
+    void set_degree(int degree) // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     {
         if (max_degree == degree)
         {
@@ -101,7 +101,7 @@ public:
         coeffs = new_coeffs;
     }
 
-    double calc(double x) // вычисление значения полинома в заданной точке х
+    double calc(double x) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ
     {
         double result = 0;
         for (int i = 0; i < max_degree; i++)
@@ -111,7 +111,7 @@ public:
         return result;
     }
 
-    Polynomial derivative() // вычисление производной
+    Polynomial derivative() // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     { 
         Polynomial result(get_degree() - 1);
         for (int i = 1; i < max_degree; i++) 
@@ -122,7 +122,7 @@ public:
     }
 }; 
  
-void main() // отладка
+void main() // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 {
     Polynomial polynom(4);
 
