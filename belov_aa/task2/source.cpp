@@ -1,6 +1,7 @@
 #include <iostream> 
 #include <cmath> 
 #include <algorithm>
+#include <stdexcept>
  
 using namespace std; 
  
@@ -14,9 +15,7 @@ public:
     {
         if ((degree < 0) || (degree > 12))
         {
-            cerr << "Wrong degree" << endl;
-            abort();
-            return;
+            throw std::invalid_argument("Incorrect degree");;
         }
 
         max_degree = degree + 1;

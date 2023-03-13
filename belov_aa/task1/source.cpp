@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -23,44 +24,41 @@ private:
         denominator /= a;
     }
 public:
-    void add(int numerator, int denominator)
+    void add(RationalFraction fraction)
     {
-        this->numerator = this->numerator * denominator + numerator * this->denominator;
-        this->denominator *= denominator;
+        this->numerator = this->numerator * fraction.denominator + fraction.numerator * this->denominator;
+        this->denominator *= fraction.denominator;
 
         ReduceFraction();
     }
-    void subtract(int numerator, int denominator)
+    void subtract(RationalFraction fraction)
     {
-        this->numerator = this->numerator * denominator - numerator * this->denominator;
-        this->denominator *= denominator;
+        this->numerator = this->numerator * fraction.denominator - fraction.numerator * this->denominator;
+        this->denominator *= fraction.denominator;
 
         ReduceFraction();
     }
-    void multiply(int numerator, int denominator)
+    void multiply(RationalFraction fraction)
     {
-        if (denominator == 0)
+        if (fraction.denominator == 0)
         {
-            cout << "Second fraction is incorrect. The denominator must not contain zero\n";
+            throw std::invalid_argument("Incorrect fraction. The denominator must not contain zero");
         }
-        else
-        {
-            this->numerator *= numerator;
-            this->denominator *= denominator;
 
-            ReduceFraction();
-        }
+        this->numerator *= fraction.numerator;
+        this->denominator *= fraction.denominator;
+
+        ReduceFraction();
     }
-    void divide(int numerator, int denominator)
+    void divide(RationalFraction fraction)
     {
-        if (numerator * denominator == 0) // если хотя бы один из двух множителей = 0, то и их произведение = 0
+        if (fraction.numerator * fraction.denominator == 0) // если хотя бы один из двух множителей = 0, то и их произведение = 0
         {
-            cout << "Second fraction is incorrect. The numerator and denominator must not contain zero!\n";
-            return;
+            throw std::invalid_argument("Incorrect fraction. The denominator must not contain zero");
         }
 
-        this->numerator *= denominator;
-        this->denominator *= numerator;
+        this->numerator *= fraction.denominator;
+        this->denominator *= fraction.numerator;
 
         ReduceFraction();
     }
@@ -82,24 +80,22 @@ public:
     }
     RationalFraction(int numerator, int denominator)
     {
-        this->numerator = numerator;
-        this->denominator = denominator;
-
         if (denominator == 0)
         {
-            cout << "The denominator must not contain zero!\n";
+            throw std::invalid_argument("Incorrect fraction. The denominator must not contain zero");
         }
-        else
-        {
-            ReduceFraction();
-        }
+
+        this->numerator = numerator;
+        this->denominator = denominator;
+        
+        ReduceFraction();
     }
 };
 
 int main() // функция использовалась для отладки
 {
-    RationalFraction fraction(1, 4);
-    fraction.divide(3, 2);
+    RationalFraction fraction(2, 3);
+    fraction.divide({ 3, 14 });
     fraction.print();
 
     system("PAUSE");
