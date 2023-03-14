@@ -21,25 +21,10 @@ public:
 		minutes = ltm->tm_min;
 		seconds = ltm->tm_sec;
 	}
-	void EnterTime() {
-		cout << "Часы: ";
-		cin >> UserHours;
-		while (UserHours < 0 || UserHours > 23) {
-			cout << "Введите корректное кол-во часов: ";
-			cin >> UserHours;
-		}
-		cout << "Минуты: ";
-		cin >> UserMinutes;
-		while (UserMinutes < 0 || UserMinutes > 59) {
-			cout << "Введите корректное кол-во минут: ";
-			cin >> UserMinutes;
-		}
-		cout << "Секунды: ";
-		cin >> UserSeconds;
-		while (UserSeconds < 0 || UserSeconds > 59) {
-			cout << "Введите корректное кол-во секунд: ";
-			cin >> UserSeconds;
-		}
+	void EnterTime(int a, int b, int c) {
+		UserHours = a;
+		UserMinutes = b;
+		UserSeconds = c;
 	}
 	void Print1() {
 		cout << "Текущее время: " << hours << ":" << minutes << ":" << seconds << endl;
@@ -96,12 +81,31 @@ public:
 };
 
 void main() {
+	int a, b, c;
 	setlocale(LC_CTYPE, "Rus");
 	Time t;
 	t.Print1();
 	//*********************************************//
 	cout << "Введите любое время: " << endl;
-	t.EnterTime();
+	cout << "Часы: ";
+	cin >> a;
+	while (a < 0 || a > 23) {
+		cout << "Введите корректное кол-во часов: ";
+		cin >> a;
+	}
+	cout << "Минуты: ";
+	cin >> b;
+	while (b < 0 || b > 59) {
+		cout << "Введите корректное кол-во минут: ";
+		cin >> b;
+	}
+	cout << "Секунды: ";
+	cin >> c;
+	while (c < 0 || c > 59) {
+		cout << "Введите корректное кол-во секунд: ";
+		cin >> c;
+	}
+	t.EnterTime(a, b, c);
 	t.Print2();
 	t.Difference();
 	system("pause");
