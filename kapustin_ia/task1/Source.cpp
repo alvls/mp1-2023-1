@@ -2,14 +2,13 @@
 using namespace std;
 class temperature_converter
 {
-	double c;
+	double CelsiusTemperature;
 	int temp;
 public:
-	double CelsiusTemperature;
-	void inPut()
+
+	temperature_converter(double t)
 	{
-		cout << "Введите текущую температуру. " << endl;
-		cin >> CelsiusTemperature;
+		CelsiusTemperature = t;
 	}
 	void MainPrint()
 	{
@@ -17,15 +16,11 @@ public:
 		cout << "Чтобы узнать текущую температуру по шкале Фаренгейта введите - 2. " << endl;
 		cout << "Чтобы узнать текущую температуру по шкале Кельвина введите - 3. " << endl;
 		cout << "Чтобы узнать текущую температуру по шкале Ранкина введите - 4. " << endl;
-		cout << "Чтобы обновить текущую температуру по шкале Цельсия введите - 5. " << endl;
+		cout << "Чтобы закрыть консоль введите - 0. " << endl;
 	}
-	void swap()
+	void swap(int temp)
 	{
-		do
-		{
-			cout << "Введите номер преобразования. Чтобы закрыть консоль введите - 0." << endl;
-			cin >> temp;
-			if (temp > 5 || temp < 0)
+			if (temp > 4 || temp < 0)
 			{
 				cout << "Введено некорректное значение!" << endl;
 			}
@@ -44,13 +39,9 @@ public:
 			case 4:
 				Rankin(CelsiusTemperature);
 				break;
-			case 5:
-				inPut();
-				break;
 			case 0:
 				break;
 			}
-		} while (temp != 0);
 	}
 	void Rankin(double Celsius)
 	{
@@ -82,10 +73,15 @@ public:
 };
 int main()
 {
+	int temp;
 	setlocale(LC_ALL, "ru");
-	temperature_converter t;
-	t.inPut();
+	temperature_converter t(30);
 	t.MainPrint();
-	t.swap();
+	do
+	{
+		cout << "Введите номер преобразования." << endl;
+		cin >> temp;
+		t.swap(temp);
+	} while (temp != 0);
 	system("pause");
 }
