@@ -32,9 +32,10 @@ public:
 		return true;
 	}
 
-	void get_size() {
+	bool get_size() {
 
 		printConsole("Size of matrix: " + to_string(i) + 'x' + to_string(j) + "\n");
+		return true;
 	}
 
 	bool change(int row, int col, int new_value) {
@@ -69,7 +70,7 @@ public:
 		else
 		{
 			printConsole("Invalid indexes.\n");
-			return 0;
+			return false;
 		}
 	}
 
@@ -95,46 +96,25 @@ public:
 		return true;
 	}
 
-	void sum_of_matrixes() {
+	int** sum_of_matrixes(int** user_matr) {
 
-		int** user_matr;
-		user_matr = new int* [i];
-
-		for (k = 0; k < i; k++)
-		{
-			user_matr[k] = new int[j];
-		}
-
-		for (k = 0; k < i; k++)
-		{
-			for (g = 0; g < j; g++)
-			{
-				printConsole("Enter element(" + to_string(k + 1) + ", " + to_string(g + 1) + "): ");
-				cin >> user_matr[k][g];
-
-				if (!cin.good())
-				{
-					cin.clear();
-					cin.ignore(cin.rdbuf()->in_avail());
-					printConsole("Incorrect value.\n");
-					
-					deleting(user_matr);
-					return;
-				}
-			}
-		}
+		int** sum_of_matrs;
+		sum_of_matrs = new int* [i];
 
 		printConsole("Sum of matrixes:\n");
 		for (k = 0; k < i; k++)
 		{
+			sum_of_matrs[k] = new int[j];
+
 			for (g = 0; g < j; g++)
 			{
-				printConsole(to_string(matr[k][g] + user_matr[k][g]) + "  ");
+				sum_of_matrs[k][g] = matr[k][g] + user_matr[k][g];
+				printConsole(to_string(sum_of_matrs[k][g]) + "  ");
 			}
 
 			printConsole("\n");
 		}
-		deleting(user_matr);
+		return sum_of_matrs;
 	}
 
 	void print() 
@@ -180,10 +160,6 @@ private:
 		for (k = 0; k < i; k++)
 		{
 			matr[k] = new int[j];
-		}
-
-		for (k = 0; k < i; k++)
-		{
 			for (g = 0; g < j; g++)
 			{
 				matr[k][g] = rand() % 10;
@@ -218,5 +194,20 @@ void main()
 
 	m.diagonal_domination();
 
-	m.sum_of_matrixes();
+	int user_row = 4; //создание пользовательского двумерного массива, для последующей передачи в метод
+	int user_col = 4;
+	int** user_matr;
+	user_matr = new int* [4];
+
+	for (int k = 0; k < user_row; k++) 
+	{
+		user_matr[k] = new int[user_col];
+		for (int g = 0; g < user_col; g++) //заполнение пользовательского массива
+		{
+			cout << "Enter element(" << k + 1 << ", " << g + 1 << "): ";
+			cin >> user_matr[k][g];
+		}
+	}
+
+	m.sum_of_matrixes(user_matr);
 }

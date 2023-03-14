@@ -18,9 +18,9 @@ public:
 		seconds = 15;
 	}
 
-	bool set_time()
+	bool set_time(int h, int min, int sec)
 	{
-		vector<int> args = time_correct();
+		vector<int> args = time_correct(h, min, sec);
 		
 		if (size(args) == 0)
 		{
@@ -30,19 +30,19 @@ public:
 		hours = args[0];
 		minutes = args[1];
 		seconds = args[2];
-		print("\nВремя успешно изменено!\n\n");
+		print("Время успешно изменено!");
 		return true;
 	}
 
 	string take_time()
 	{
-		print("\nТекущее время: " + to_string(hours) + "h. " + to_string(minutes) + "m. " + to_string(seconds) + "s. \n\n");
+		print("Текущее время: " + to_string(hours) + "h. " + to_string(minutes) + "m. " + to_string(seconds) + "s.");
 		return to_string(hours) + "h. " + to_string(minutes) + "m. " + to_string(seconds) + "s.";
 	}
 
-	string difference()
+	string difference(int h, int min, int sec)
 	{
-		vector<int> args = time_correct();
+		vector<int> args = time_correct(h, min, sec);
 
 		if (size(args) == 0)
 		{
@@ -56,24 +56,20 @@ public:
 			return "";
 		}
 
-		print("\nРазница составляет: " + to_string(new_data[0]) + "h. " + to_string(new_data[1]) + "m. " + to_string(new_data[2]) + "s. \n\n");
+		print("Разница составляет: " + to_string(new_data[0]) + "h. " + to_string(new_data[1]) + "m. " + to_string(new_data[2]) + "s.");
 		return to_string(new_data[0]) + "h. " + to_string(new_data[1]) + "m. " + to_string(new_data[2]) + "s.";
 	}
 
-	bool move_time()
+	bool move_time(int h, int min, int sec, char sign)
 	{
-		vector<int> args = time_correct();
+		vector<int> args = time_correct(h, min, sec);
 
 		if (size(args) == 0)
 		{
 			return false;
 		}
 
-		print("\nЕсли вы хотите сдвинуть время вперед, введите: \"+\"\nЕсли вы хотите сдвинуть время назад, введите: \"-\"\n");
-		char s;
-		cin >> s;
-
-		if (s == '-')
+		if (sign == '-')
 		{
 			if (size(args) == 0)
 			{
@@ -112,10 +108,10 @@ public:
 				seconds = new_data[2];
 			}
 
-			print("\nВремя успешно изменено!\n\n");
+			print("Сдвиг прошёл успешно!");
 			return true;
 		}
-		else if (s == '+')
+		else if (sign == '+')
 		{
 			int cnt_m = 0, cnt_h = 0;
 
@@ -146,14 +142,14 @@ public:
 				hours -= 24;
 			}
 
-			print("\nВремя успешно изменено!\n\n");
+			print("Сдвиг прошёл успешно!");
 			return true;
 		}
 		else
 		{
 			cin.ignore(cin.rdbuf()->in_avail());
 
-			print("\nОшибка ввода!\n\n");
+			print("Ошибка ввода!");
 			return false;
 		}
 	}
@@ -164,35 +160,23 @@ private:
 	int minutes;
 	int	seconds;
 
-	vector<int> time_correct()
+	vector<int> time_correct(int user_hours, int user_minutes, int user_seconds)
 	{	
-		print("\nВведите количество часов: ");
-		int user_hours;
-		cin >> user_hours;
-
 		if (!(user_hours >= 0 && user_hours < 24))
 		{
-			print("\nОшибка ввода!\n\n");
+			print("Ошибка ввода!");
 			return {  };
 		}
 		
-		print("\nВведите количество минут: ");
-		int user_minutes;
-		cin >> user_minutes;
-
 		if (!(user_minutes >= 0 && user_minutes < 60))
 		{
-			print("\nОшибка ввода!\n\n");
+			print("Ошибка ввода!");
 			return {  };
 		}
 
-		print("\nВведите количество секунд: ");
-		int user_seconds;
-		cin >> user_seconds;
-
 		if (!(user_seconds >= 0 && user_seconds < 60))
 		{
-			print("\nОшибка ввода!\n\n");
+			print("Ошибка ввода!");
 			return {  };
 		}
 		
@@ -357,53 +341,21 @@ private:
 };
 
 
-void choose_func(Time t)
-{
-	int function_number;
-
-	cout << "\nЧто вы хотите сделать?\n\n" << "  (1) Установить время\n" << "  (2) Узнать время\n" 
-		<< "  (3) Вычислить разницу между заданным временем и установленным\n"  
-		<< "  (4) Сдвинуть время на заданное смещение\n\n" << "Введите число от 1 до 4: ";
-	cin >> function_number;
-
-	if (!cin.good()) //Если состояние потока ввода не good
-	{
-		cin.clear(); //Убираем флаг ошибки.
-		cin.ignore(cin.rdbuf()->in_avail()); //Обращаемся к буферу потока ввода и получаем из него количество введенных символов, затем - игнорируем их.
-	}
-
-	if (function_number > 0 && function_number < 5)
-	{
-		switch (function_number)
-		{
-		case 1: t.set_time();
-			choose_func(t);
-
-		case 2: t.take_time();
-			choose_func(t);
-
-		case 3: t.difference();
-			choose_func(t);
-
-		case 4: t.move_time();
-			choose_func(t);
-
-		default:
-			choose_func(t);
-		}
-	}
-	else
-	{
-		cout << "\nОшибка ввода!\n\n" << endl;
-		choose_func(t);
-	}
-}
-
 void main() 
 {
 	setlocale(LC_ALL, "");
 
 	Time t;
-	
-	choose_func(t);
+
+	t.take_time();
+
+	t.set_time(10, 30, 0);
+
+	t.take_time();
+
+	t.move_time(0, 30, 0, '-');
+
+	t.take_time();
+
+	t.difference(5, 45, 0);
 }
