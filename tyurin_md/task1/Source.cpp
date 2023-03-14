@@ -33,7 +33,7 @@ class rational_function
 {
 public:
 
-   void Get_fraction()
+   void Res_fraction()
    {
       system("cls");
       Simplify();
@@ -227,19 +227,19 @@ start:
          {
          case Addition:
             fraction_1.Sum(fraction_2);
-            fraction_1.Get_fraction();
+            fraction_1.Res_fraction();
             system("pause");
             break;
 
          case Subtraction:
             fraction_1.Dif(fraction_2);
-            fraction_1.Get_fraction();
+            fraction_1.Res_fraction();
             system("pause");
             break;
 
          case Multiplication:
             fraction_1.Mult(fraction_2);
-            fraction_1.Get_fraction();
+            fraction_1.Res_fraction();
             system("pause");
             break;
 
@@ -252,7 +252,7 @@ start:
                cout << "Нельзя делить на ноль" << endl;
             }
             else
-               fraction_1.Get_fraction();
+               fraction_1.Res_fraction();
             system("pause");
             break;
 
