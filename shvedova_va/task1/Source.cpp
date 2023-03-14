@@ -12,21 +12,11 @@ public:
 		minutes = 0;
 		seconds = 0;
 	}
-	void SetTime()
+	void SetNewTime(int h, int m, int s)
 	{
-		int h, m, s;
-		cout << "„асы 0 - 23 (без дополнительных нулей): ";
-		cin >> h;
-		if ((h >= 0) && (h < 24))
-			hours = h;
-		cout << "ћинуты 0 - 59 (без дополнительных нулей): ";
-		cin >> m;
-		if ((m >= 0) && (m < 60))
-			minutes = m;
-		cout << "—екунды 0 - 59 (без дополнительных нулей): ";
-		cin >> s;
-		if ((s >= 0) && (s < 60))
-			seconds = s;
+		hours = h;
+		minutes = m;
+		seconds = s;
 	}
 	void ToRightTime(int sec)
 	{
@@ -54,8 +44,6 @@ public:
 				NewTime -= 24 * 3600;
 		}
 		ToRightTime(NewTime);
-		cout << "¬рем€ успешно изменено\nЌовое врем€ - ";
-		PrintTime();
 	}
 	void TimeDiff(Time t)
 	{
@@ -64,16 +52,37 @@ public:
 		//if (diff < 0)
 			//diff += 24 * 3600;//если разница между заданным временем и установленным отрицательна€, то происходит переход на следующие сутки
 		ToRightTime(abs(diff));//абсолютна€ величина разницы во времени
-		cout << "–азница во времени - ";
-		PrintTime();
 	}
 };
 Time tSet;
+int sh, sm, ss;
+void SetTime()
+{
+	int h, m, s;
+	cout << "„асы 0 - 23 (без дополнительных нулей): ";
+	cin >> h;
+	if ((h >= 0) && (h < 24))
+		sh = h;
+	cout << "ћинуты 0 - 59 (без дополнительных нулей): ";
+	cin >> m;
+	if ((m >= 0) && (m < 60))
+		sm = m;
+	cout << "—екунды 0 - 59 (без дополнительных нулей): ";
+	cin >> s;
+	if ((s >= 0) && (s < 60))
+		ss = s;
+}
+bool CorrectTime(int h, int m, int s)
+{
+	if ((h >= 0) && (h < 24) && (m >= 0) && (m < 60) && (s >= 0) && (s < 60))
+		return true;
+	return false;
+}
 void Operations()
 {
 	Time tOperation;
 	int operation;
-	int h1, m1, s1, dif, side;
+	int side;
 	cout << "¬ыберете операцию:\n1) узнать врем€\n2) вычислить разницу\n3) сдвинуть врем€\n4) завершить\n";
 	cin >> operation;
 	system("cls");
@@ -86,19 +95,25 @@ void Operations()
 		break;
 	case 2:
 		cout << "«адайте новый момент времени:\n";
-		tOperation.SetTime();
+		SetTime();
+		tOperation.SetNewTime(sh, sm, ss);
 		system("cls");
 		tOperation.TimeDiff(tSet);
+		cout << "–азница во времени - ";
+		tOperation.PrintTime();
 		Operations();
 		break;
 	case 3:
 		cout << "«адайте смещение:\n";
-		tOperation.SetTime();
+		SetTime();
+		tOperation.SetNewTime(sh, sm, ss);
 		system("cls");
 		cout << "0 - смещение времени в меньшую сторону\n1 - смещение времени в большую сторону\n";
 		cin >> side;
 		system("cls");
 		tSet.ChangeTime(side, tOperation);
+		cout << "¬рем€ успешно изменено\nЌовое врем€ - ";
+		tSet.PrintTime();
 		Operations();
 		break;
 	case 4:
@@ -111,7 +126,8 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	cout << "”становите врем€:\n";
-	tSet.SetTime();
+	SetTime();
+	tSet.SetNewTime(sh, sm, ss);
 	system("cls");
 	Operations();
 	system("pause");
