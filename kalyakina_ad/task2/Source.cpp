@@ -49,7 +49,6 @@ class String
 	char str[41];
 	int size;
 	int code_of_letter;
-	string choise_of_case[4];
 	int count_of_letters;
 	int counter;
 	char substring[41];
@@ -60,7 +59,6 @@ public:
 		memset(lower_case, 0, 26 * sizeof(int));
 		memset(upper_case, 0, 26 * sizeof(int));
 		code_of_letter = 0;
-		choise_of_case[0] = { "Выберите, как Вы хотите совершить проверку:" }; choise_of_case[1] = { "С учетом регистра" }; choise_of_case[2] = { "Без учета регистра" }; choise_of_case[3] = { "Выйти" };
 		count_of_letters = 0;
 		counter = 0;
 	}
@@ -82,9 +80,9 @@ public:
 		return(str[index]);
 	}
 
-	void change_letter(int index)
+	void change_letter(int index, char c)
 	{
-		cin >> str[index];
+		str[index] = c;
 	}
 
 	char* select_a_substring(int index_of_begining, int lenght_of_substring)
@@ -103,7 +101,7 @@ public:
 		return (counter > size / 2);
 	}
 
-	int check_of_different()
+	int check_of_different(int case_of_check)
 	{
 		count_of_letters = 0;
 		for (counter = 0; counter <= size; counter++)
@@ -116,7 +114,7 @@ public:
 			else if ((code_of_letter > 64) && (code_of_letter < 91))
 				upper_case[code_of_letter - 65]++;
 		}
-		switch (choise_in_menu(choise_of_case, 4))
+		switch (case_of_check)
 		{
 		case 1:
 			for (counter = 0; counter < 26; counter++)
@@ -148,11 +146,9 @@ public:
 		return (count_of_letters);
 	}
 
-	void output_string()
+	char* output_string()
 	{
-		cout << "Текущая строка: " << str << endl << endl;
-		system("pause");
-		system("cls");
+		return(str);
 	}
 
 	~String()
@@ -172,6 +168,7 @@ void begining_ending(String w)
 	int num = 0;
 	char* k = new char[41];
 	string actions[actions_count] = { "Выберите действие:", "Задать строку", "Узнать длину строки", "Получить символ строки по его индексу", "Изменить символ строки по заданному индексу", "Выделить подстроку из строки", "Проверить, является ли строка палиндромом (с учетом регистра)", "Найти, сколько разных символов латинского алфавита содержится в строке", "Вывести текущую строку", "Выйти"};
+	string choise_of_case[4] = { "Выберите, как Вы хотите совершить проверку:", "С учетом регистра", "Без учета регистра", "Выйти" };
 	cout << "Добрый день!" << endl;
 	cout << "ПРЕДУПРЕЖДЕНИЕ: изначальная строка пустая, поэтому сначала её нужно изменить" << endl;
 	cout << "Чтобы перемещаться по меню, используйте клавиши 'Вверх' и 'Вниз'. Для выбора из списка нажмите 'Enter'" << endl << endl;
@@ -208,7 +205,8 @@ void begining_ending(String w)
 			if ((index > -1) && (index < w.output_lenght()))
 			{
 				cout << endl << "Введите символ: ";
-				w.change_letter(index);
+				while (getchar() != '\n');
+				w.change_letter(index, getchar());
 				while (getchar() != '\n');
 			}
 			else
@@ -238,7 +236,8 @@ void begining_ending(String w)
 			system("cls");
 			break;
 		case 7:
-			num = w.check_of_different();
+			num = choise_in_menu(choise_of_case, 4);
+			num = w.check_of_different(num);
 			if (num != -1)
 			{
 				cout << "Количество разных символов латинского алфавита в строке: " << num << endl << endl;
@@ -247,7 +246,9 @@ void begining_ending(String w)
 			}
 			break;
 		case 8:
-			w.output_string();
+			cout << "Текущая строка: " << w.output_string() << endl << endl;
+			system("pause");
+			system("cls");
 			break;
 		default:
 			num = -1;
