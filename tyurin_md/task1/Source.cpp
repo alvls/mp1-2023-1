@@ -33,10 +33,8 @@ class rational_function
 {
 public:
 
-   void Res_fraction()
+   void Print_fraction()
    {
-      system("cls");
-      Simplify();
       cout << "Дробь: " << numerator << "/" << denominator << endl;
    }
 
@@ -62,6 +60,7 @@ public:
       num *= denominator;
       denominator *= den;
       numerator += num;
+      Simplify();
    }
 
    void Dif(rational_function fraction)
@@ -73,6 +72,7 @@ public:
       num *= denominator;
       denominator *= den;
       numerator -= num;
+      Simplify();
    }
 
    void Mult(rational_function fraction)
@@ -82,6 +82,7 @@ public:
 
       numerator *= num;
       denominator *= den;
+      Simplify();
    }
 
    int Div(rational_function fraction)
@@ -103,6 +104,7 @@ public:
 
       numerator *= den;
       denominator *= tmp_num;
+      Simplify();
       return 1;
    }
 
@@ -223,23 +225,24 @@ start:
             active_menu++;
          break;
       case ENTER:
+         system("cls");
          switch (active_menu)
          {
          case Addition:
             fraction_1.Sum(fraction_2);
-            fraction_1.Res_fraction();
+            fraction_1.Print_fraction();
             system("pause");
             break;
 
          case Subtraction:
             fraction_1.Dif(fraction_2);
-            fraction_1.Res_fraction();
+            fraction_1.Print_fraction();
             system("pause");
             break;
 
          case Multiplication:
             fraction_1.Mult(fraction_2);
-            fraction_1.Res_fraction();
+            fraction_1.Print_fraction();
             system("pause");
             break;
 
@@ -252,7 +255,7 @@ start:
                cout << "Нельзя делить на ноль" << endl;
             }
             else
-               fraction_1.Res_fraction();
+               fraction_1.Print_fraction();
             system("pause");
             break;
 
