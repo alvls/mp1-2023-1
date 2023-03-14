@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -29,12 +30,12 @@ public:
 		hours = args[0];
 		minutes = args[1];
 		seconds = args[2];
-		cout << "\nВремя успешно изменено!\n\n" << endl;
+		print("\nВремя успешно изменено!\n\n");
 	}
 
 	void take_time()
 	{
-		cout << "\nТекущее время: " << hours << "h. " << minutes << "m. " << seconds << "s. \n\n" << endl;
+		print("\nТекущее время: " + to_string(hours) + "h. " + to_string(minutes) + "m. " + to_string(seconds) + "s. \n\n");
 	}
 
 	int difference()
@@ -53,7 +54,7 @@ public:
 			return 0;
 		}
 
-		cout << "\nРазница составляет: " << new_data[0] << "h. " << new_data[1] << "m. " << new_data[2] << "s.\n";
+		print("\nРазница составляет: " + to_string(new_data[0]) + "h. " + to_string(new_data[1]) + "m. " + to_string(new_data[2]) + "s. \n\n");
 	}
 
 	int move_time()
@@ -65,9 +66,8 @@ public:
 			return 0;
 		}
 
+		print("\nЕсли вы хотите сдвинуть время вперед, введите: \"+\"\nЕсли вы хотите сдвинуть время назад, введите: \"-\"\n");
 		char s;
-		cout << "\nЕсли вы хотите сдвинуть время вперед, введите: \"+\"" <<
-			"\nЕсли вы хотите сдвинуть время назад, введите: \"-\"\n";
 		cin >> s;
 
 		if (s == '-')
@@ -109,7 +109,7 @@ public:
 				seconds = new_data[2];
 			}
 
-			cout << "\nВремя успешно изменено!\n\n" << endl;
+			print("\nВремя успешно изменено!\n\n");
 		}
 		else if (s == '+')
 		{
@@ -142,13 +142,13 @@ public:
 				hours -= 24;
 			}
 
-			cout << "\nВремя успешно изменено!\n\n";
+			print("\nВремя успешно изменено!\n\n");
 		}
 		else
 		{
 			cin.ignore(cin.rdbuf()->in_avail());
 
-			cout << "\nОшибка ввода!\n\n" << endl;
+			print("\nОшибка ввода!\n\n");
 			return 0;
 		}
 	}
@@ -161,33 +161,33 @@ private:
 
 	vector<int> time_correct()
 	{	
+		print("\nВведите количество часов: ");
 		int user_hours;
-		cout << "\nВведите количество часов: ";
 		cin >> user_hours;
 
 		if (!(user_hours >= 0 && user_hours < 24))
 		{
-			cout << "\nОшибка ввода!\n\n" << endl;
+			print("\nОшибка ввода!\n\n");
 			return {  };
 		}
 		
+		print("\nВведите количество минут: ");
 		int user_minutes;
-		cout << "\nВведите количество минут: ";
 		cin >> user_minutes;
 
 		if (!(user_minutes >= 0 && user_minutes < 60))
 		{
-			cout << "\nОшибка ввода!\n\n" << endl;
+			print("\nОшибка ввода!\n\n");
 			return {  };
 		}
 
+		print("\nВведите количество секунд: ");
 		int user_seconds;
-		cout << "\nВведите количество секунд: ";
 		cin >> user_seconds;
 
 		if (!(user_seconds >= 0 && user_seconds < 60))
 		{
-			cout << "\nОшибка ввода!\n\n" << endl;
+			print("\nОшибка ввода!\n\n");
 			return {  };
 		}
 		
@@ -344,6 +344,11 @@ private:
 
 		return 0;
 	}
+
+	void print(string line)
+	{
+		cout << line << endl;
+	}
 };
 
 
@@ -394,6 +399,6 @@ void main()
 	setlocale(LC_ALL, "");
 
 	Time t;
-
+	
 	choose_func(t);
 }

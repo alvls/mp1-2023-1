@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <string>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
 
 		if ((new_i != new_j) || (new_i > 8) || (new_i < 2))
 		{
-			cout << "Incorrect size." << endl;
+			printConsole("Incorrect size.\n");
 			return false;
 		}
 
@@ -27,13 +28,13 @@ public:
 		j = new_j;
 		creating();
 
-		cout << "The size was successfully changed." << endl;
+		printConsole("The size was successfully changed.\n");
 		return true;
 	}
 
 	void get_size() {
 
-		cout << "Size of matrix: " << i << 'x' << j << endl;
+		printConsole("Size of matrix: " + to_string(i) + 'x' + to_string(j) + "\n");
 	}
 
 	bool change(int row, int col, int new_value) {
@@ -45,12 +46,12 @@ public:
 		{
 			matr[row][col] = new_value;
 
-			cout << "The element was successfully changed." << endl;
+			printConsole("The element was successfully changed.\n");
 			return true;
 		}
 		else
 		{
-			cout << "Invalid indexes." << endl;
+			printConsole("Invalid indexes.\n");
 			return false;
 		}
 	}
@@ -62,12 +63,12 @@ public:
 
 		if ((row >= 0 && row < i) && (col >= 0 && col < j))
 		{
-			cout << "Element(" << row + 1 << ", " << col + 1  << "): " << matr[row][col] << endl;
+			printConsole("Element(" + to_string(row + 1) + ", " + to_string(col + 1) + "): " + to_string(matr[row][col]) + "\n");
 			return  matr[row][col];
 		}
 		else
 		{
-			cout << "Invalid indexes." << endl;
+			printConsole("Invalid indexes.\n");
 			return 0;
 		}
 	}
@@ -86,11 +87,11 @@ public:
 
 			if (abs(matr[k][k]) < abs(sum - matr[k][k]))
 			{
-				cout << "This matrix is not diagonally dominant." << endl;
+				printConsole("This matrix is not diagonally dominant.\n");
 				return false;
 			}
 		}
-		cout << "This matrix is diagonally dominant." << endl;
+		printConsole("This matrix is diagonally dominant.\n");
 		return true;
 	}
 
@@ -108,14 +109,14 @@ public:
 		{
 			for (g = 0; g < j; g++)
 			{
-				cout << "Enter element(" << k + 1 << ", " << g + 1 << "): ";
+				printConsole("Enter element(" + to_string(k + 1) + ", " + to_string(g + 1) + "): ");
 				cin >> user_matr[k][g];
 
 				if (!cin.good())
 				{
 					cin.clear();
 					cin.ignore(cin.rdbuf()->in_avail());
-					cout << "Incorrect value." << endl;
+					printConsole("Incorrect value.\n");
 					
 					deleting(user_matr);
 					return;
@@ -123,14 +124,15 @@ public:
 			}
 		}
 
-		cout << "Sum of matrixes:" << endl;
+		printConsole("Sum of matrixes:\n");
 		for (k = 0; k < i; k++)
 		{
 			for (g = 0; g < j; g++)
 			{
-				cout << matr[k][g] + user_matr[k][g] << "  ";
+				printConsole(to_string(matr[k][g] + user_matr[k][g]) + "  ");
 			}
-			cout << endl;
+
+			printConsole("\n");
 		}
 		deleting(user_matr);
 	}
@@ -141,9 +143,10 @@ public:
 		{
 			for (g = 0; g < j; g++)
 			{
-				cout << matr[k][g] << "  ";
+				printConsole(to_string(matr[k][g]) + "  ");
 			}
-			cout << endl;
+
+			printConsole("\n");
 		}
 	}
 
@@ -155,6 +158,11 @@ public:
 private:
 	int i, j, k, g; //ћожно было обойтись и без переменной, отвечающей за количесвто столбцов (т.к. матрица квадратна€),
 	int** matr;    //но € решил сделать с ней, чтобы класс мог работать не только с квадратными матрицами (если убрать контроль ввода)
+
+	void printConsole(string line) {
+
+		cout << line;
+	}
 
 	void deleting(int** matrix) {
 
@@ -188,7 +196,7 @@ private:
 void main()
 {
 	Matrix m;
-
+	
 	m.get_size();
 
 	m.print();
