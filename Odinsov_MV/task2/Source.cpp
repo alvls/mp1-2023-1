@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <string.h>
+#include <locale.h>
 using namespace std;
 class strin {
 	char* str;
@@ -10,19 +11,18 @@ public:
 		str = new char[size + 1];
 		strcpy(str, s);
 	}
-	void getstr() {
-		cout << str << "\n";
+	void prstr() {
+		cout << str;
 	}
-	void getsize() {
-		cout << size << "\n";
+	int getsize() {
+		return size;
 	}
-	void getsymb(int ind) {
-		cout << str[ind];
-		cout << "\n";
+	char getsymb(int ind) {
+		return str[ind];
 	}
-	void changesimb(int ind, char ans) {
+	char* changesimb(int ind, char ans) {
 		str[ind] = ans;
-		cout << str << "\n";
+		return str;
 	}
 	char* substring(int start, int finish) {
 		char* str2;
@@ -30,17 +30,14 @@ public:
 		str2 = new char[l + 1];
 		memset(str2, '\0', l + 1);
 		strncpy(str2, str + start, l);
-		cout << str2 << "\n";
 		return str2;
 	}
 	bool ispalindrom() {
 		for (int i = 0; i < size / 2; i++) {
 			if (str[i] != str[size - i - 1]) {
-				cout << "No\n";
 				return false;
 			}
 		}
-		cout << "Yes\n";
 		return true;
 	}
 	int countsymb() {
@@ -62,13 +59,12 @@ public:
 				}
 			}
 		}
-		cout << count << "\n";
 		return count;
 	}
 	void changestr(char* s) {
 		size = strlen(s);
 		strcpy(str, s);
-		
+
 	}
 	~strin() {
 		delete[] str;
@@ -80,54 +76,55 @@ void main() {
 	int start, finish;
 	int ans;
 	char ans1;
-	cout << "Enter the string\n";
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите строку\n";
 	cin >> s1;
 	strin h(s1);
 	while (flag) {
-		cout << "1 output a string \n";
-		cout << "2 find the length of a string \n";
-		cout << "3 get character by its index \n";
-		cout << "4 change character of string at given index \n";
-		cout << "5 extract a substring from a string \n";
-		cout << "6 check if a string is a palindrome \n";
-		cout << "7 find how many characters of the latin alphabet are in a string \n";
-		cout << "8 change string \n";
-		cout << "9 exit \n";
+		cout << "1 Узнать строку \n";
+		cout << "2 Узнать размер \n";
+		cout << "3 Узнать символ по индексу \n";
+		cout << "4 Изменить символ с указанным индексом \n";
+		cout << "5 Выделить подстроку \n";
+		cout << "6 Проверить является ли строка палиндромом \n";
+		cout << "7 Узнать сколько символов латинского алфовита находиться в строке \n";
+		cout << "8 Изменить строку \n";
+		cout << "9 Выйти \n";
 		cin >> ans;
 		switch (ans) {
 		case 1:
-			h.getstr();
+			h.prstr();
 			break;
 		case 2:
-			h.getsize();
+			cout << h.getsize() << "\n";
 			break;
 		case 3:
-			cout << "Enter index\n";
+			cout << "Введите индекс\n";
 			cin >> ind;
-			h.getsymb(ind);
+			cout << h.getsymb(ind) << "\n";
 			break;
 		case 4:
-			cout << "Enter which character you want to change to\n";
+			cout << "Введите символ\n";
 			cin >> ans1;
 			cout << " \n";
-			cout << "Enter index \n";
+			cout << "Введите индекс \n";
 			cin >> ind;
-			h.changesimb(ind, ans1);
+			cout << h.changesimb(ind, ans1) << "\n";
 			break;
 		case 5:
-			cout << "enter index of start and end of substring\n";
+			cout << "Введите начальный и конечный индекс\n";
 			cin >> start;
 			cin >> finish;
-			h.substring(start, finish);
+			cout << h.substring(start, finish) << "\n";
 			break;
 		case 6:
-			h.ispalindrom();
+			cout << h.ispalindrom() << "\n";
 			break;
 		case 7:
-			h.countsymb();
+			cout << h.countsymb() << "\n";
 			break;
 		case 8:
-			cout << "Enter the strin\n";
+			cout << "Введите строку\n";
 			cin >> s1;
 			h.changestr(s1);
 			break;
