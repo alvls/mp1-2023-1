@@ -45,56 +45,23 @@ public:
 			cout << endl;
 		}
 	}
-	void GetSize()
+	 int GetSize()
 	{
-		cout << "Размер матрицы: " << size << endl;
+		 return size;
 	}
-	void AskElement(int option)
+	 void AskElement(int i, int j, int n)
+	 {
+		 mt[i][j] = n;
+	 }
+	int GetElement(int i, int j)
 	{
-		int i, j, n;
-		if (option == 1)
-		{
-			cout << "Введите номер строки 0 - " << size - 1 << ": ";
-			cin >> i;
-			cout << "Введите номер столбца 0 - " << size - 1 << ": ";
-			cin >> j;
-			if ((i >= 1) && (i <= size) && (j >= 1) && (j <= size))
-			{
-				cout << "Введите новое значение элемента: ";
-				cin >> n;
-				mt[i][j] = n;
-				system("cls");
-				cout << "Новое значение задано" << endl;
-			}
-			else
-				cout << "Некорректный номер" << endl;
-		}
-		else if (option == 2)
-		{
-			for (i = 0;i < size;i++)
-			{
-				for (j = 0;j < size;j++)
-				{
-					cout << "Введите новое значение элемента m[" << i << "][" << j << "]: ";
-					cin >> n;
-					mt[i][j] = n;
-					system("cls");
-				}
-			}
-			cout << "Новые значения заданы" << endl;
-		}
-		else
-			cout << "Выбран недопустимый вариант" << endl;
+		return mt[i][j];
 	}
-	void GetElement()
+	bool PossibleIndex(int i, int j)
 	{
-		int i, j;
-		cout << "Введите номер строки 0 - " << size - 1 << ": ";
-		cin >> i;
-		cout << "Введите номер столбца 0 - " << size - 1 << ": ";
-		cin >> j;
-		if ((i >= 1) && (i <= size) && (j >= 1) && (j <= size))
-			cout << "Значение элемента с заданными индексами: " << mt[i][j] << endl;;
+		if ((i >= 0) && (i < size) && (j >= 0) && (j < size))
+			return true;
+		return false;
 	}
 	bool Diagonal()
 	{
@@ -124,8 +91,8 @@ public:
 };
 void Options()
 {
-	Matrix *m1, *m2, *m3;
-	int operation, option, n, t;
+	Matrix *m1, *m2;
+	int operation, n, t, i, j, el;
 	cout << "Задайте размер исходной матрицы: ";
 	cin >> n;
 	m1 = new Matrix(n);
@@ -144,16 +111,38 @@ void Options()
 			m1 = new Matrix(n);
 			break;
 		case 2:
-			m1->GetSize();
+			n = m1->GetSize();
+			cout << "Размер матрицы: " << n << endl;
 			break;
 		case 3:
-			cout << "1) задать один элемент\n2) задать все элементы матрицы" << endl;
-			cin >> option;
-			system("cls");
-			m1->AskElement(option);
+			cout << "Введите номер строки: ";
+			cin >> i;
+			cout << "Введите номер столбца: ";
+			cin >> j;
+			if (m1->PossibleIndex(i, j))
+
+			{
+				cout << "Введите новое значение элемента: ";
+				cin >> el;
+				m1->AskElement(i, j, el);
+				system("cls");
+				cout << "Новое значение задано" << endl;
+			}
+			else
+				cout << "Некорректный номер" << endl;
 			break;
 		case 4:
-			m1->GetElement();
+			cout << "Введите номер строки: ";
+			cin >> i;
+			cout << "Введите номер столбца: ";
+			cin >> j;
+			if (m1->PossibleIndex(i, j))
+			{
+				el = m1->GetElement(i, j);
+				cout << "Значение элемента с заданными индексами: " << el << endl;
+			}
+			else
+				cout << "Недопустимый индекс элемента" << endl;
 			break;
 		case 5:
 			if (m1->Diagonal())
@@ -164,7 +153,17 @@ void Options()
 		case 6:
 			m2 = new Matrix(n);
 			cout << "Введите элементы второй матрицы-слагаемого:" << endl;
-			m2->AskElement(2);
+			for (i = 0;i < n;i++)
+			{
+				for (j = 0;j < n;j++)
+				{
+					cout << "Введите новое значение элемента m[" << i << "][" << j << "]: ";
+					cin >> el;
+					m2->AskElement(i, j, el);
+					system("cls");
+				}
+			}
+			cout << "Новые значения заданы" << endl;
 			system("cls");
 			m2->SumMatrix(*m1);
 			cout << "Результат сложения матриц:" << endl;
@@ -188,6 +187,7 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	Options();
+	system("cls");
 	system("pause");
 	return 0;
 }
