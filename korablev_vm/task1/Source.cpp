@@ -48,15 +48,18 @@ class RationalFraction
 	}
 	void MultipAndDiv(long a, long b)//шаблон для умножения и деления
 	{
-		if (b == 0)
-		{
-			cout << "Ошибка! Деление на 0 невозможно." << endl;
-			return;
-		}
 		numerator *= a;
 		denominator *= b;
 	}
-public: 
+public:
+	long return_numerator()
+	{
+		return numerator;
+	}
+	unsigned long return_denominator()
+	{
+		return denominator;
+	}
 	RationalFraction()//создание "пустой дроби" для дальнейшего изменения
 	{
 		numerator = 1;
@@ -70,8 +73,6 @@ public:
 	}
 	void GetFraction()
 	{
-		system("cls");
-		Optimization();
 		cout << "Результат: " << numerator << "/" << denominator << endl;
 	}
 	void Summation(RationalFraction fraction)
@@ -80,6 +81,7 @@ public:
 		unsigned long den = fraction.denominator;
 		num = ToCommonDenominator(num, den);
 		numerator += num;
+		Optimization();
 	}
 	void Subtraction(RationalFraction fraction)
 	{
@@ -87,12 +89,14 @@ public:
 		unsigned long den = fraction.denominator;
 		num = ToCommonDenominator(num, den);
 		numerator -= num;
+		Optimization();
 	}
 	void Multiplication(RationalFraction fraction)
 	{
 		long num = fraction.numerator;
 		unsigned long den = fraction.denominator;
 		MultipAndDiv(num,den);
+		Optimization();
 	}
 	void Division(RationalFraction fr)
 	{
@@ -105,6 +109,7 @@ public:
 		}
 		num = unsigned long(num);
 		MultipAndDiv(den,num);
+		Optimization();
 	}
 };
 RationalFraction SecondFraction()//загрузка следующей дроби для вычислений
@@ -176,8 +181,17 @@ start:
 			break;
 		case 4:
 			NextFraction = SecondFraction();
-			fraction.Division(NextFraction);
-			break;
+			if (NextFraction.return_numerator() == 0)
+			{
+				cout << "\nОшибка! Деление на 0 невозможно." << endl;
+				system("pause");
+				break;
+			}
+			else
+			{
+				fraction.Division(NextFraction);
+				break;
+			}
 		case 5:
 			goto start;
 			break;
