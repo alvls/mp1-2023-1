@@ -112,6 +112,7 @@ public:
 		Optimization();
 	}
 };
+
 RationalFraction SecondFraction()//загрузка следующей дроби для вычислений
 {
 	long a;

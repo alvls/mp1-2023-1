@@ -10,7 +10,7 @@ private:
 	Fx func;//функция из cmath + y=x для удобства
 	void find_answ()
 	{
-		int i;
+		int i=0;
 		double x = lim[0], slag, n = (lim[1] - lim[0]) / seg;
 		answ = 0;
 		switch (mtd)
@@ -21,13 +21,15 @@ private:
 		case _left:
 			break;
 		case _mid:
-			//реализация
+			for (i=0; i < seg; i++)
+			{
+				slag = func(x + (i + 0.5) * n);
+				answ += slag;
+			}
+			answ *= n;
 			return;
-		default:
-			cout << "Возникла непредвиденная ошибка" << endl;
-			system("pause");
 		}
-		for (i = 0; i < n; i++)
+		for (i=0; i < seg; i++)
 		{
 			slag = func(x + i * n);
 			answ += slag;
@@ -45,7 +47,7 @@ public:
 		seg = 1;
 		mtd = _left;
 	}
-	void set_lim(double r, double l)
+	void set_lim(double l, double r)
 	{
 		lim[0] = l;
 		lim[1] = r;
