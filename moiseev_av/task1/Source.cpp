@@ -18,19 +18,20 @@ public:
 		seconds = 15;
 	}
 
-	int set_time()
+	bool set_time()
 	{
 		vector<int> args = time_correct();
 		
 		if (size(args) == 0)
 		{
-			return 0;
+			return false;
 		}
 
 		hours = args[0];
 		minutes = args[1];
 		seconds = args[2];
 		print("\nВремя успешно изменено!\n\n");
+		return true;
 	}
 
 	string take_time()
@@ -45,14 +46,14 @@ public:
 
 		if (size(args) == 0)
 		{
-			return nullptr;
+			return "";
 		}
 
 		vector<int> new_data = calculations(args[0], args[1], args[2]);
 
 		if (size(args) == 0)
 		{
-			return nullptr;
+			return "";
 		}
 
 		print("\nРазница составляет: " + to_string(new_data[0]) + "h. " + to_string(new_data[1]) + "m. " + to_string(new_data[2]) + "s. \n\n");
