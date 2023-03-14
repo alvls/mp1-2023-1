@@ -10,24 +10,26 @@ class scales {
 		void setkg(double weight) {
 			weightkg = weight;
 		}
-		void getkg() {
-			cout << weightkg;
-			cout << "\n";
+		double getkg() {
+			return weightkg;
 		}
-		void getberkovets() {
+		double getberkovets() {
 			double weightberkovets = weightkg / 163.8;
-			cout << weightberkovets;
-			cout << "\n";
+			return weightberkovets;
 		}
-		void getpuds() {
+		double getpuds() {
 			double weightpuds = weightkg / 16.38;
-			cout << weightpuds;
-			cout << "\n";
+			return weightpuds;
 		}
-		void getfunt() {
+		double getfunt() {
 			double weightfunt = weightkg / 0.4095;
-			cout << weightfunt;
-			cout << "\n";
+			return weightfunt;
+		}
+		void prall() {
+			cout <<"В килограммах "<< weightkg << "\n";
+			cout << "В Берковцах " << weightkg / 163.8 << "\n";
+			cout << "В пудах" << weightkg / 16.38 << "\n";
+			cout <<"В фунтах" << weightkg / 0.4095 << "\n";
 		}
 };
 void main() {
@@ -44,29 +46,32 @@ void main() {
 		cout << "3 узнать вес в пудах\n";
 		cout << "4 узнать вес в фунтах торговых\n";
 		cout << "5 сменить вес в килограммах\n";
-		cout << "6 выйти\n";
+		cout << "6 вывести всю информацию \n";
+		cout << "7 выйти\n";
 		cin >> ans_2;
 		switch (ans_2)
 		{
 		case 1:
-			h.getkg();
+			cout<<h.getkg()<<"\n";
 			break;
 		case 2:
-			h.getberkovets();
+			cout<<h.getberkovets()<<"\n";
 			break;
 		case 3:
-			h.getpuds();
+			cout<<h.getpuds()<<"\n";
 			break;
 		case 4:
-			h.getfunt();
+			cout<<h.getfunt()<<"\n";
 			break;
 		case 5:
 			cin >> ans_1;
 			h.setkg(ans_1);
 			break;
 		case 6:
-			flag = 0;
+			h.prall();
 			break;
+		case 7:
+			flag = 0;
 		}
 	}
 	system("pause");
