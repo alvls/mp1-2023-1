@@ -69,22 +69,22 @@ public:
         return os;
     } 
 
-    double get_coeff(int power) // ������ �������� ������������ �� ��� ������
+    double get_coeff(int power) // узнать значение коэффициента по его номеру
     {
         return coeffs[power];
     }
 
-    void set_coeff(int power, double value) // ������ ����������� ��� ������ ������� power
+    void set_coeff(int power, double value) // задать коэффициент для монома степени power
     { 
         coeffs[power] = value;
     } 
 
-    int get_degree() // ������ ������� ��������
+    int get_degree() // узнать степень полинома
     { 
         return max_degree - 1; 
     } 
 
-    void set_degree(int degree) // ������ ������� ��������
+    void set_degree(int degree) // задать степень полинома
     {
         if (max_degree == degree)
         {
@@ -101,7 +101,7 @@ public:
         coeffs = new_coeffs;
     }
 
-    double calc(double x) // ���������� �������� �������� � �������� ����� �
+    double calc(double x) // вычисление значения полинома в заданной точке х
     {
         double result = 0;
         for (int i = 0; i < max_degree; i++)
@@ -111,7 +111,7 @@ public:
         return result;
     }
 
-    Polynomial derivative() // ���������� �����������
+    Polynomial derivative() // вычисление производной
     { 
         Polynomial result(get_degree() - 1);
         for (int i = 1; i < max_degree; i++) 
@@ -122,7 +122,7 @@ public:
     }
 }; 
  
-void main() // �������
+void main()
 {
     Polynomial polynom(4);
 
