@@ -5,83 +5,46 @@ class temperature_converter
 	double CelsiusTemperature;
 	int temp;
 public:
-
+	temperature_converter()
+	{}
 	temperature_converter(double t)
 	{
 		CelsiusTemperature = t;
 	}
-	void MainPrint()
+
+	void temper_c(double new_cels_t)
 	{
-		cout << "Чтобы узнать текущую температуры по шкале  Цельсия введите - 1." << endl;
-		cout << "Чтобы узнать текущую температуру по шкале Фаренгейта введите - 2. " << endl;
-		cout << "Чтобы узнать текущую температуру по шкале Кельвина введите - 3. " << endl;
-		cout << "Чтобы узнать текущую температуру по шкале Ранкина введите - 4. " << endl;
-		cout << "Чтобы закрыть консоль введите - 0. " << endl;
+		CelsiusTemperature = new_cels_t;
 	}
-	void swap(int temp)
+	double outC()
 	{
-			if (temp > 4 || temp < 0)
-			{
-				cout << "Введено некорректное значение!" << endl;
-			}
-			else 
-				switch (temp)
-				{
-			case 1:
-				printC();
-				break;
-			case 2:
-				Fahr(CelsiusTemperature);
-				break;
-			case 3:
-				kelv(CelsiusTemperature);
-				break;
-			case 4:
-				Rankin(CelsiusTemperature);
-				break;
-			case 0:
-				break;
-			}
+		return(CelsiusTemperature);
 	}
-	void Rankin(double Celsius)
+	double rankin()
 	{
-		double F;
-		Celsius = (Celsius * 1.8) + 32 + 459.67;
-		F = Celsius;
-		cout << "Текущая температура по шкале Ранкина: " << F << "°R" << endl;
+		return((CelsiusTemperature * 1.8) + 32 + 459.67);
 	}
-	void Fahr(double Celsius)
+	double fahr()
 	{
-		double F;
-		Celsius = Celsius * 2;
-		Celsius = Celsius - (Celsius * 0.1);
-		Celsius = Celsius + 32;
-		F = Celsius;
-		cout << "Текущая температура по шкале Фаренгейта: " << F << "°F" << endl;
+		return((9 * CelsiusTemperature) / 5 + 32);
 	}
-	void printC()
+	double kelv()
 	{
-		cout << "Текущая температура по шкале Цельсия: " << CelsiusTemperature << "°C" << endl;
+		return(CelsiusTemperature + 273.15);
 	}
-	void kelv(double Celsius)
+	void outall()
 	{
-		double F;
-		Celsius = Celsius + 273.15;
-		F = Celsius;
-		cout << "Текущая температура по шкале Кельвина: " << F << "K" << endl;
+		cout << "Температура в градусах Цельсия " << CelsiusTemperature << endl;
+		cout << "Температура в градусах Кельвина " << kelv() << endl;
+		cout << "Температура в градусах Фаренгейта " << fahr() << endl;
+		cout << "Температура по шклае Ранкина " << rankin() << endl;
 	}
 };
-int main()
-{
-	int temp;
-	setlocale(LC_ALL, "ru");
-	temperature_converter t(30);
-	t.MainPrint();
-	do
+    void  main()
 	{
-		cout << "Введите номер преобразования." << endl;
-		cin >> temp;
-		t.swap(temp);
-	} while (temp != 0);
+	setlocale(LC_ALL, "ru");
+	temperature_converter t;
+	t.temper_c(30);
+	t.outall();
 	system("pause");
 }
