@@ -26,32 +26,22 @@ public:
 		UserMinutes = b;
 		UserSeconds = c;
 	}
-	int Print1Hour() {
-		return hours;
+	void Print1() {
+		cout << "Текущее время: " << hours << ":" << minutes << ":" << seconds << endl;
 	}
-	int Print1Minute() {
-		return minutes;
+	void Print2() {
+		cout << "Пользовательское время: " << UserHours << ":" << UserMinutes << ":" << UserSeconds << endl;
 	}
-	int Print1seconds() {
-		return seconds;
+	Time Difference() {
+		return *this;
 	}
-
-	int Print2hour() {
-		return UserHours;
-	}
-	int Print2Minutes() {
-		return UserMinutes;
-	}
-	int Print2Seconds() {
-		return UserSeconds;
-	}
-
 	int DifferenceHour() {
 		return abs(hours - UserHours);
 	}
 	int DifferenceMinnute() {
 		return abs(minutes - UserMinutes);
-	}int DifferenceSeconds() {
+	}
+	int DifferenceSeconds() {
 		return abs(seconds - UserSeconds);
 	}
 	int PlusHour(int h, int m, int s) {
@@ -135,7 +125,7 @@ void main() {
 	int h, m, s;
 	setlocale(LC_CTYPE, "Rus");
 	Time t;
-	cout << "Текущее время: " << t.Print1Hour() << ":" << t.Print1Minute() << ":" << t.Print1seconds() << endl;
+	t.Print1();
 	//*********************************************//
 	cout << "Введите любое время: " << endl;
 	cout << "Часы: ";
@@ -157,12 +147,12 @@ void main() {
 		cin >> c;
 	}
 	t.EnterTime(a, b, c);
-	cout << "Пользовательское время: " << t.Print2hour() << ":" << t.Print2Minutes() << ":" << t.Print2Seconds() << endl;
+	t.Print2();
 	cout << "Разница между текущим и пользовательским временем: " << t.DifferenceHour() << ":" << t.DifferenceMinnute() << ":" << t.DifferenceSeconds() << endl;
 	system("pause");
 	system("cls");
 	//*********************************************//
-	cout << "Текущее время: " << t.Print1Hour() << ":" << t.Print1Minute() << ":" << t.Print1seconds() << endl;
+	t.Print1();
 	cout << "Введите время, на которое будет сдвинуто текущее" << endl;
 	cout << "Часы: ";
 	cin >> h;
