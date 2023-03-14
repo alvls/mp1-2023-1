@@ -33,37 +33,39 @@ public:
 		print("\nВремя успешно изменено!\n\n");
 	}
 
-	void take_time()
+	string take_time()
 	{
 		print("\nТекущее время: " + to_string(hours) + "h. " + to_string(minutes) + "m. " + to_string(seconds) + "s. \n\n");
+		return to_string(hours) + "h. " + to_string(minutes) + "m. " + to_string(seconds) + "s.";
 	}
 
-	int difference()
+	string difference()
 	{
 		vector<int> args = time_correct();
 
 		if (size(args) == 0)
 		{
-			return 0;
+			return nullptr;
 		}
 
 		vector<int> new_data = calculations(args[0], args[1], args[2]);
 
 		if (size(args) == 0)
 		{
-			return 0;
+			return nullptr;
 		}
 
 		print("\nРазница составляет: " + to_string(new_data[0]) + "h. " + to_string(new_data[1]) + "m. " + to_string(new_data[2]) + "s. \n\n");
+		return to_string(new_data[0]) + "h. " + to_string(new_data[1]) + "m. " + to_string(new_data[2]) + "s.";
 	}
 
-	int move_time()
+	bool move_time()
 	{
 		vector<int> args = time_correct();
 
 		if (size(args) == 0)
 		{
-			return 0;
+			return false;
 		}
 
 		print("\nЕсли вы хотите сдвинуть время вперед, введите: \"+\"\nЕсли вы хотите сдвинуть время назад, введите: \"-\"\n");
@@ -74,7 +76,7 @@ public:
 		{
 			if (size(args) == 0)
 			{
-				return 0;
+				return false;
 			}
 
 			if (hours < args[0])
@@ -110,6 +112,7 @@ public:
 			}
 
 			print("\nВремя успешно изменено!\n\n");
+			return true;
 		}
 		else if (s == '+')
 		{
@@ -143,13 +146,14 @@ public:
 			}
 
 			print("\nВремя успешно изменено!\n\n");
+			return true;
 		}
 		else
 		{
 			cin.ignore(cin.rdbuf()->in_avail());
 
 			print("\nОшибка ввода!\n\n");
-			return 0;
+			return false;
 		}
 	}
 
