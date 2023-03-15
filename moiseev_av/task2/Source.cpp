@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -8,206 +9,163 @@ using namespace std;
 class Matrix {
 
 public:
-	Matrix()
-	{
-		i = j = 2;
-		k = g = 0;
+	Matrix(int i, int j) : i(i), j(j) { //Вместо: this->i = i;
+	
+		values_control(i, j);
 		creating();
+	}
+
+	Matrix(const Matrix& source) : i(source.i), j(source.j) {
+
+		matr = new int[i * j];
+		copy(source.matr, &source.matr[i * j], matr);
+	}
+
+	Matrix operator +(const Matrix& plus) const {
+
+		if (i != plus.i || j != plus.j)
+		{
+			throw invalid_argument("invalid values");
+		}
+
+		Matrix result(i, j);
+
+		for (int k = 0; k < (result.i * result.j); k++)
+		{
+			result.matr[k] = matr[k] + plus.matr[k];
+		}
+
+		return result;
 	}
 
 	bool set_size(int new_i, int new_j) {
 
-		if ((new_i != new_j) || (new_i > 8) || (new_i < 2))
-		{
-			printConsole("Incorrect size.\n");
-			return false;
-		}
+		values_control(new_i, new_j);
 
-		deleting(matr);
+		delete[] matr;
 		i = new_i;
 		j = new_j;
 		creating();
 
-		printConsole("The size was successfully changed.\n");
 		return true;
 	}
 
-	bool get_size() {
+	pair<int, int> get_size() const {
 
-		printConsole("Size of matrix: " + to_string(i) + 'x' + to_string(j) + "\n");
+		return pair<int, int>(i, j);
+	}
+
+	bool change_element(int row, int col, int new_value) {
+
+		indexes_control(row, col);
+		matr[(row - 1) * j + col - 1] = new_value;
+		
 		return true;
 	}
 
-	bool change(int row, int col, int new_value) {
+	int get_element(int row, int col) const {
 
-		row -= 1;
-		col -= 1;
-
-		if ((row >= 0 && row < i) && (col >= 0 && col < j))
-		{
-			matr[row][col] = new_value;
-
-			printConsole("The element was successfully changed.\n");
-			return true;
-		}
-		else
-		{
-			printConsole("Invalid indexes.\n");
-			return false;
-		}
-	}
-
-	int get_element(int row, int col) {
-
-		row -= 1;
-		col -= 1;
-
-		if ((row >= 0 && row < i) && (col >= 0 && col < j))
-		{
-			printConsole("Element(" + to_string(row + 1) + ", " + to_string(col + 1) + "): " + to_string(matr[row][col]) + "\n");
-			return  matr[row][col];
-		}
-		else
-		{
-			printConsole("Invalid indexes.\n");
-			return false;
-		}
+		indexes_control(row, col);
+		return matr[(row - 1) * j + col - 1];
 	}
 
 	bool diagonal_domination() {
 
-		int sum;
+		int k = 1, sum = 0, diagonal = 0;
+		int size = i * j;
 
-		for (k = 0; k < i; k++)
+		for (k = 1; k <= size; k++)
 		{
-			sum = 0;
-			for (g = 0; g < i; g++)
+			sum += matr[k - 1];
+			if (k % j == 0)
 			{
-				sum += matr[k][g];
-			}
-
-			if (abs(matr[k][k]) < abs(sum - matr[k][k]))
-			{
-				printConsole("This matrix is not diagonally dominant.\n");
-				return false;
+				if (abs(matr[diagonal]) < abs(sum - matr[diagonal]))
+				{
+					return false;
+				}
+				
+				diagonal += i + 1;
+				sum = 0;
 			}
 		}
-		printConsole("This matrix is diagonally dominant.\n");
+
 		return true;
 	}
 
-	int** sum_of_matrixes(int** user_matr) {
+	friend ostream& operator <<(ostream& stream, Matrix& matrix) {
 
-		int** sum_of_matrs;
-		sum_of_matrs = new int* [i];
+		stream << "Size: " << matrix.i << "x" << matrix.j << endl;
+		stream << "Diagonal domination(1 - true, 0 - false): " << matrix.diagonal_domination() << endl;
+		stream << "Matrix:" << endl;
 
-		printConsole("Sum of matrixes:\n");
-		for (k = 0; k < i; k++)
+		int k, size = matrix.i * matrix.j;
+		for (k = 1; k <= size; k++)
 		{
-			sum_of_matrs[k] = new int[j];
-
-			for (g = 0; g < j; g++)
+			stream << matrix.matr[k - 1] << "  ";
+			if (k % matrix.j == 0)
 			{
-				sum_of_matrs[k][g] = matr[k][g] + user_matr[k][g];
-				printConsole(to_string(sum_of_matrs[k][g]) + "  ");
+				stream << endl;
 			}
-
-			printConsole("\n");
 		}
-		return sum_of_matrs;
-	}
 
-	void print() 
-	{
-		for (k = 0; k < i; k++)
-		{
-			for (g = 0; g < j; g++)
-			{
-				printConsole(to_string(matr[k][g]) + "  ");
-			}
-
-			printConsole("\n");
-		}
+		return stream;
 	}
 
 	~Matrix() {
 
-		deleting(matr);
+		delete[] matr;
 	}
 
 private:
-	int i, j, k, g; //Можно было обойтись и без переменной, отвечающей за количесвто столбцов (т.к. матрица квадратная),
-	int** matr;    //но я решил сделать с ней, чтобы класс мог работать не только с квадратными матрицами (если убрать контроль ввода)
-
-	void printConsole(string line) {
-
-		cout << line;
-	}
-
-	void deleting(int** matrix) {
-
-		for (k = 0; k < i; k++)
-		{
-			delete[] matrix[k];
-		}
-		delete[] matrix;
-	}
+	int i, j;   //Можно было обойтись и без переменной, отвечающей за количесвто столбцов (т.к. матрица квадратная),
+	int* matr; //но я решил сделать с ней, чтобы класс мог работать не только с квадратными матрицами (если убрать контроль ввода)
 
 	void creating() {
 
-		matr = new int* [i];
+		matr = new int[i * j];
 
-		for (k = 0; k < i; k++)
+		int size = i * j;
+		for (int k = 0; k < size; k++)
 		{
-			matr[k] = new int[j];
-			for (g = 0; g < j; g++)
-			{
-				matr[k][g] = rand() % 10;
-			}
+			matr[k] = rand() % 10;
+		}
+	}
+
+	void values_control(int i, int j) const {
+
+		if (i != j || i < 2 || j < 2 || i > 8 || j > 8)
+		{
+			throw invalid_argument("invalid values");
+		}
+	}
+
+	void indexes_control(int row, int col) const {
+
+		if (row < 1 || row > i || col < 1 || col > j)
+		{
+			throw invalid_argument("invalid indexes");
 		}
 	}
 };
 
 
-void main()
+int main()
 {
-	Matrix m;
+	Matrix m1(2, 2);
 	
-	m.get_size();
+	m1.set_size(4, 4);
+	m1.change_element(1, 1, 22);
+	m1.change_element(2, 2, 30);
+	m1.change_element(3, 3, 12);
+	m1.change_element(4, 4, 15);
 
-	m.print();
+	Matrix m2(m1);
 
-	m.set_size(4, 4);
+	Matrix m3 = m1 + m2 + m2;
 
-	m.get_size();
+	cout << m1 << endl <<  m2 << endl << m3 << endl;
 
-	m.print();
+	cout << m2.get_element(1, 4) << endl;
 
-	m.change(1, 1, 30);
-	m.change(2, 2, 12);
-	m.change(3, 3, 45);
-	m.change(4, 4, 22);
-
-	m.print();
-
-	m.get_element(3, 4);
-
-	m.diagonal_domination();
-
-	int user_row = 4; //создание пользовательского двумерного массива, для последующей передачи в метод
-	int user_col = 4;
-	int** user_matr;
-	user_matr = new int* [4];
-
-	for (int k = 0; k < user_row; k++) 
-	{
-		user_matr[k] = new int[user_col];
-		for (int g = 0; g < user_col; g++) //заполнение пользовательского массива
-		{
-			cout << "Enter element(" << k + 1 << ", " << g + 1 << "): ";
-			cin >> user_matr[k][g];
-		}
-	}
-
-	m.sum_of_matrixes(user_matr);
+	return EXIT_SUCCESS;
 }
