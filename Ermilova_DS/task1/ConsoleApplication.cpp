@@ -5,116 +5,116 @@ using namespace std;
 
 class Lenght_converter
 {
+	double meters = 0;
+
 public:
+	Lenght_converter()
+	{
+	}
 
-	double meters, coefficient;
-	string name;
-
-	void SetMeters(int meters)
+	void SetMeters(double meters)
 	{
 		this->meters = meters;
 	}
 
-	double Getcnt(double coefficient)
+	double GetMeters()
 	{
-		return meters * coefficient;
+		return meters;
 	}
-	void Print() 
+
+	double GetFeets()
 	{
-		cout<<Getcnt(coefficient)<< " " << name << endl;
+		return meters * 3.28;
+	}
+
+	double GetArshins()
+	{
+		return meters * 1.41;
+	}
+
+	double GetFathoms()
+	{
+		return meters * 0.47;
+	}
+
+	double GetYards()
+	{
+		return meters * 1.09;
+	}
+
+	double GetMiles()
+	{
+		return meters * 0.00062;
+	}
+	void PrintAll()
+	{
+		cout << meters << " meters" << "\n";
+		cout << meters * 3.28 << " feets" << "\n";
+		cout << meters * 2.41 << " arshins" << "\n";
+		cout << meters * 0.47 << " fathoms" << "\n";
+		cout << meters * 1.09 << " yards" << "\n";
+		cout << meters * 0.00062 << " miles" << "\n";
+
 	}
 };
 
 int main()
 {
-	int cnt_meters, choice;
+	Lenght_converter user;
+	int choice = 10000;
+	double cnt_meters;
 	cout << "Enter the number of meters" << endl;
 	cin >> cnt_meters;
-	cout << "Press 1 to display the number of meters\nPress 2 to convert meters to feet\nPress 3 to convert meters to arshins\nPress 4 to convert meters to fathoms\nPress 5 to convert meters to yards\nPress 6 to convert meters to miles\nPress 0 to exit\n" << endl;
-	cin >> choice;
+	user.SetMeters(cnt_meters);
 
 
 	while (choice != 0) {
+		cout << "Press 1 to display the number of meters\nPress 2 to convert meters to feet\nPress 3 to convert meters to arshins\nPress 4 to convert meters to fathoms\nPress 5 to convert meters to yards\nPress 6 to convert meters to miles\nPress 7 to display all values\nPress 0 to exit\n" << endl;
+		cin >> choice;
+
 		switch (choice)
 		{
 
 		case 1:
 		{
-			Lenght_converter meters;
-			meters.SetMeters(cnt_meters);
-			meters.name = "meters";
-			meters.coefficient = 1;
-			meters.Print();
-
-			cout << "Press 1 to display the number of meters\nPress 2 to convert meters to feet\nPress 3 to convert meters to arshins\nPress 4 to convert meters to fathoms\nPress 5 to convert meters to yards\nPress 6 to convert meters to miles\nPress 0 to exit\n" << endl;
-			cin >> choice;
+			cout << user.GetMeters() << "\n";
 			break;
 		}
 		case 2:
 		{
-			Lenght_converter feets;
-			feets.SetMeters(cnt_meters);
-			feets.name = "feets";
-			feets.coefficient = 3.28;
-			feets.Print();
-
-			cout << "Press 1 to display the number of meters\nPress 2 to convert meters to feet\nPress 3 to convert meters to arshins\nPress 4 to convert meters to fathoms\nPress 5 to convert meters to yards\nPress 6 to convert meters to miles\nPress 0 to exit\n" << endl;
-			cin >> choice;
+			cout << user.GetFeets() << "\n";
 			break;
 		}
 		case 3:
 		{
-			Lenght_converter arshins;
-			arshins.SetMeters(cnt_meters);
-			arshins.name = "arshins";
-			arshins.coefficient = 1.41;
-			arshins.Print();
-
-			cout << "Press 1 to display the number of meters\nPress 2 to convert meters to feet\nPress 3 to convert meters to arshins\nPress 4 to convert meters to fathoms\nPress 5 to convert meters to yards\nPress 6 to convert meters to miles\nPress 0 to exit\n" << endl;
-			cin >> choice;
+			cout << user.GetArshins() << "\n";
 			break;
 		}
 		case 4:
 		{
-			Lenght_converter fathoms;
-			fathoms.SetMeters(cnt_meters);
-			fathoms.name = "fathoms";
-			fathoms.coefficient = 0.47;
-			fathoms.Print();
-
-			cout << "Press 1 to display the number of meters\nPress 2 to convert meters to feet\nPress 3 to convert meters to arshins\nPress 4 to convert meters to fathoms\nPress 5 to convert meters to yards\nPress 6 to convert meters to miles\nPress 0 to exit\n" << endl;
-			cin >> choice;
+			cout << user.GetFathoms() << "\n";
 			break;
 		}
 		case 5:
 		{
-			Lenght_converter yards;
-			yards.SetMeters(cnt_meters);
-			yards.name = "yards";
-			yards.coefficient = 1.09;
-			yards.Print();
-
-			cout << "Press 1 to display the number of meters\nPress 2 to convert meters to feet\nPress 3 to convert meters to arshins\nPress 4 to convert meters to fathoms\nPress 5 to convert meters to yards\nPress 6 to convert meters to miles\nPress 0 to exit\n" << endl;
-			cin >> choice;
+			cout << user.GetYards() << "\n";
 			break;
 		}
 		case 6:
 		{
-			Lenght_converter miles;
-			miles.SetMeters(cnt_meters);
-			miles.name = "miles";
-			miles.coefficient = 0.00062;
-			miles.Print();
-
-			cout << "Press 1 to display the number of meters\nPress 2 to convert meters to feet\nPress 3 to convert meters to arshins\nPress 4 to convert meters to fathoms\nPress 5 to convert meters to yards\nPress 6 to convert meters to miles\nPress 0 to exit\n" << endl;
-			cin >> choice;
+			cout << user.GetMiles() << "\n";
 			break;
 		}
-	
+		case 7:
+		{
+			user.PrintAll();
+			cout << "\n";
+			break;
+		}
+
 		default:
 			break;
 		}
 	}
 }
-
 

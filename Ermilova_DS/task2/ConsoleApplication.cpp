@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <string>
 
-
 using namespace std;
 
 class dynamic_array
 {
-public:
-	int size;
-	double *arr;
 
+	int size;
+	double* arr;
+
+public:
 	void Create_arr() {
 		srand(time(NULL));
 		arr = new double[size];
 		for (int i = 0; i < size; i++)
-			arr[i] = (rand() % 100) ;
+			arr[i] = (rand() % 100);
 	}
 
 	dynamic_array() : size(4) { Create_arr(); }
@@ -36,34 +36,31 @@ public:
 		cout << "\n";
 	}
 
-	void array_size() {
-		cout << "Array size:" << size;
-		cout << "\n";
+	int array_size() {
+		return size;
 	}
 
-	void input_index(int i) {
-		cout << "Write elements:\n";
+	string input_index(int i) {
+		cout << "Write elements:";
 		cin >> arr[i];
-		cout << "\n";
+		return "\n";
 	}
 
-	void output_index(int i) {
-		cout << arr[i];
-		cout << "\n";
+	double output_index(int i) {
+		return arr[i];
 	}
 
-	void min_element() {
+	double min_element() {
 		double min = arr[0];
 		for (int i = 0; i < size - 1; i++) {
 			if (arr[i] > arr[i + 1]) {
 				min = arr[i + 1];
 			}
 		}
-		cout << "Minimum array element: " << min << endl;
-		cout << "\n";
+		return min;
 	}
 
-	void is_ordered() {
+	string is_ordered() {
 		string answer;
 		bool a = true;
 		for (int i = 0; i < size - 1; i++) {
@@ -78,8 +75,8 @@ public:
 		{
 			answer = "Array is ordered";
 		}
-		cout << answer << endl;
-		cout << "\n";
+		return answer;
+
 	}
 
 	void DeleteElement(double* a, int j, int size)
@@ -106,30 +103,27 @@ public:
 		}
 		size = size - k;
 		cout << "\n";
-		}
+	}
 };
 
 
 int main()
-{	
-	int size, choice;
+{
+	int size, choice = 999;
 	cout << "Enter the array size" << endl;
 	cin >> size;
 
 	dynamic_array a;
 	a.SetSize(size);
 
-	cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
-	cin >> choice;
-
 	while (choice != 0) {
+		cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\nPress 0 to exit\n" << endl;
+		cin >> choice;
 		switch (choice)
 		{
 		case 1:
 		{
-			a.array_size();
-			cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
-			cin >> choice;
+			cout << a.array_size() << "\n" << endl;
 			break;
 		}
 
@@ -138,9 +132,8 @@ int main()
 			int i;
 			cout << "Enter the element index" << endl;
 			cin >> i;
-			a.input_index(i);
-			cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
-			cin >> choice;
+			cout << a.input_index(i) << endl;
+
 			break;
 		}
 
@@ -149,43 +142,36 @@ int main()
 			int i;
 			cout << "Enter the element index" << endl;
 			cin >> i;
-			a.output_index(i);
-			cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
-			cin >> choice;
+			cout << a.output_index(i) << "\n" << endl;
+
 			break;
 		}
 
 		case 4:
 		{
-			a.min_element();
-			cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
-			cin >> choice;
+			cout << a.min_element() << "\n" << endl;
 			break;
 		}
 
 		case 5:
 		{
-			a.is_ordered();
-			cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
-			cin >> choice;
+			cout << a.is_ordered() << "\n" << endl;
 			break;
 		}
 
 		case 6:
-		{	
+		{
 			a.subarray();
-			cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
-			cin >> choice;
 			break;
 		}
 
 		case 7:
 		{
 			a.output();
-			cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\n" << endl;
-			cin >> choice;
 			break;
 		}
+		default:
+			break;
 		}
 	}
 
