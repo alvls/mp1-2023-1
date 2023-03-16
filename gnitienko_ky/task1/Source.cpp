@@ -32,8 +32,12 @@ public:
 	void Print2() {
 		cout << "ѕользовательское врем€: " << UserHours << ":" << UserMinutes << ":" << UserSeconds << endl;
 	}
-	Time Difference() {
-		return *this;
+	Time Difference(const Time& t) {
+		Time t_buf;
+		t_buf.hours = abs(hours - t.UserHours);
+		t_buf.minutes = abs(minutes - t.UserMinutes);
+		t_buf.seconds = abs(seconds - t.UserSeconds);
+		return t_buf;
 	}
 	int DifferenceHour() {
 		return abs(hours - UserHours);
@@ -125,6 +129,7 @@ void main() {
 	int h, m, s;
 	setlocale(LC_CTYPE, "Rus");
 	Time t;
+	Time a;
 	t.Print1();
 	//*********************************************//
 	cout << "¬ведите любое врем€: " << endl;
@@ -148,7 +153,8 @@ void main() {
 	}
 	t.EnterTime(a, b, c);
 	t.Print2();
-	cout << "–азница между текущим и пользовательским временем: " << t.DifferenceHour() << ":" << t.DifferenceMinnute() << ":" << t.DifferenceSeconds() << endl;
+	cout << "–азница между текущим и пользовательским временем: ";// << t.DifferenceHour() << ":" << t.DifferenceMinnute() << ":" << t.DifferenceSeconds() << endl;
+	t.Difference(t); cout << endl;
 	system("pause");
 	system("cls");
 	//*********************************************//
