@@ -28,6 +28,14 @@ public:
 		for (int i = 0; i < size; i++)
 			menu[i] = "";
 	}
+	Menu(int Size, int item)
+	{
+		size = Size;
+		punkt = item;
+		menu = new string[size];
+		for (int i = 0; i < size; i++)
+			menu[i] = "";
+	}
 	Menu(Menu& other)
 	{
 		size = other.size;
@@ -40,6 +48,7 @@ public:
 	int get_size() { return size; }
 	void set_name(int index, string name) { menu[index] = name; }
 	string get_name(int index) { return menu[index]; }
+	void set_item(int item) { punkt = item; }
 	int get_last_punkt() { return punkt + 1; }
 	void print_menu()
 	{
@@ -47,6 +56,7 @@ public:
 		bool flag = true;
 		while(flag)
 		{
+			cout << "-----------------" << endl;
 			for (int i = 0; i < size; i++)
 			{
 				if (i == punkt)
@@ -55,11 +65,13 @@ public:
 					textcolor(LIGHTGRAY);
 				cout << i + 1 << ". " << menu[i] << endl;
 			}
+			cout << "-----------------" << endl;
 			ch = _getch();
 			if (ch == -32)
 				ch = _getch();
 			switch (ch)
 			{
+			case 1:
 			case UP:
 				if(punkt>0)
 					--punkt;
@@ -96,6 +108,8 @@ void main()
 	lunch.set_name(1, "Pasta");
 	lunch.set_name(2, "Juice");
 	lunch.set_name(3, "Cheesecake");
+	lunch.print_menu();
+	cout << "Last selected item:" << lunch.get_last_punkt() << endl;
 	lunch.print_menu();
 	cout << "Last selected item:" << lunch.get_last_punkt() << endl;
 	system("PAUSE");
