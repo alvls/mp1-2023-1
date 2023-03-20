@@ -25,7 +25,7 @@ public:
 				mt[i][j] = 0;
 		}
 	}
-	Matrix(Matrix& MM)
+	Matrix(const Matrix& MM)
 	{
 		size = MM.size;
 		mt = new int* [size];
@@ -49,7 +49,7 @@ public:
 	{
 		 return size;
 	}
-	 void AskElement(int i, int j, int n)
+	 void SetElement(int i, int j, int n)
 	 {
 		 mt[i][j] = n;
 	 }
@@ -76,11 +76,11 @@ public:
 		}
 		return true;
 	}
-	void SumMatrix(const Matrix& m)
+	void SumMatrix(const Matrix& m1, const Matrix& m2)
 	{
 		for (int i = 0;i < size;i++)
 			for (int j = 0;j < size;j++)
-				mt[i][j] += m.mt[i][j];
+				mt[i][j] = m1.mt[i][j] + m2.mt[i][j];
 	}
 	~Matrix()
 	{
@@ -91,7 +91,7 @@ public:
 };
 void Options()
 {
-	Matrix *m1, *m2;
+	Matrix *m1, *m2, *m3;
 	int operation, n, t, i, j, el;
 	cout << "Задайте размер исходной матрицы: ";
 	cin >> n;
@@ -124,7 +124,7 @@ void Options()
 			{
 				cout << "Введите новое значение элемента: ";
 				cin >> el;
-				m1->AskElement(i, j, el);
+				m1->SetElement(i, j, el);
 				system("cls");
 				cout << "Новое значение задано" << endl;
 			}
@@ -152,6 +152,7 @@ void Options()
 			break;
 		case 6:
 			m2 = new Matrix(n);
+			m3 = new Matrix(n);
 			cout << "Введите элементы второй матрицы-слагаемого:" << endl;
 			for (i = 0;i < n;i++)
 			{
@@ -159,16 +160,17 @@ void Options()
 				{
 					cout << "Введите новое значение элемента m[" << i << "][" << j << "]: ";
 					cin >> el;
-					m2->AskElement(i, j, el);
+					m2->SetElement(i, j, el);
 					system("cls");
 				}
 			}
 			cout << "Новые значения заданы" << endl;
 			system("cls");
-			m2->SumMatrix(*m1);
+			m3->SumMatrix(*m1, *m2);
 			cout << "Результат сложения матриц:" << endl;
-			m2->PrintMatr();
+			m3->PrintMatr();
 			delete m2;
+			delete m3;
 			break;
 		case 7:
 			m1->PrintMatr();
