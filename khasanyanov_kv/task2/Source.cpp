@@ -188,7 +188,7 @@ public:
 
 int main()
 {
-	vec v(5, 10), n(5, 3), d, c(v);
+	vec v(5, 10), n(5, 3), c(v);
 	cout << v.get_size() << endl;
 	v.push(1, 5);
 	(v += n).print();
@@ -197,9 +197,6 @@ int main()
 	(v * 5).print();
 	cout << v.length()<< endl;
 	(v + n).print();
-	d.set_size(4);
-	d.print();
-	
 	system("PAUSE");
 	return 0;
 	
