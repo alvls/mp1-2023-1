@@ -49,17 +49,13 @@ int menu(char* menu[], int j) {
 class Matrix {
 	int N;
 	int** matr;
-	int** matr2;
-	int** matr3;
 public:
 	Matrix() {
 		N = 0;
 		matr = NULL;
-		matr2 = NULL;
-		matr3 = NULL;
 	}
-	void MatrixSize() {
-		cin >> N;
+	void MatrixSize(int size) {
+		N = size;
 	}
 	int GetMatrixSize() {
 		return N;
@@ -110,28 +106,15 @@ public:
 			}
 	}
 	void secondMatrix(int a, int i, int j) {
-		int** matr2 = (int**) new int* [N];
-		for (int i = 0; i < N; i++)
-			matr2[i] = (int*)new int[N];
-		matr2[i][j] = a;
-
+		matr[i][j] = a;
 	}
 	int PrintMatr(int i, int j) {
 		return matr[i][j];
 	}
-	int PrintMatr2(int i, int j) {
-		return matr2[i][j];
-	}
-	int PrintMatr3(int i, int j) {
-		return matr3[i][j];
-	}
-	void SummTwoMatrix(){
-		int** matr3 = (int**) new int* [N];
-		for (int i = 0; i < N; i++)
-			matr3[i] = (int*)new int[N];
+	void SummTwoMatrix(Matrix& m1, Matrix& m2, Matrix& m3){
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++) {
-				matr3[i][j] = matr[i][j] + matr2[i][j];
+				m3.matr[i][j] = m1.matr[i][j] + m2.matr[i][j];
 			}
 	}
 	~Matrix()
@@ -149,6 +132,8 @@ void main() {
 	char* menuu[6] = { (char*)"1. Задать размер матрицы", (char*)"2. Узнать размер матрицы", (char*)"3. Задать элемент матрицы по его индексам", (char*)"4. Узнать элемент матрицы по его индексам", (char*)"5. Диагональное преобладание матрицы", (char*)"6. Сложение двух матриц" };
 	setlocale(LC_ALL, "Rus");
 	Matrix m;
+	Matrix m2;
+	Matrix m3;
 	int chose = 0;
 	while (chose != KEY_EXIT) {
 		chose = menu(menuu, 6);
@@ -156,9 +141,16 @@ void main() {
 		case 0: {
 			system("cls");
 			cout << "Введите размер матрицы ";
-			m.MatrixSize();
+			int size;
+			cin >> size;
+			m.MatrixSize(size);
+			m2.MatrixSize(size);
+			m3.MatrixSize(size);
 			m.firstMatrix();
+			m2.firstMatrix();
+			m3.firstMatrix();
 			int n = m.GetMatrixSize();
+			
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
 					if (j % n == 0) cout << endl;
@@ -200,38 +192,41 @@ void main() {
 		case 5: {
 			system("cls");
 			int n = m.GetMatrixSize();
-			//m.SummTwoMatrix();
-			cout << "Изначальная матрица: " << endl;
+			cout << "Изначальная матрица: ";
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
 					if (j % n == 0) cout << endl;
 					cout << m.PrintMatr(i, j) << " ";
 				}
 			}
-			cout << "Введите значения матрицы" << endl;
+			cout << endl;
+			cout << "Введите значения матрицы";
 			int a = 0;
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
 					if (j % n == 0) cout << endl;
 					cin >> a;
-					m.secondMatrix(a, i, j);
+					m2.secondMatrix(a, i, j);
 				}
 			}
-			cout << "Ваша матрица: " << endl;
+			cout << endl;
+			cout << "Ваша матрица: ";
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
 					if (j % n == 0) cout << endl;
-					cout << m.PrintMatr2(i, j) << " ";
+					cout << m2.PrintMatr(i, j) << " ";
 				}
 			}
-			m.SummTwoMatrix();
-			cout << "Результат: " << endl;
+			cout << endl;
+			m.SummTwoMatrix(m, m2, m3);
+			cout << "Результат: ";
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
 					if (j % n == 0) cout << endl;
-					cout << m.PrintMatr3(i, j) << " ";
+					cout << m3.PrintMatr(i, j) << " ";
 				}
 			}
+			cout << endl;
 			system("pause");
 			break;
 		}
