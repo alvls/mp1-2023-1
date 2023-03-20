@@ -18,10 +18,6 @@ private:
 		else
 			return true;
 	}
-	void wrong()
-	{
-		cout << "Wrong size" << endl;
-	}
 	void pull(int* arrive, int def, int SIZE)
 	{
 		for (int i = 0; i < SIZE; arrive[i] = def, i++) {};
@@ -37,8 +33,6 @@ public:
 			arr = new int[size];
 			pull(arr, b, size);
 		}
-		else
-			wrong();
 	}
 	vec(const vec& source)
 	{
@@ -50,12 +44,6 @@ public:
 	~vec()
 	{
 		delete[] arr;
-	}
-	void set_size(int size)
-	{
-		this->size = size;
-		arr = new int[size];
-		pull(arr, 0, size);
 	}
 
 	int get_size()
@@ -87,35 +75,109 @@ public:
 		}
 		return sqrt(answer);
 	}
-	static vec sum_of_vectors(vec a, vec b)
+
+	vec operator +(const vec& a)
 	{
-		int S = a.get_size(), item;
-		vec answer(S);
-		if (a.get_size() == b.get_size())
-		{
-			for (int i = 0; i < S; i++)
-			{
-				item = a.get_item(i) + b.get_item(i);
-				answer.push(i, item);
-			}
-		}
-		else
-			cout << "Different length";
-		return answer;
-	}
-	int composition_with(vec a)
-	{
-		int answer=0;
-		if (a.get_size() == size)
+		vec result(*this);
+		if (size == a.size)
 		{
 			for (int i = 0; i < size; i++)
 			{
-				answer += a.get_item(i) * arr[i];
+				result.arr[i] = arr[i] + a.arr[i];
+			}
+		}
+		return result;
+	}
+	vec& operator+=(const vec& a)
+	{
+		if (size == a.size)
+		{
+			for (int i = 0; i < size; i++)
+			{
+				arr[i] += a.arr[i];
+			}
+		}
+		return *this;
+	}
+	vec operator -(const vec& a)
+	{
+		vec result(*this);
+		if (size == a.size)
+		{
+			for (int i = 0; i < size; i++)
+			{
+				result.arr[i] = arr[i] - a.arr[i];
+			}
+		}
+		return result;
+	}
+
+	vec& operator-=(const vec& a)
+	{
+		if (size == a.size)
+		{
+			for (int i = 0; i < size; i++)
+			{
+				arr[i] -= a.arr[i];
+			}
+		}
+		return *this;
+	}
+
+	vec operator*(int a)
+	{
+		vec result(*this);
+		for (int i = 0; i < size; i++)
+		{
+			result.arr[i] *= a;
+		}
+		return result;
+	}
+	int operator *(const vec& a)
+	{
+		int result = 0;
+		if (size == a.size)
+		{
+			for (int i = 0; i < size; i++)
+			{
+				result += arr[i] * a.arr[i];
+			}
+		}
+		return result;
+	}
+
+	vec& operator*=(int a)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] *= a;
+		}
+		return *this;
+	}
+
+	bool operator==(const vec& a)
+	{
+		if (size == a.size)
+		{
+			for (int i = 0; i < size; i++)
+			{
+				if (arr[i] == a.arr[i])
+					continue;
+				else
+					return false;
 			}
 		}
 		else
-			cout << "Different length";
-		return answer;
+			return false;
+		return true;
+	}
+
+	bool operator !=(const vec& a)
+	{
+		if (*this == a)
+			return false;
+		else
+			return true;
 	}
 };
 
@@ -126,15 +188,18 @@ public:
 
 int main()
 {
-	vec v(5, 10), n(5, 3), d;
-	cout << v.get_size()<<endl;
+	vec v(5, 10), n(5, 3), d, c(v);
+	cout << v.get_size() << endl;
 	v.push(1, 5);
+	(v += n).print();
+	cout << (v * n) << endl;
 	v.print();
+	(v * 5).print();
 	cout << v.length()<< endl;
-	vec::sum_of_vectors(v,n).print();
-	cout<<v.composition_with(n)<<endl;
+	(v + n).print();
 	d.set_size(4);
 	d.print();
+	
 	system("PAUSE");
 	return 0;
 	
