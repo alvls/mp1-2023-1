@@ -59,20 +59,17 @@ public:
 		matr3 = NULL;
 	}
 	void MatrixSize() {
-		cout << "Введите размер матрицы ";
 		cin >> N;
 	}
-	void GetMatrixSize() {
-		cout << "Размер матрицы = " << N << endl;
+	int GetMatrixSize() {
+		return N;
 	}
-	void GetElement() {
-		cout << "Введите i и j для поиска элемента";
+	int GetElement() {
 		int i, j;
 		cin >> i >> j;
-		cout << matr[i][j] << endl;
+		return matr[i][j];
 	}
 	void SetElement() {
-		cout << "Введите индексы элемента";
 		int i, j;
 		cin >> i >> j;
 		if ((i < 0) || (i >= N))
@@ -81,7 +78,7 @@ public:
 			return;
 		cin >> matr[i][j];
 	}
-	void Diagonal() {
+	bool Diagonal() {
 		int sum = 0;
 		int flag = 1;
 		for (int i = 0; i < N; i++)
@@ -94,12 +91,12 @@ public:
 				if (abs(matr[i][i]) >= sum)
 					flag = 1;
 				else {
-					cout << "Не олбадает диагональным преобладанием" << endl;
+					return false;
 					break;
 				}
 			} break;
 		}
-		if (flag) cout << true << endl;
+		if (flag) return true;
 	}
 	void firstMatrix() {
 		matr = (int**) new int* [N];
@@ -113,7 +110,6 @@ public:
 				if (j % N == 0) cout << endl;
 				cout << matr[i][j] << " ";
 			}
-		cout << endl;
 	}
 	void SummTwoMatrix() {
 		int** matr2 = (int**) new int* [N];
@@ -174,32 +170,37 @@ void main() {
 		switch (chose) {
 		case 0: {
 			system("cls");
+			cout << "Введите размер матрицы ";
 			m.MatrixSize();
 			m.firstMatrix();
+			cout << endl;
 			system("pause");
 			break;
 		}
 		case 1: {
 			system("cls");
-			m.GetMatrixSize();
+			cout << "Размер матрицы = " << m.GetMatrixSize() << endl;
 			system("pause");
 			break;
 		}
 		case 2: {
 			system("cls");
+			cout << "Введите индексы элемента";
 			m.SetElement();
 			system("pause");
 			break;
 		}
 		case 3: {
 			system("cls");
-			m.GetElement();
+			cout << "Введите i и j для поиска элемента";
+			cout << m.GetElement() << endl;
 			system("pause");
 			break;
 		}
 		case 4: {
 			system("cls");
-			m.Diagonal();
+			if (m.Diagonal() == 0) cout << "Не обладает диагональным преобладанием" << endl;
+			else cout << "Матрица с диагональным преобладанием" << endl;
 			system("pause");
 			break;
 		}
