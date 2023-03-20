@@ -59,7 +59,7 @@ public:
       pol[ind] = cf;
    }
 
-   double get_answer(double x)                   // вычислить значение полинома в заданной точке х
+   double get_value(double x)                   // вычислить значение полинома в заданной точке х
    {
       double answ = 0;
       for (int m = 0; m <= degree; m++)
@@ -80,7 +80,7 @@ public:
       return der;
    }
 
-   void get_response()                          // вывод полинома
+   void Print()                          // вывод полинома
    {
       if (degree == 1)
       {
@@ -205,7 +205,7 @@ start:
          case show_polynomial:
             system("cls");
             cout << "ѕолином: ";
-            poly.get_response();
+            poly.Print();
             cout << endl;
             system("pause");
             break;
@@ -236,7 +236,7 @@ start:
             cout << "¬ведите значение x: ";
             cin >> x;
             system("cls");
-            rez = poly.get_answer(x);
+            rez = poly.get_value(x);
             cout << "–езультат: " << noshowpos << rez << endl;
             system("pause");
             break;
@@ -245,7 +245,7 @@ start:
             deriv = poly.derivative_pol();
             system("cls");
             cout << "ѕроизводна€ полинома: ";
-            deriv.get_response();
+            deriv.Print();
             cout << endl;
             system("pause");
             break;
