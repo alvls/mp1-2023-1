@@ -60,6 +60,16 @@ public:
 			arr[i] = vec.arr[i];
 	}
 
+	Vector(const Vector& vec) // Конструктор копирования
+	{
+
+		arr = new int[vec.size];
+		size = vec.size;
+
+		for (int i = 0; i < size; i++)
+			arr[i] = vec.arr[i];
+	}
+
 	void Print() // Вывод на консоль
 	{
 		cout << "Размер вектора: " << size << endl << "Компоненты вектора: ";
@@ -99,14 +109,14 @@ public:
 
 	void SetComponent(int index, int component) // Изменение компоненты вектора по её номеру
 	{
-		inline void validate_vector_component(int size, int index);
+		validate_vector_component(size, index);
 
 		arr[--index] = component;
 	}
 
 	int GetComponent(int index) // Получение компоненты вектора по её номеру
 	{
-		inline void validate_vector_component(int size, int index);
+		validate_vector_component(size, index);
 
 		return arr[--index];
 	}
@@ -139,19 +149,19 @@ public:
 		return scalar;
 	}
 
-	void Sum(const Vector& vec, Vector& vec_sum) // Расчёт суммы двух векторов одного размера
+	Vector Sum(const Vector& vec) // Расчёт суммы двух векторов одного размера
 	{
 		if (size != vec.size)
 		{
 			throw std::invalid_argument("Невозможно посчитать сумму двух векторов разного размера");
 		}
 
-		delete[] vec_sum.arr;
-		vec_sum.arr = new int[size];
-		vec_sum.size = size;
+		Vector vec_sum(size);
 
 		for (int i = 0; i < size; i++)
-			vec_sum.arr[i] = arr[i] + vec.arr[i];
+			vec_sum.arr[i]= arr[i] + vec.arr[i];
+
+		return vec_sum;
 	}
 };
 
@@ -197,10 +207,8 @@ int main()
 
 	cout << endl << "5) Скалярное произведение двух векторов одного размера: " << vec1.ScalarProduct(vec2) << endl;
 
-	Vector sum1(1);
-	vec1.Sum(vec2, sum1);
 	cout << endl << "6) Сумма двух векторов одного размера:" << endl;
-	sum1.Print();
+	(vec1.Sum(vec2)).Print();
 	
 	cout << endl;
 
