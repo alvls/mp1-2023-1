@@ -235,5 +235,3 @@ void showcursor(void)
     buf.bVisible = 1;
     SetConsoleCursorInfo(Console, &buf);
 }
-
-//-----------------------------------------------------------------------------
