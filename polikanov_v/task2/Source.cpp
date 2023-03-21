@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <array>
 using namespace std;
 
 class eventsCalendar {
@@ -37,16 +38,16 @@ public:
 		}
 	}
 
-	int *getDate(string name) {
+	array<int,3> getDate(string name) {
 		for (int i = 0; i < 30; i++) {
 			if (names[i] == name) {
-				static int date[3] = { std::stoi(days[i]), std::stoi(months[i]), std::stoi(years[i]) };
+				array<int,3> date = { std::stoi(days[i]), std::stoi(months[i]), std::stoi(years[i]) };
 				return date;
 			}
 		}
 	}
 
-	int *calcDiff(string name, int day, int month, int year) {
+	array<int, 3> calcDiff(string name, int day, int month, int year) {
 		for (int i = 0; i < 30; i++) {
 			if (names[i] == name) {
 				int inputDays = day + ((month - 1) * 30) + year * 360; // use 30 days in month -> 360 days in year
@@ -56,7 +57,7 @@ public:
 				int diffYears = allDaysDiff / 360;
 				int diffMonths = (allDaysDiff - diffYears * 360) / 30;
 				int diffDays = allDaysDiff - diffYears * 360 - diffMonths * 30;
-				static int difference[3] = {diffDays, diffMonths, diffYears};
+				array<int, 3> difference = {diffDays, diffMonths, diffYears};
 				return difference;
 			}
 		}
@@ -129,7 +130,8 @@ int main() {
 	calendar.moveEvent("women's day", 20, 2, 2, "up");
 	calendar.moveEvent("women's day", 28, 5, 0, "down");
 	calendar.print();
-	int* date = calendar.calcDiff("birthday", 30, 10, 2020);
+	array<int, 3> date = calendar.calcDiff("birthday", 30, 10, 2020);
 	cout << date[1] << endl;
+	system("PAUSE");
 	return 0;
 }
