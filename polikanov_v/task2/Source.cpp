@@ -17,7 +17,6 @@ public:
 
 	void setEvent(string name, int day, int month, int year) {
 		if (day > 31 || day < 1 || month > 12 || month < 1 || year < 1 || year > 2100) {
-			cout << "Incorrect data" << endl;
 			return;
 		}
 		else {
@@ -27,7 +26,6 @@ public:
 					break;
 				}
 				else if (days[i] == std::to_string(day) && months[i] == std::to_string(month) && years[i] == std::to_string(year)) {
-					cout << "TwoEventsInOneDayException" << endl;
 					return;
 				}
 			}
@@ -39,17 +37,16 @@ public:
 		}
 	}
 
-	string getDate(string name) {
+	string *getDate(string name) {
 		for (int i = 0; i < 30; i++) {
 			if (names[i] == name) {
-				string allDate = days[i] + " " + months[i] + " " + years[i];
-				return allDate;
+				static string date[3] = { days[i], months[i], years[i] };
+				return date;
 			}
 		}
-		return "Incorrect name of event";
 	}
 
-	string calcDiff(string name, int day, int month, int year) {
+	string *calcDiff(string name, int day, int month, int year) {
 		for (int i = 0; i < 30; i++) {
 			if (names[i] == name) {
 				int inputDays = day + ((month - 1) * 30) + year * 360; // use 30 days in month -> 360 days in year
@@ -59,10 +56,10 @@ public:
 				int diffYears = allDaysDiff / 360;
 				int diffMonths = (allDaysDiff - diffYears * 360) / 30;
 				int diffDays = allDaysDiff - diffYears * 360 - diffMonths * 30;
-				return "difference " + std::to_string(diffDays) + "days " + std::to_string(diffMonths) + "months " + std::to_string(diffYears) + "years";
+				static string difference[3] = {std::to_string(diffDays), std::to_string(diffMonths), std::to_string(diffYears)};
+				return difference;
 			}
 		}
-		return "Incorrect name of event";
 	}
 	void moveEvent(string name, int day, int month, int year, string moveTo) {
 
@@ -76,11 +73,8 @@ public:
 					years[i] = std::to_string(eventYears);
 					months[i] = std::to_string(eventMonths + 1);
 					days[i] = std::to_string(eventDays + 1);
-					cout << "new date: " + (days[i]) + " " + (months[i]) + " " + (years[i]) << endl;
 					return;
 				}
-				cout << "Incorrect name of event" << endl;
-				return;
 			}
 		}
 		else if (moveTo == "down") {
@@ -93,23 +87,13 @@ public:
 					years[i] = std::to_string(eventYears);
 					months[i] = std::to_string(eventMonths + 1);
 					days[i] = std::to_string(eventDays + 1);
-
-					cout << "new date: " + (days[i]) + " " + (months[i]) + " " + (years[i]) << endl;
 					return;
 				}
-				cout << "Incorrect name of event" << endl;
-				return;
 			}
 		}
-		else {
-			cout << "LearnToWriteCorrectlyException" << endl;
-			return;
-		}
-
-
 	}
 	~eventsCalendar() {
-		cout << "free" << endl; // we don't need to free static arrays
+		 // we don't need to free static arrays
 	}
 
 	void print() { // I don't know how class can show itself in this programm, so I did this:
@@ -140,16 +124,12 @@ int main() {
 	calendar.setEvent("fake men's day", 8, 3, 2023);
 	calendar.setEvent("women's day", 81, 3, 2023);
 	calendar.setEvent("birthday", 24, 8, 2004);
-	cout << calendar.getDate("birthday") << endl;
-	cout << calendar.getDate("םמגûי דמהת") << endl;
-	cout << calendar.getDate("women's day") << endl;
-	cout << calendar.calcDiff("women's day", 3, 11, 2021) << endl;
 	calendar.moveEvent("tusa-jusa", 20, 1, 2,"up");
 	calendar.moveEvent("women's day", 200, 1, 2, "wow");
 	calendar.moveEvent("women's day", 20, 2, 2, "up");
 	calendar.moveEvent("women's day", 28, 5, 0, "down");
-	cout << calendar.getDate("women's day") << endl;
 	calendar.print();
-
+	string* date = calendar.calcDiff("birthday", 30, 10, 2020);
+	cout << date[1] << endl;
 	return 0;
 }
