@@ -37,16 +37,16 @@ public:
 		}
 	}
 
-	string *getDate(string name) {
+	int *getDate(string name) {
 		for (int i = 0; i < 30; i++) {
 			if (names[i] == name) {
-				static string date[3] = { days[i], months[i], years[i] };
+				static int date[3] = { std::stoi(days[i]), std::stoi(months[i]), std::stoi(years[i]) };
 				return date;
 			}
 		}
 	}
 
-	string *calcDiff(string name, int day, int month, int year) {
+	int *calcDiff(string name, int day, int month, int year) {
 		for (int i = 0; i < 30; i++) {
 			if (names[i] == name) {
 				int inputDays = day + ((month - 1) * 30) + year * 360; // use 30 days in month -> 360 days in year
@@ -56,7 +56,7 @@ public:
 				int diffYears = allDaysDiff / 360;
 				int diffMonths = (allDaysDiff - diffYears * 360) / 30;
 				int diffDays = allDaysDiff - diffYears * 360 - diffMonths * 30;
-				static string difference[3] = {std::to_string(diffDays), std::to_string(diffMonths), std::to_string(diffYears)};
+				static int difference[3] = {diffDays, diffMonths, diffYears};
 				return difference;
 			}
 		}
@@ -129,7 +129,7 @@ int main() {
 	calendar.moveEvent("women's day", 20, 2, 2, "up");
 	calendar.moveEvent("women's day", 28, 5, 0, "down");
 	calendar.print();
-	string* date = calendar.calcDiff("birthday", 30, 10, 2020);
+	int* date = calendar.calcDiff("birthday", 30, 10, 2020);
 	cout << date[1] << endl;
 	return 0;
 }
