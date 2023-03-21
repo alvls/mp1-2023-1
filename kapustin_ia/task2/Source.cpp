@@ -8,8 +8,8 @@ using namespace std;
 class calendar
 {
 private:
-	int day[29] = {}, month[29] = {}, year[29] = {};
-	string EventName[29] = {};
+	int day[30] = {}, month[30] = {}, year[30] = {};
+	string EventName[30] = {};
 	int temp;
 	int i = 0;
 public:
@@ -17,45 +17,54 @@ public:
 	{};
 	void installdate(string eventname, int Day, int Month, int Year)
 	{
-		day[i] = Day;
-		month[i] = Month;
-		year[i] = Year;
-		if (day[i] > 31 || day[i] < 1 || year[i] > 2100 || year[i] < 1 || month[i] > 12)
+		if (Day > 0 && Month > 0 && Month <= 12 && Year > 0 && Year <= 2100)
 		{
-			cout << "Дата некорректна" << endl;
-			year[i] = 0;
-			month[i] = 0;
-			day[i] = 0;
-			return;
-		}
-		else
-			for (int h = 0; h < 30; h++)
+			bool check = false;
+			for (int h = 0; h < i; h++)
 			{
 				if ((day[h] == day[i]) && (month[h] == month[i]) && (year[h] == year[i]))
 				{
-					int k = 0;
-					k++;
-					if (k > 1)
+					check = true;
+					break;
+				}
+			}
+			if (check)
+			{
+				return;
+			}
+			else
+			{
+				int max_days = 31;
+				if (Month == 2) 
+				{
+					if (Year % 4 == 0 && (Year % 100 != 0 || Year % 400 == 0))
 					{
-						cout << "Дата уже используется" << endl;
-						year[i] = 0;
-						month[i] = 0;
-						day[i] = 0;
-						return;
+						max_days = 29;
 					}
-					else
-					{
-						day[i] = Day;
-						month[i] = Month;
-						year[i] = Year;
-						EventName[i] = eventname;
+					else {
+						max_days = 28;
 					}
 				}
-
+				else if (Month == 4 || Month == 6 || Month == 9 || Month == 11)
+				{
+					max_days = 30;
+				}
+				if (Day <= max_days)
+				{
+					day[i] = Day;
+					month[i] = Month;
+					year[i] = Year;
+					EventName[i] = eventname;
+					i++;
+				}
+				else
+					return;
 			}
-		i++;
+		}
+		else
+			return;
 	}
-	string get_date(string eventname)
+	std::tuple<int, int, int> get_date(string eventname)
 	{
 		int h = 0;
 		do
@@ -64,16 +73,18 @@ public:
 				h++;
 			else
 			{
-				string d = to_string(day[h]);
-				string m = to_string(month[h]);
-				string y = to_string(year[h]);
-				string out = d + "." + m + "." + y;
-				cout << out << endl;
-				return out;
+				if (day[h] == 0 && month[h] == 0 && year[h] == 0)
+				{
+					return std::make_tuple(0, 0, 0);
+				}
+				else
+				{
+					return std::make_tuple(day[h], month[h], year[h]);
+				}
 			}
 		} while (h < 30);
-		if (h == 30)
-			return "Событие не найдено";
+
+		return std::make_tuple(0, 0, 0);
 	}
 	int  difference(int day1, int month1, int year1, string eventname, string dmy)
 	{
@@ -134,7 +145,6 @@ public:
 			year[h] = ReverseJuliansDate(a, 1);
 			month[h] = ReverseJuliansDate(a, 2);
 			day[h] = ReverseJuliansDate(a, 3);
-			/*cout << day[h] << " " << month[h] << " " << year[h] << endl;*/
 		}
 		else if (up_down == "down")
 		{
