@@ -1,40 +1,45 @@
 #include <iostream> 
 #include <cmath>
+
 using namespace std;
 
 typedef double (*MathFunction)(double);
 
 class IntegralCalculator {
 private:
-    MathFunction function; // функция для интегрирования 
-    double lower_limit, upper_limit; // пределы интегрирования 
-    int num_segments; // число отрезков метода прямоугольников
-    int method; // метод вычисления  
+    MathFunction function;
+    double lower_limit, upper_limit;
+    int num_segments;
+    int method; 
 
 public:
     IntegralCalculator(MathFunction function, double lower_limit, double upper_limit, int num_segments, int method)
         : function(function), lower_limit(lower_limit), upper_limit(upper_limit), num_segments(num_segments), method(method)
     {}
 
-    ~IntegralCalculator()
-    {}
+    friend ostream& operator<<(ostream& os, const IntegralCalculator& integral)
+    {
+        os << "[" << integral.lower_limit << "; " << integral.upper_limit << "]: " << integral.calculate();
+        return os;
+    }
 
-    double get_lowerLimit() // узнать нижний предел интегрирования
+    // узнать пределы интегрирования
+    double get_lowerLimit() const
     {
         return lower_limit;
     }
 
-    double get_upperLimit() // узнать верхний предел интегрирования
+    double get_upperLimit() const
     {
         return upper_limit;
     }
 
-    int get_numSegments() // узнать число отрезков метода прямоугольников
+    int get_numSegments() const // узнать число отрезков метода прямоугольников
     {
         return num_segments;
     }
 
-    int get_method() // узнать метод вычисления
+    int get_method() const // узнать метод вычисления
     {
         return method;
     }
@@ -55,7 +60,7 @@ public:
         this->method = method;
     }
 
-    double calculate() // вычислить значение интеграла выбранным методом
+    double calculate() const // вычислить значение интеграла выбранным методом
     {
         double rect_width = (upper_limit - lower_limit) / num_segments;
         double sum = 0;
@@ -91,17 +96,13 @@ public:
 
         return sum;
     }
-
-    void print() // вывести результат вычисления на экран
-    {
-        cout << "The result of calculation is: " << calculate() << endl;
-    }
 };
 
 int main()
 {
     IntegralCalculator integral([](double x) { return cos(x); }, 0, 1, 1000, 0);
-    integral.print();
+    cout << "The result of calculation within " << integral << endl;
+
     system("PAUSE");
 
     return 0;
