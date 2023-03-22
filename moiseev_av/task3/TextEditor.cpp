@@ -56,7 +56,7 @@ void reprint_line(string& str, int length, int x) {
 	gotoxy(origin_x, wherey());
 }
 
-string TextEditor::Read() {
+string TextEditor::read() {
 
 	int label_len = label.length();
 	int deleting_len = length + label_len;
@@ -89,20 +89,14 @@ string TextEditor::Read() {
 	{
 		line_len = line.length();
 
-		if (c == Keycodes::Special)
-		{
-			special_key = true;
-			continue;
-		}
+		if (c == Keycodes::Special) { special_key = true; continue; }
 
 		if (special_key)
 		{
-			if ((c == Keycodes::Right && (position < length - 1)) || ((c == Keycodes::Left) && (position > 0)))
+			if ((c == Keycodes::Right && (position < line_len)) || ((c == Keycodes::Left) && (position > 0)))
 			{
 				offset = (c == Keycodes::Right) ? 1 : (-1);
 				position += offset;
-				
-				if (offset == 1) { line += ' '; }
 				
 				gotoxy(wherex() + offset, y);
 			}
@@ -128,29 +122,23 @@ string TextEditor::Read() {
 			continue;
 		}
 
-		if (!isprint(static_cast<unsigned char>(c))) { continue; }
+		if (!isprint(static_cast<unsigned char>(c))) continue;
 
-		if (line_len == length || position > length - 1) { continue; }
+		if (line_len == length || position > length - 1) continue;
 
-		if (position >= line_len) { line += c; }
+		if (position >= line_len) { line += c; cout << c; }
 
 		else
 		{
-			if (line.length() > length) { line = line.substr(0, length - 1); }
-
 			line = line.substr(0, position) + c + line.substr(position, line.length());
 			int ox = wherex();
 
 			gotoxy(x, y);
 			cout << line;
 			gotoxy(ox + 1, y);
-
-			position++;
-			continue;
 		}
 
 		position++;
-		cout << c;
 	}
 
 	textbackground(BLACK);

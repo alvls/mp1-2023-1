@@ -10,8 +10,8 @@ int main() {
 
 	cout << line1 << line2 << endl;
 
-	cout << line1.get_label() << "'" << line1.Read() << "'" << endl;
-	cout << line2.get_label() << "'" << line2.Read() << "'" << endl;
+	cout << line1.get_label() << "'" << line1.read() << "'" << endl;
+	cout << line2.get_label() << "'" << line2.read() << "'" << endl;
 
 	return EXIT_SUCCESS;
 }

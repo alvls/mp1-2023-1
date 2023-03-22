@@ -13,7 +13,7 @@ public:
 
 	string get_label() const;
 
-	string Read();
+	string read();
 
 	friend ostream& operator <<(ostream& stream, const TextEditor& source);
 
