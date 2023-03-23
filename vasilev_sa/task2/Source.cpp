@@ -1,136 +1,189 @@
 #include <iostream>
 
-template<typename T>
-class Vector {
+class Vector
+{
 private:
-  void addMemory() {
-    capacity_ *= 2;
-    T* tmp = arr_;
-    arr_ = new T[capacity_];
-    for (size_t i = 0; i < size_; ++i) arr_[i] = tmp[i];
-    delete[] tmp;
-  }
-
-  T* arr_;
-  size_t size_{};
-  size_t capacity_{};
+	int* arr;
+	int size;
 public:
-  Vector() {
-    arr_ = new T[1];
-    capacity_ = 1;
-  }
-  Vector(Vector& other) {
-    if (this != &other) {
-      delete[] arr_;
-      arr_ = other.arr_;
-      size_ = other.size_;
-      capacity_ = other.capacity_;
-      other.arr_ = nullptr;
-      other.size_ = other.capacity_ = 0;
-    }
-  }
-  Vector(Vector&& other)  noexcept {
-    if (this != &other) {
-      delete[] arr_;
-      arr_ = other.arr_;
-      size_ = other.size_;
-      capacity_ = other.capacity_;
-      other.arr_ = nullptr;
-      other.size_ = other.capacity_ = 0;
-    }
-  }
-  Vector& operator=(Vector& other) {
-    if (this != &other) {
-      delete[] arr_;
-      arr_ = other.arr_;
-      size_ = other.size_;
-      capacity_ = other.capacity_;
-      other.arr_ = nullptr;
-      other.size_ = other.capacity_ = 0;
-    }
-    return *this;
-  }
+	Vector(int x = 0, int y = 0)
+	{
+		if (x >= 1 && x <= 20)
+		{
+			size = x;
+			arr = new int[size];
+			for (int i = 0; i < size; i++)
+				arr[i] = y;
+		}
+		else
+		{
+			size = 0;
+			arr = nullptr;
+		}
+	}
 
-  Vector& operator=(Vector&& other) noexcept {
-    if (this != &other) {
-      delete[] arr_;
-      arr_ = other.arr_;
-      size_ = other.size_;
-      capacity_ = other.capacity_;
-      other.arr_ = nullptr;
-      other.size_ = other.capacity_ = 0;
-    }
-    return *this;
-  }
+	~Vector()
+	{
+		delete[] arr;
+	}
 
-  ~Vector() {
-    delete[] arr_;
-  }
-public:
-  [[nodiscard]] bool isEmpty() const {
-    return size_ == 0;
-  }
+	Vector(const Vector& another)
+	{
+		size = another.size;
+		arr = new int[size];
+		for (int i = 0; i < size; i++)
+			arr[i] = another.arr[i];
+	}
 
-  [[nodiscard]] size_t size() const {
-    return size_;
-  }
+	Vector& operator = (const Vector another)
+	{
+		size = another.size;
+		arr = new int[size];
+		for (int i = 0; i < size; i++)
+			arr[i] = another.arr[i];
+		return *this;
+	}
 
-  [[nodiscard]] size_t capacity() const {
-    return capacity_;
-  }
+	Vector operator + (const Vector& another)
+	{
+		Vector r(*this);
+		if (size != another.size)
+			throw '+';
+		for (int i = 0; i < size; i++)
+			r.arr[i] = arr[i] + another.arr[i];
+		return r;
+	}
 
-  void pushBack(const T& value) {
-    if (size_ >= capacity_) addMemory();
-    arr_[size_++] = value;
-  }
+	Vector& operator += (const Vector& another)
+	{
+		if (size != another.size)
+			throw '+';
+		for (int i = 0; i < size; i++)
+			arr[i] += another.arr[i];
+		return *this;
+	}
 
-  void remove(size_t index) {
-    for (size_t i = index + 1; i < size_; ++i) {
-      arr_[i - 1] = arr_[i];
-    }
-    --size_;
-  }
-public:
-  T* begin() {
-    return &arr_[0];
-  }
+	Vector operator - (const Vector& another)
+	{
+		Vector r(*this);
+		if (size != another.size)
+			throw '-';
+		for (int i = 0; i < size; i++)
+			r.arr[i] = arr[i] - another.arr[i];
+		return r;
+	}
 
-  const T* begin() const {
-    return &arr_[0];
-  }
+	Vector& operator -= (const Vector& another)
+	{
+		if (size != another.size)
+			throw '-';
+		for (int i = 0; i < size; i++)
+			arr[i] -= another.arr[i];
+		return *this;
+	}
 
-  T* end() {
-    return &arr_[size_];
-  }
+	Vector operator * (int another)
+	{
+		Vector r(*this);
+		for (int i = 0; i < size; i++)
+			r.arr[i] *= another;
+		return r;
+	}
 
-  const T* end() const {
-    return &arr_[size_];
-  }
-public:
-  T& operator[](size_t index) {
-    return arr_[index];
-  }
+	Vector& operator *= (int another)
+	{
+		for (int i = 0; i < size; i++)
+			arr[i] *= another;
+		return *this;
+	}
 
-  const T& operator[](size_t index) const {
-    return arr_[index];
-  }
+	int operator * (const Vector& another)
+	{
+		int r = 0;
+		if (size != another.size)
+			throw "*";
+		for (int i = 0; i < size; i++)
+			r += arr[i] * another.arr[i];
+		return r;
+	}
 
+	bool operator == (const Vector& another)
+	{
+		if (size != another.size)
+		{
+			return false;
+		}
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] != another.arr[i])
+				return false;
+		}
+		return true;
+	}
+
+	bool operator != (const Vector& another)
+	{
+		if (*this == another)
+			return false;
+		else
+			return true;
+	}
+	//-----------------------------------------------------
+	int Get_size()
+	{
+		return size;
+	}
+
+	int Get_from(int index)
+	{
+		return arr[index];
+	}
+
+	double Length()
+	{
+		double answer = 0.0;
+		for (int i = 0; i < size; i++)
+			answer += pow(arr[i], 2);
+		return sqrt(answer);
+	}
+
+	void Append_arr(int index, int value)
+	{
+		arr[index] = value;
+	}
+
+	void Print()
+	{
+		std::cout << '{';
+		for (int i = 0; i < size; i++)
+		{
+			std::cout << arr[i];
+			if (i < size - 1)
+				std::cout << "; ";
+		}
+		std::cout << '}' << std::endl;
+	}
 };
-
-template<typename T>
-inline std::ostream& operator<<(std::ostream& os, const Vector<T>& vec) {
-  for (const T& val : vec) os << val << " ";
-  return os;
-}
-
 
 int main()
 {
-  Vector <int> vector;
-  vector.pushBack(1);
-  vector.pushBack(2);
-  vector.pushBack(3);
-  std::cout << vector << std::endl;
-  system("pause");
-  return 0;
+	try
+	{
+		Vector f(5, -10), s(5, 10), r1, r2, r3;
+		int r4;
+		r1 = f + s;
+		r1.Print();
+		r2 = f - s;
+		r2.Print();
+		r3 = f * 10;
+		r3.Print();
+		r4 = f * s;
+		std::cout << r4 << std::endl;
+	}
+	catch (char c)
+	{
+		std::cout << "Error with size in operand of " << c << std::endl;
+	}
+	system("PAUSE");
+	return 0;
 }
