@@ -47,9 +47,9 @@ int menu(char* menu[], int j) {
 }
 
 class Matrix {
+public:
 	int N;
 	int** matr;
-public:
 	Matrix() {
 		N = 0;
 		matr = nullptr;
@@ -89,20 +89,6 @@ public:
 			} break;
 		}
 		if (flag) return true;
-	}
-	void firstMatrix() {
-		matr = (int**) new int* [N];
-		for (int i = 0; i < N; i++)
-			matr[i] = (int*)new int[N];
-
-		srand(time(NULL));
-		for (int i = 0; i < N; i++)
-			for (int j = 0; j < N; j++) {
-				matr[i][j] = 1 + rand() % 100;
-			}
-	}
-	void secondMatrix(int a, int i, int j) {
-		matr[i][j] = a;
 	}
 	int PrintMatr(int i, int j) {
 		return matr[i][j];
@@ -144,11 +130,22 @@ void main() {
 			m.MatrixSize(size);
 			m2.MatrixSize(size);
 			m3.MatrixSize(size);
-			m.firstMatrix();
-			m2.firstMatrix();
-			m3.firstMatrix();
+			m.matr = (int**) new int* [m.N];
+			for (int i = 0; i < m.N; i++)
+				m.matr[i] = (int*)new int[m.N];
+			m2.matr = (int**) new int* [m.N];
+			for (int i = 0; i < m.N; i++)
+				m2.matr[i] = (int*)new int[m.N];
+			m3.matr = (int**) new int* [m.N];
+			for (int i = 0; i < m.N; i++)
+				m3.matr[i] = (int*)new int[m.N];
+
+			srand(time(NULL));
+			for (int i = 0; i < m.N; i++)
+				for (int j = 0; j < m.N; j++) {
+					m.matr[i][j] = 1 + rand() % 100;
+				}
 			int n = m.GetMatrixSize();
-			
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
 					if (j % n == 0) cout << endl;
@@ -210,7 +207,7 @@ void main() {
 				for (int j = 0; j < n; j++) {
 					if (j % n == 0) cout << endl;
 					cin >> a;
-					m2.secondMatrix(a, i, j);
+					m2.matr[i][j] = a;
 				}
 			}
 			cout << endl;
