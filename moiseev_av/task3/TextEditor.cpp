@@ -14,7 +14,8 @@ enum Keycodes {
 	Delete = 83,
 	Left = 75,
 	Right = 77,
-	Special = -32, //Такие клавиши как: LEFT, RIGHT, DEL состоят из 2х символов, один из которых: Special
+	Tab = 9,
+	Special = -32 //Такие клавиши как: LEFT, RIGHT, DEL состоят из 2х символов, один из которых: Special
 };
 
 TextEditor::TextEditor(string label, int x, int y, int length)
@@ -82,7 +83,7 @@ string TextEditor::read() {
 	string line = "";
 	char c;
 
-	int position = 0, line_len, offset;
+	int position = 0, correction, line_len, offset;
 	bool special_key = false;
 
 	while ((c = _getch()) != Keycodes::Enter)
@@ -118,6 +119,28 @@ string TextEditor::read() {
 
 			line = line.substr(0, position) + line.substr(position + 1, line_len);
 			reprint_line(line, length, x);
+
+			continue;
+		}
+
+		if (c == Keycodes::Tab)
+		{
+			int ox = wherex();
+			
+			line += "    ";
+			correction = 4;
+			position += 4;
+			
+			if (line.length() >= length)
+			{
+				line = line.substr(0, length);
+				correction = length + x;
+				position = length;
+			}
+
+			gotoxy(x, y);
+			cout << line;
+			gotoxy(ox + correction, y);
 
 			continue;
 		}
