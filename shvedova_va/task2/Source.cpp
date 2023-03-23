@@ -18,10 +18,10 @@ public:
 	{
 		size = n;
 		mt = new int* [size];
-		for (int i = 0;i < size;i++)
+		for (int i = 0; i < size; i++)
 		{
-			mt[i] = new int [size];
-			for (int j = 0;j < size;j++)
+			mt[i] = new int[size];
+			for (int j = 0; j < size; j++)
 				mt[i][j] = 0;
 		}
 	}
@@ -29,30 +29,29 @@ public:
 	{
 		size = MM.size;
 		mt = new int* [size];
-		for (int i = 0;i < size;i++)
+		for (int i = 0; i < size; i++)
 			mt[i] = new int[size];
-		for (int i = 0;i < size;i++)
-			for (int j = 0;j < size;j++)
+		for (int i = 0; i < size; i++)
+			for (int j = 0; j < size; j++)
 				mt[i][j] = MM.mt[i][j];
 	}
 	void PrintMatr()
 	{
-		cout << "Текущая матрица:"<< endl;
-		for (int i = 0;i < size;i++)
+		for (int i = 0; i < size; i++)
 		{
-			for (int j = 0;j < size;j++)
+			for (int j = 0; j < size; j++)
 				cout << setw(4) << left << mt[i][j];
 			cout << endl;
 		}
 	}
-	 int GetSize()
+	int GetSize()
 	{
-		 return size;
+		return size;
 	}
-	 void SetElement(int i, int j, int n)
-	 {
-		 mt[i][j] = n;
-	 }
+	void SetElement(int i, int j, int n)
+	{
+		mt[i][j] = n;
+	}
 	int GetElement(int i, int j)
 	{
 		return mt[i][j];
@@ -66,9 +65,9 @@ public:
 	bool Diagonal()
 	{
 		int s = 0;
-		for (int i = 0;i < size;i++)
+		for (int i = 0; i < size; i++)
 		{
-			for (int j = 0;j < size;j++)
+			for (int j = 0; j < size; j++)
 				if (j != i)
 					s += mt[i][j];
 			if (fabs(mt[i][i]) < fabs(s))
@@ -76,27 +75,25 @@ public:
 		}
 		return true;
 	}
-	void SumMatrix(const Matrix& m1, const Matrix& m2)
+	Matrix SumMatrix(const Matrix& other)
 	{
-		for (int i = 0;i < size;i++)
-			for (int j = 0;j < size;j++)
-				mt[i][j] = m1.mt[i][j] + m2.mt[i][j];
+		Matrix m(size);
+		for (int i = 0; i < size; i++)
+			for (int j = 0; j < size; j++)
+				m.mt[i][j] = m.mt[i][j] + other.mt[i][j];
+		return m;
 	}
-	~Matrix()
-	{
-		for (int i = 0;i < size;i++)
-			delete[] mt[i];
-		delete[] mt;
-	}
+	~Matrix(){}
 };
 void Options()
 {
-	Matrix *m1, *m2, *m3;
+	Matrix* m1, * m2;
+	Matrix slag;
 	int operation, n, t, i, j, el;
 	cout << "Задайте размер исходной матрицы: ";
 	cin >> n;
 	m1 = new Matrix(n);
-	while(1)
+	while (1)
 	{
 		system("cls");
 		cout << "Выберете операцию:\n1) изменить размер матрицы\n2) узнать размер матрицы\n3) задать элемент матрицы по его индексам\n4) узнать элемент матрицы по его индексам\n5) проверить свойство диагонального преобладания\n6) вычислить сумму двух матриц\n7) вывести текущую матрицу на экран\n";
@@ -120,7 +117,6 @@ void Options()
 			cout << "Введите номер столбца: ";
 			cin >> j;
 			if (m1->PossibleIndex(i, j))
-
 			{
 				cout << "Введите новое значение элемента: ";
 				cin >> el;
@@ -152,11 +148,10 @@ void Options()
 			break;
 		case 6:
 			m2 = new Matrix(n);
-			m3 = new Matrix(n);
 			cout << "Введите элементы второй матрицы-слагаемого:" << endl;
-			for (i = 0;i < n;i++)
+			for (i = 0; i < n; i++)
 			{
-				for (j = 0;j < n;j++)
+				for (j = 0; j < n; j++)
 				{
 					cout << "Введите новое значение элемента m[" << i << "][" << j << "]: ";
 					cin >> el;
@@ -166,13 +161,14 @@ void Options()
 			}
 			cout << "Новые значения заданы" << endl;
 			system("cls");
-			m3->SumMatrix(*m1, *m2);
+			slag = *m2;
+			slag.SumMatrix(*m1);
 			cout << "Результат сложения матриц:" << endl;
-			m3->PrintMatr();
+			slag.PrintMatr();
 			delete m2;
-			delete m3;
 			break;
 		case 7:
+			cout << "Текущая матрица:" << endl;
 			m1->PrintMatr();
 			break;
 		default:
