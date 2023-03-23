@@ -11,16 +11,16 @@ using namespace std;
 
 class Tabulator {
 private:
-	double left_dot, right_dot = 0;
-	int dot_amount = 0;
+	double leftDot, rightDot = 0;
+	int dotAmount = 0;
 	double (*function)(double);
 	vector<double> result;
 
 public:
-	Tabulator(double left_dot, double right_dot, int dot_amount, double(*function)(double)) {
-		this->left_dot = left_dot;
-		this->right_dot = right_dot;
-		this->dot_amount = dot_amount;
+	Tabulator(double leftDot, double rightDot, int dotAmount, double(*function)(double)) {
+		this->leftDot = leftDot;
+		this->rightDot = rightDot;
+		this->dotAmount = dotAmount;
 		this->function = function;
 	}
 
@@ -28,30 +28,30 @@ public:
 		this->function = function;
 	}
 	
-	void setDotAmount(int dot_amount) {
-		this->dot_amount = dot_amount;
+	void setDotAmount(int dotAmount) {
+		this->dotAmount = dotAmount;
 	}
 
 	int getDotAmount() {
-		return dot_amount;
+		return dotAmount;
 	}
 	
-	void setTabSegment(double left_dot, double right_dot) {
-		this->left_dot = left_dot;
-		this->right_dot = right_dot;
+	void setTabSegment(double leftDot, double rightDot) {
+		this->leftDot = leftDot;
+		this->rightDot = rightDot;
 	}
 
 	array<double,2> getTabSegment() {
-		return { left_dot, right_dot };
+		return { leftDot, rightDot };
 	}
 
 	void tabulate() {
-		double nowDot = left_dot;
+		double nowDot = leftDot;
 		result.clear();
-		for (int i = 0; i < dot_amount; i++) {
+		for (int i = 0; i < dotAmount; i++) {
 			result.push_back(nowDot);
 			result.push_back(function(nowDot));
-			nowDot += (right_dot - left_dot) / (dot_amount - 1);
+			nowDot += (rightDot - leftDot) / (dotAmount - 1);
 		}
 
 	}
