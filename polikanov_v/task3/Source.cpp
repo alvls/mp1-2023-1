@@ -62,8 +62,8 @@ public:
 		}
 	}
 	
-	void saveResults() {
-		ofstream fout("res.txt");
+	void saveResults(string path) {
+		ofstream fout(path);
 		for (int i = 0; i < result.size(); i = i + 2) {
 			fout << "x: " << result[i] << "   y: " << result[i + 1] << endl;
 		}
@@ -95,7 +95,7 @@ int main() {
 	tabulator.setFunction(function2);
 	tabulator.tabulate();
 	tabulator.printResults();
-	tabulator.saveResults();
+	tabulator.saveResults("res.txt");
 	return 0;
 }
 
