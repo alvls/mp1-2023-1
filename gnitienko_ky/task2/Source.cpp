@@ -52,7 +52,7 @@ class Matrix {
 public:
 	Matrix() {
 		N = 0;
-		matr = NULL;
+		matr = nullptr;
 	}
 	void MatrixSize(int size) {
 		N = size;
@@ -60,19 +60,15 @@ public:
 	int GetMatrixSize() {
 		return N;
 	}
-	int GetElement() {
-		int i, j;
-		cin >> i >> j;
+	int GetElement(int i, int j) {
 		return matr[i][j];
 	}
-	void SetElement() {
-		int i, j;
-		cin >> i >> j;
+	void SetElement(int i, int j, int a) {
 		if ((i < 0) || (i >= N))
 			return;
 		if ((j < 0) || (j >= N))
 			return;
-		cin >> matr[i][j];
+		matr[i][j] = a;
 	}
 	bool Diagonal() {
 		int sum = 0;
@@ -111,11 +107,13 @@ public:
 	int PrintMatr(int i, int j) {
 		return matr[i][j];
 	}
-	void SummTwoMatrix(Matrix& m1, Matrix& m2, Matrix& m3){
+	Matrix SummTwoMatrix(Matrix& m1, Matrix& m2){
+		Matrix m3;
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++) {
-				m3.matr[i][j] = m1.matr[i][j] + m2.matr[i][j];
+				matr[i][j] = m1.matr[i][j] + m2.matr[i][j];
 			}
+		return m3;
 	}
 	~Matrix()
 	{
@@ -171,14 +169,20 @@ void main() {
 		case 2: {
 			system("cls");
 			cout << "¬ведите индексы элемента";
-			m.SetElement();
+			int i, j, a;
+			cin >> i >> j;
+			cout << "¬ведите число ";
+			cin >> a;
+			m.SetElement(i, j, a);
 			system("pause");
 			break;
 		}
 		case 3: {
 			system("cls");
 			cout << "¬ведите i и j дл€ поиска элемента";
-			cout << m.GetElement() << endl;
+			int i, j;
+			cin >> i >> j;
+			cout << m.GetElement(i, j) << endl;
 			system("pause");
 			break;
 		}
@@ -218,7 +222,7 @@ void main() {
 				}
 			}
 			cout << endl;
-			m.SummTwoMatrix(m, m2, m3);
+			m3.SummTwoMatrix(m, m2);
 			cout << "–езультат: ";
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
