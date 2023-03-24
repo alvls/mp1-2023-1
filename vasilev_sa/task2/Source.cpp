@@ -35,9 +35,10 @@ public:
 			arr[i] = another.arr[i];
 	}
 
-	Vector& operator = (const Vector another)
+	Vector& operator = (const Vector& another)
 	{
 		size = another.size;
+		delete[] arr;
 		arr = new int[size];
 		for (int i = 0; i < size; i++)
 			arr[i] = another.arr[i];
