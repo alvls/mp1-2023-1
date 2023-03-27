@@ -151,10 +151,12 @@ public:
 	void add(Song song)
 	{
 		songs.push_back(song);
+		this->sort();
 	}
 	void del(int index)
 	{
 		songs.erase(songs.begin() + index);
+		this->sort();
 	}
 	void del(Song song)
 	{
@@ -163,6 +165,7 @@ public:
 			if (song == songs[i])
 				songs.erase(songs.begin() + i);
 		}
+		this->sort();
 	}
 	void del(string name_or_singer)
 	{
@@ -171,6 +174,7 @@ public:
 			if ((songs[i].get_name() == name_or_singer) || (songs[i].get_singer() == name_or_singer))
 				songs.erase(songs.begin() + i);
 		}
+		this->sort();
 	}
 	int size() { return songs.size(); }
 	string find(string name, string compositor_or_autor_or_singer)
@@ -206,9 +210,6 @@ public:
 		}
 		cout << "***********************************************************************************************************************" << endl;
 	}
-
-	
-
 	void print_autor(string autor)
 	{
 
