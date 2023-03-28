@@ -76,15 +76,3 @@ void textcolor(int color)
   printf("%c", ch);
   gotoxy(pos.X, pos.Y);
 }
-
-void hidecursor(void)
-{
-  HANDLE Console = GetStdHandle(STD_OUTPUT_HANDLE);
-  if (!Console)
-    return;
-
-  CONSOLE_CURSOR_INFO buf;
-  GetConsoleCursorInfo(Console, &buf);
-  buf.bVisible = 0;
-  SetConsoleCursorInfo(Console, &buf);
-}

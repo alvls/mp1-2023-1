@@ -79,7 +79,7 @@ public:
 				system("cls");
 				gotoxy(x, y);
 				textcolor(LIGHTGRAY);
-				std::cout << "You choosed " << point + 1 << "menu item" << std::endl;
+				std::cout << "You choosed " << point + 1 << " menu item" << std::endl;
 				gotoxy(x, y + 1);
 				system("PAUSE");
 				break;
@@ -89,3 +89,14 @@ public:
 		}
 	}
 };
+
+int main()
+{
+	hidecursor();
+	Menu my_list(3);
+	my_list.Set_name(0, "Nissan");
+	my_list.Set_name(1, "Lada");
+	my_list.Set_name(2, "Range Rover");
+	my_list.Print(10, 10);
+	return 0;
+}
