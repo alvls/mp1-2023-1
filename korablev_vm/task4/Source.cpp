@@ -25,67 +25,25 @@ int main()
 	system("cls");
 	hello();
 	Storage storage;
-	string main_func[] = { "\t\t Выберите желаемую функцию:", "> Создать новый контакт", "> Вывести список контактов", "> Найти контакт по ФИО", "> Найти контакт по телефону ", "> Контакты на заданную букву", "> Избранные контакты", "> Сохранить в файл", "> Экспорт из файла" };
+	string main_func[] = { "\t\t Выберите желаемую функцию:", "> Создать новый контакт", "> Вывести список контактов", "> Найти контакт по ФИО", "> Найти контакт по телефону ", "> Контакты на заданную букву", "> Избранные контакты", "> Текущее число контактов", "> Сохранить в файл", "> Экспорт из файла" };
 	string contact_func[] = { "\t\t Выберите желаемую функцию:", "> Изменить контакт", "> Изменить статус избранного", "> Удалить контакт", "> Вернуться назад"};
-	string YesNo[] = { "\t\t Добавить в избранное?", "> Да", "> Нет" };
 	string name, surname, patronymic, phone, way;
 	Contacts temp;
 	size_t size;
 	int day, month, year;
-	bool favourite;
 	char letter;
 	int func_menu;
 	int func_list = 1;
 	int func_contact = 1;
-	int func_prev;
 	bool active = true;
 	bool active_contact = true;
 	while (active)
 	{
-		func_menu = menu_mode_clear(main_func, 9);
+		func_menu = menu_mode_clear(main_func, 10);
 		switch (func_menu)
 		{
 		case 1:
-			system("cls");
-			cout << "Введите ФИО контакта (разделение через Enter):" << endl;
-			cin >> surname;
-			cin >> name;
-			cin >> patronymic;
-			cout << "\nВведите номер телефона в формате +00000000000" << endl;
-			cin >> phone;
-			cout << "Введите дату рождения в цифровом формате (разделение через Enter):" << endl;
-			cin >> day; 
-			cin >> month;
-			cin >> year;
-			cout << "Вы хотите добавить этот контакт в избаранные?" << endl;
-			func_prev = menu_mode_clear(YesNo, 3);
-			switch (func_prev)
-			{
-			case 1:
-				favourite = true;
-				break;
-			case 2:
-				favourite = false;
-				break;
-			}
-			temp.set_name(name);
-			temp.set_surname(surname);
-			temp.set_patronymic(patronymic);
-			temp.set_phone(phone);
-			temp.set_day(day);
-			temp.set_month(month);
-			temp.set_year(year);
-			temp.set_favourite(favourite);
-			for (int i = 0; i < storage.get_contacts_count(); i++)
-			{
-				if (temp == storage[i])
-				{
-					cout << "Ошибка! Такой контакт уже существует" << endl;
-					system("pause");
-					break;
-				}
-			}
-			storage.create_contact(temp);
+			create_new_contact(temp, storage);
 			break;
 		case 2:
 			size = storage.get_contacts_count();
@@ -99,13 +57,13 @@ int main()
 					switch (func_contact)
 					{
 					case 1:
-						cout << "Введите ФИО контакта (разделение через Enter):" << endl;
+						cout << "Введите ФИО контакта:" << endl;
 						cin >> surname;
 						cin >> name;
 						cin >> patronymic;
 						cout << "\nВведите номер телефона в формате +00000000000" << endl;
 						cin >> phone;
-						cout << "\nВведите дату рождения в цифровом формате (разделение через Enter):" << endl;
+						cout << "\nВведите дату рождения в цифровом формате (разделение через пробел или Enter):" << endl;
 						cin >> day;
 						cin >> month;
 						cin >> year;
@@ -139,7 +97,7 @@ int main()
 			break;
 		case 3:
 			system("cls");
-			cout << "Введите ФИО контакта (разделение через Enter):" << endl;
+			cout << "Введите ФИО контакта:" << endl;
 			cin >> surname;
 			cin >> name;
 			cin >> patronymic;
@@ -167,13 +125,18 @@ int main()
 			break;
 		case 7:
 			system("cls");
+			cout << "Текущее число контактов: " << storage.get_contacts_count() << endl;
+			system("pause");
+			break;
+		case 8:
+			system("cls");
 			way = get_way();
 			system("cls");
 			storage.save_file(way);
 			cout << "Сохранено" << endl;
 			system("pause");
 			break;
-		case 8:
+		case 9:
 			system("cls");
 			way = get_way();
 			storage.load_file(way);

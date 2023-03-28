@@ -130,6 +130,7 @@ public:
     int load_file(string way);
     void save_file(string way);
     void print_storage();
+    bool is_exist(Contacts& contact);
     void change_contact(string _name, string _surname, string _patronymic, string _phone, int day, int month, int year, bool favourite, int ind);
     ~Storage() {}
 };
@@ -138,4 +139,5 @@ int menu_mode_contact(string* arr, int size, Contacts& contact);
 int menu_mode_list(Storage& list);
 void exit_prog();
 void hello();
+void create_new_contact(Contacts& contact, Storage& list);
 string get_way();

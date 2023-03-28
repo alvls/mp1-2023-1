@@ -23,6 +23,7 @@ size_t Storage::get_index(Contacts& contact)
     for (i = 0; i < contacts.size(); i++)
         if (contact.get_phone() == contacts[i].get_phone())
             return i;
+    return -1;
 }
 
 void Storage::print_storage()
@@ -35,18 +36,23 @@ void Storage::print_storage()
     }
 }
 
-void Storage::create_contact(Contacts& contact)
+bool Storage::is_exist(Contacts& contact)
 {
-    bool new_c = true;
+    bool ex_c = false;
     for (int i = 0; i < get_contacts_count(); i++)
     {
         if (contact == contacts[i])
         {
-            new_c = false;
+            ex_c = true;
             break;
         }
     }
-    if (new_c = true)
+    return ex_c;
+}
+
+void Storage::create_contact(Contacts& contact)
+{
+    if (!is_exist(contact))
     {
         contacts.push_back(contact);
         sort_contacts();
@@ -88,38 +94,30 @@ Contacts Storage::contacts_by_name(string _name, string _surname, string _patron
 {
     int i = 0;
     bool check = false;
-    Contacts Empty;
+    Contacts answer;
     for (i = 0; i < contacts.size(); i++)
         if (contacts[i].get_name() == _name && contacts[i].get_surname() == _surname && contacts[i].get_patronymic() == _patronymic)
         {
             check = true;
             contacts[i].print_contact();
-            return contacts[i];
+            answer = contacts[i];
         }
-    if (!check)
-    {
-        cout << "По вашему запросу ничего не найдено!" << endl;
-        return Empty;
-    }
+    return answer;
 }
 
 Contacts Storage::contacts_by_phone(string _phone)
 {
     int i = 0;
     bool indicator = false;
-    Contacts Empty;
+    Contacts answer;
     for (i = 0; i < contacts.size(); i++)
         if (contacts[i].get_phone() == _phone)
         {
             indicator = 1;
             contacts[i].print_contact();
-            return contacts[i];
+            answer = contacts[i];
         }
-    if (!indicator)
-    {
-        cout << "По вашему запросу ничего не найдено!" << endl;
-        return Empty;
-    }
+    return answer;
 }
 
 vector <Contacts> Storage::contacts_by_letter(char _letter)
@@ -148,8 +146,6 @@ int Storage::load_file(string way)
     in.open(way);
     if (!in.is_open())
     {
-        cout << "По вашему запросу ничего не найдено!" << endl;
-        system("pause");
         return 0;
     }
     while (!in.eof())
@@ -163,32 +159,32 @@ int Storage::load_file(string way)
         temp_contact.set_year(year);
         temp_contact.set_phone(phone);
         temp_contact.set_favourite(favourite);
-        contacts.push_back(temp_contact);
+        if (!is_exist(temp_contact))
+            contacts.push_back(temp_contact);
     }
-    contacts.pop_back();
     in.close();
     return 1;
 }
 
 void Storage::save_file(string way)
 {
-    ofstream fileout;
+    ofstream out;
     int i = 0;
-    fileout.open(way);
+    out.open(way);
     for (i = 0; i < contacts.size(); i++)
     {
-        fileout << contacts[i].get_surname() << " ";
-        fileout << contacts[i].get_name() << " ";
-        fileout << contacts[i].get_patronymic() << " ";
-        fileout << contacts[i].get_day() << " ";
-        fileout << contacts[i].get_month() << " ";
-        fileout << contacts[i].get_year() << " ";
-        fileout << contacts[i].get_phone() << " ";
+        out << contacts[i].get_surname() << " ";
+        out << contacts[i].get_name() << " ";
+        out << contacts[i].get_patronymic() << " ";
+        out << contacts[i].get_day() << " ";
+        out << contacts[i].get_month() << " ";
+        out << contacts[i].get_year() << " ";
+        out << contacts[i].get_phone() << " ";
         if (contacts[i].favourite_contact())
-            fileout << "1";
+            out << "1";
         else
-            fileout << "0";
-        fileout << endl;
+            out << "0";
+        out << endl;
     }
-    fileout.close();
+    out.close();
 }
