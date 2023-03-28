@@ -148,15 +148,17 @@ public:
 	Songbook() { name = "Безымянный песенник"; }
 	Songbook(string _name) : name(_name) {}
 	Songbook(Songbook& other) { name = other.name; songs = other.songs; }
+	string get_name() { return name; }
+	vector<Song> get_songs() { return songs; }
 	void add(Song song)
 	{
 		songs.push_back(song);
-		this->sort();
+		sort(songs);
 	}
 	void del(int index)
 	{
 		songs.erase(songs.begin() + index);
-		this->sort();
+		sort(songs);
 	}
 	void del(Song song)
 	{
@@ -165,7 +167,7 @@ public:
 			if (song == songs[i])
 				songs.erase(songs.begin() + i);
 		}
-		this->sort();
+		sort(songs);
 	}
 	void del(string name_or_singer)
 	{
@@ -174,9 +176,14 @@ public:
 			if ((songs[i].get_name() == name_or_singer) || (songs[i].get_singer() == name_or_singer))
 				songs.erase(songs.begin() + i);
 		}
-		this->sort();
+		sort(songs);
 	}
 	int size() { return songs.size(); }
+	void rename(Song a, string _name, string _autor, string _compositor, string _singer, string _album, string _date)
+	{
+		a.rename(_name,  _autor,  _compositor,  _singer,  _album,  _date);
+		sort(songs);
+	}
 	string find(string name, string compositor_or_autor_or_singer)
 	{
 		for (int i = 0; i < songs.size(); i++)
@@ -187,9 +194,42 @@ public:
 				continue;
 		}
 	}
-	void print()
+	void sort()
 	{
-		this->sort();
+		int i, j;
+		Song x;
+		for (i = 0; i < songs.size(); i++)
+		{
+			for (j = songs.size() - 1; j > i; j--)
+			{
+				if (songs[j - 1] > songs[j])
+				{
+					x = songs[j - 1];
+					songs[j - 1] = songs[j];
+					songs[j] = x;
+				}
+			}
+		}
+	}
+	void sort(vector<Song> vec)
+	{
+		int i, j;
+		Song x;
+		for (i = 0; i < vec.size(); i++)
+		{
+			for (j = vec.size() - 1; j > i; j--)
+			{
+				if (vec[j - 1] > vec[j])
+				{
+					x = vec[j - 1];
+					vec[j - 1] = vec[j];
+					vec[j] = x;
+				}
+			}
+		}
+	}
+	void print(vector<Song> songs, string name)
+	{
 		cout << "***********************************************************************************************************************" << endl;
 		help_to_print(name, songs.size());
 		for (int i = 0; i < songs.size(); i++)
@@ -210,139 +250,53 @@ public:
 		}
 		cout << "***********************************************************************************************************************" << endl;
 	}
-	void print_autor(string autor)
-	{
 
-		int count = 1;
-		this->sort();
-		cout << "***********************************************************************************************************************" << endl;
-		help_to_print(autor, songs.size());
+	vector<Song> autor_songs(string autor)
+	{
+		vector<Song> result;
 		for (int i = 0; i < songs.size(); i++)
 		{
-			if(songs[i].get_autor() == autor)
-			{
-				cout << count << ". ";
-				cout.width(20);
-				cout << songs[i].get_name();
-				cout.width(20);
-				cout << songs[i].get_autor();
-				cout.width(20);
-				cout << songs[i].get_compositor();
-				cout.width(20);
-				cout << songs[i].get_singer();
-				cout.width(20);
-				cout << songs[i].get_album();
-				cout.width(10);
-				cout << songs[i].get_date() << endl;
-				count++;
-			}
+			if (songs[i].get_autor() == autor)
+				result.push_back(songs[i]);
 		}
-		cout << "***********************************************************************************************************************" << endl;
+		sort(result);
+		return result ;
 	}
 
-	void print_compositor(string compositor)
+	vector<Song>compositor_songs(string compositor)
 	{
-		int count = 1;
-		this->sort();
-		cout << "***********************************************************************************************************************" << endl;
-		help_to_print(compositor, songs.size());
+		vector<Song> result;
 		for (int i = 0; i < songs.size(); i++)
 		{
 			if (songs[i].get_compositor() == compositor)
-			{
-				cout << count << ". ";
-				cout.width(20);
-				cout << songs[i].get_name();
-				cout.width(20);
-				cout << songs[i].get_autor();
-				cout.width(20);
-				cout << songs[i].get_compositor();
-				cout.width(20);
-				cout << songs[i].get_singer();
-				cout.width(20);
-				cout << songs[i].get_album();
-				cout.width(10);
-				cout << songs[i].get_date() << endl;
-				count++;
-			}
+				result.push_back(songs[i]);
 		}
-		cout << "***********************************************************************************************************************" << endl;
+		sort(result);
+		return result;
 	}
 
-	void print_singer(string singer)
+	vector<Song> singer_songs(string singer)
 	{
-		int count = 1;
-		this->sort();
-		cout << "***********************************************************************************************************************" << endl;
-		help_to_print(singer, songs.size());
+		vector<Song> result;
 		for (int i = 0; i < songs.size(); i++)
 		{
 			if (songs[i].get_singer() == singer)
-			{
-				cout << count << ". ";
-				cout.width(20);
-				cout << songs[i].get_name();
-				cout.width(20);
-				cout << songs[i].get_autor();
-				cout.width(20);
-				cout << songs[i].get_compositor();
-				cout.width(20);
-				cout << songs[i].get_singer();
-				cout.width(20);
-				cout << songs[i].get_album();
-				cout.width(10);
-				cout << songs[i].get_date() << endl;
-				count++;
-			}
+				result.push_back(songs[i]);
 		}
-		cout << "***********************************************************************************************************************" << endl;
+		sort(result);
+		return result;
 	}
 
-	void print_album(string album)
+	vector<Song> album_songs(string album)
 	{
-		int count = 1;
-		this->sort();
-		cout << "***********************************************************************************************************************" << endl;
-		help_to_print(album, songs.size());
+		vector<Song> result;
 		for (int i = 0; i < songs.size(); i++)
 		{
 			if (songs[i].get_album() == album)
-			{
-				cout << count << ". ";
-				cout.width(20);
-				cout << songs[i].get_name();
-				cout.width(20);
-				cout << songs[i].get_autor();
-				cout.width(20);
-				cout << songs[i].get_compositor();
-				cout.width(20);
-				cout << songs[i].get_singer();
-				cout.width(20);
-				cout << songs[i].get_album();
-				cout.width(10);
-				cout << songs[i].get_date() << endl;
-				count++;
-			}
+				result.push_back(songs[i]);
 		}
-		cout << "***********************************************************************************************************************" << endl;
-	}
-
-	void sort()
-	{
-		int i, j;
-		Song x;
-		for (i = 0; i < songs.size(); i++)
-		{
-			for (j = songs.size() - 1; j > i; j--)
-			{
-				if (songs[j - 1] > songs[j])
-				{
-					x = songs[j - 1];
-					songs[j - 1] = songs[j];
-					songs[j] = x;
-				}
-			}
-		}
+		sort(result);
+		return result;
 	}
 
 	void save_to(string path)
@@ -360,7 +314,7 @@ public:
 			return;
 		}
 		fout.setf(ios::left);
-		cout << "***********************************************************************************************************************" << endl;
+		fout << "***********************************************************************************************************************" << endl;
 		fout << name << ":" << endl;
 		if (songs.size() < 10)
 			fout.width(3);
@@ -403,7 +357,6 @@ public:
 		fout << "***********************************************************************************************************************" << endl;
 		fout.close();
 	}
-
 
 	void get_from(string path)
 	{
@@ -461,7 +414,7 @@ void main()
 	test.add(g);
 	test.add(h);
 	test.add(i);
-	test.print();
+	test.print(test.get_songs(), test.get_name());
 	system("PAUSE");
 	system("cls");
 	Songbook test1("Военные");
@@ -472,10 +425,10 @@ void main()
 	test1.del(g);
 	test1.del(h);
 	test1.del(i);
-	test1.print();
+	test1.print(test1.get_songs(), test1.get_name());
 	system("PAUSE");
 	system("cls");
-	test.print_singer("Лев Лещенко");
+	test.print(test.singer_songs("Лев Лещенко"), "Песни Льва Лещенко");
 	system("PAUSE");
 	system("cls");
 	test.save_to("File.txt");
