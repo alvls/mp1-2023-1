@@ -1,11 +1,11 @@
-//собственно, сам класс для контактов
+п»ї//СЃРѕР±СЃС‚РІРµРЅРЅРѕ, СЃР°Рј РєР»Р°СЃСЃ РґР»СЏ РєРѕРЅС‚Р°РєС‚РѕРІ
 #include "header.h"
 
 Contacts::Contacts() 
 {
-	name = "Имя";
-	surname = "Фамилия";
-	patronymic = "Отчество";
+	name = "РРјСЏ";
+	surname = "Р¤Р°РјРёР»РёСЏ";
+	patronymic = "РћС‚С‡РµСЃС‚РІРѕ";
 	phone = "+00000000000";
 	day = 1;
 	month = 1;
@@ -67,14 +67,14 @@ void Contacts::print_contact()
 {
 	setlocale(LC_ALL, "Rus");
 	cout << "/////////////////////////////////////////////////////////////////////" << endl;
-	cout << "\t\t\tФИО: " << surname << " " << name << " " << patronymic << endl;
-	cout << "\t\t\tКонтактный телефон: " << phone << endl;
-	cout << "\t\t\tДата рождения: " << day << "/" << month << "/" << year << endl;
-	cout << "\t\t\tНаходится в избранном: ";
+	cout << "\t\t\tР¤РРћ: " << surname << " " << name << " " << patronymic << endl;
+	cout << "\t\t\tРљРѕРЅС‚Р°РєС‚РЅС‹Р№ С‚РµР»РµС„РѕРЅ: " << phone << endl;
+	cout << "\t\t\tР”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ: " << day << "/" << month << "/" << year << endl;
+	cout << "\t\t\tРќР°С…РѕРґРёС‚СЃСЏ РІ РёР·Р±СЂР°РЅРЅРѕРј: ";
 	if (favourite == true)
-		cout << "Да" << endl;
+		cout << "Р”Р°" << endl;
 	else
-		cout << "Нет" << endl;
+		cout << "РќРµС‚" << endl;
 	cout << "//////////////////////////////////////////////////////////////////////" << endl;
 }
 Contacts& Contacts::operator=(const Contacts& c)

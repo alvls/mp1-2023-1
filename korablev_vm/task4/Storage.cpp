@@ -1,4 +1,4 @@
-//класс, отвечающий за хранение контактов
+п»ї//РєР»Р°СЃСЃ, РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° С…СЂР°РЅРµРЅРёРµ РєРѕРЅС‚Р°РєС‚РѕРІ
 #include "header.h"
 
 
@@ -98,7 +98,7 @@ Contacts Storage::contacts_by_name(string _name, string _surname, string _patron
         }
     if (!check)
     {
-        cout << "По вашему запросу ничего не найдено!" << endl;
+        cout << "РџРѕ РІР°С€РµРјСѓ Р·Р°РїСЂРѕСЃСѓ РЅРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ!" << endl;
         return Empty;
     }
 }
@@ -117,7 +117,7 @@ Contacts Storage::contacts_by_phone(string _phone)
         }
     if (!indicator)
     {
-        cout << "По вашему запросу ничего не найдено!" << endl;
+        cout << "РџРѕ РІР°С€РµРјСѓ Р·Р°РїСЂРѕСЃСѓ РЅРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ!" << endl;
         return Empty;
     }
 }
@@ -148,7 +148,7 @@ int Storage::load_file(string way)
     in.open(way);
     if (!in.is_open())
     {
-        cout << "По вашему запросу ничего не найдено!" << endl;
+        cout << "РџРѕ РІР°С€РµРјСѓ Р·Р°РїСЂРѕСЃСѓ РЅРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ!" << endl;
         system("pause");
         return 0;
     }
