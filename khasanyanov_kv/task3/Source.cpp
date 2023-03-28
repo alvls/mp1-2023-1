@@ -50,22 +50,18 @@ public:
 			return;
 		else if(Size > size)
 		{
-			string* temp = new string[size];
+			string* temp = new string[Size];
 			for (int i = 0; i < size; i++)
 			{
 				temp[i] = menu[i];
 			}
-			menu = new string[Size];
-			for (int i = 0; i < size; i++)
-			{
-				menu[i] = temp[i];
-			}
+			delete[] menu;
+			menu = temp;
 			for (int i = size; i < Size; i++)
 			{
 				menu[i] = "";
 			}
 			size = Size;
-			delete[] temp;
 		}
 		else if (Size < size)
 		{
@@ -74,13 +70,9 @@ public:
 			{
 				temp[i] = menu[i];
 			}
-			menu = new string[Size];
-			for (int i = 0; i < Size; i++)
-			{
-				menu[i] = temp[i];
-			}
+			delete[] menu;
+			menu = temp;
 			size = Size;
-			delete[] temp;
 		}
 	}
 	int get_size() { return size; }
