@@ -16,41 +16,22 @@ void main()
 	string str_func[] = { "\t\t Выберите желаемую функцию:", "> (x)", "> exp(x)", "> sin(x)", "> cos(x)", "> tan(x)", "> atan(x)", "> sqrt(x)"};
 	string str_mtd[] = { "\t\t Выберите метод", "> Метод правых прямоугольников", "> Метод левых прямоугольников", "> Метод средних прямоугольников"};
 	string str_exit[] = { "\t\t Выберите дальнейшее действие", "> Новое вычисление", "> Выйти из программы" };
+	Fx math_functions[7] = { &line, &exp, &sin, &cos, &tan, &atan, &sqrt };
 	Integral integ;
 	int choice_num_func, choice_num_metod, choice_exit_menu;
 	double answer=0;
 	double* lims;
 	Fx choice_function = line;
-	en_side choice_metod;
+	en_side choice_metod = _left;
 	while (1)
 	{
 		choice_num_func = menu_mode(str_func, 8);
-		switch (choice_num_func)
-		{
-		case _line:
-			choice_function = line;
-			break;
-		case _exp:
-			choice_function = exp;
-			break;
-		case _sin:
-			choice_function = sin;
-			break;
-		case _cos:
-			choice_function = cos;
-			break;
-		case _tan:
-			choice_function = tan;
-			break;
-		case _atan:
-			choice_function = atan;
-			break;
-		case _sqrt:
-			choice_function = sqrt;
-			break;
-		}
+		choice_function = math_functions[choice_num_func - 1];
 		integ.set_func(choice_function);
-		lims = get_lim(); 
+		if (choice_num_func == 7)
+			lims = get_right_lim();
+		else
+			lims = get_lim(); 
 		integ.set_lim(lims[0], lims[1]);
 		choice_num_metod = menu_mode(str_mtd, 4);
 		switch (choice_num_metod)
@@ -72,10 +53,7 @@ void main()
 		integ.set_mtd(choice_metod);
 		integ.set_seg(get_segment());
 		answer = integ.return_answ();
-		if ((lims[0] || lims[1] < 0) && (choice_num_func == _sqrt))
-			cout << "Квадратный корень берется только от неотрицательных чисел" << endl;
-		else
-			cout << "Ответ: " << answer << endl;
+		cout << "Ответ: " << answer << endl;
 		system("pause");
 		choice_exit_menu = menu_mode(str_exit, 3);
 		switch (choice_exit_menu)

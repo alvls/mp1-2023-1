@@ -14,6 +14,7 @@ using namespace std;
 int menu_mode(string* arr, int size);
 void exit_prog();
 double* get_lim();
+double* get_right_lim();
 int get_segment();
 double line(double x);
 void hello();

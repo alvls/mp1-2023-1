@@ -111,7 +111,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Contacts.cpp" />
+    <ClCompile Include="Design.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Storage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

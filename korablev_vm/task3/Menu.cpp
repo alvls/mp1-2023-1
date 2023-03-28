@@ -71,6 +71,24 @@ double* get_lim()
 	system("cls");
 	return lims;
 }
+double* get_right_lim()
+{
+	double lims[2];
+	do
+	{
+		system("cls");
+		cout << "Введите левый предел - ";
+		cin >> lims[0];
+		cout << "\nВведите правый предел - ";
+		cin >> lims[1];
+	} while ((lims[0] > lims[1]) || (lims[0] < 0));
+	system("cls");
+	cout << "Левый предел: " << lims[0] << endl;
+	cout << "Правый предел: " << lims[1] << endl;
+	system("pause");
+	system("cls");
+	return lims;
+}
 double line(double x)
 {
 	return x;
