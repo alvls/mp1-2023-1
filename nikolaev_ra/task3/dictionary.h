@@ -11,10 +11,6 @@ private:
 public:
     Dictionary() = default;
 
-    explicit Dictionary(int count) {
-        wordsCount = count;
-    }
-
     explicit Dictionary(const std::string& filePath) {
         wordsCount = ReadFromFile(filePath);
     }
@@ -122,5 +118,5 @@ public:
         }
     }
 
-    virtual ~Dictionary() = default;
+    ~Dictionary() = default;
 };
