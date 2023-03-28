@@ -10,27 +10,52 @@ class dynamic_array
 	int size;
 	double* arr;
 
+
 public:
-	void Create_arr() {
-		srand(time(NULL));
-		arr = new double[size];
-		for (int i = 0; i < size; i++)
-			arr[i] = (rand() % 100);
+	dynamic_array() {
+		size = 0;
+		arr = NULL;
+	}
+	dynamic_array(const dynamic_array& a) {
+		size = a.size;
+		if (size) {
+			arr = new double[size];
+			for (int i = 0; i < size; i++)
+				arr[i] = a.arr[i];
+		}
+		else
+			arr = NULL;
+	}
+	dynamic_array(int isize) {
+		size = isize;
+		if (size)
+			arr = new double[size];
+		else
+			arr = NULL;
+	}
+	void resize(int nsize) {
+		if (nsize != size) {
+			double* temp = new double[nsize];
+			double tsize = size;
+			if (size > nsize)
+				tsize = nsize;
+			for (int i = 0; i < tsize; i++)
+				temp[i] = arr[i];
+			delete[] arr;
+			size = nsize;
+			arr = temp;
+		}
+	}
+	int get_size() {
+		return size;
 	}
 
-	dynamic_array() : size(4) { Create_arr(); }
-	dynamic_array(int size) : size(size) { Create_arr(); };
-
-	~dynamic_array() {
-		delete[] arr;
-	}
-
-	void SetSize(int size)
+	void set_size(int size)
 	{
 		this->size = size;
 	}
 
-	void output() {
+	void out_put() {
 		for (int i = 0; i < size; i++)
 			cout << arr[i] << " ";
 		cout << "\n";
@@ -41,7 +66,6 @@ public:
 	}
 
 	string input_index(int i) {
-		cout << "Write elements:";
 		cin >> arr[i];
 		return "\n";
 	}
@@ -60,49 +84,34 @@ public:
 		return min;
 	}
 
-	string is_ordered() {
-		string answer;
+	bool is_ordered() {
 		bool a = true;
 		for (int i = 0; i < size - 1; i++) {
 			if (arr[i] > arr[i + 1]) {
 				a = false;
 			}
 		}
-		if (a == false) {
-			answer = "Array is not ordered";
-		}
-		else
-		{
-			answer = "Array is ordered";
-		}
-		return answer;
+		return a;
 
 	}
 
-	void DeleteElement(double* a, int j, int size)
-	{
-		for (int i = j; i < size - 1; i++)
-		{
-			a[i] = a[i + 1];
+
+	dynamic_array subarray() {
+		dynamic_array temp;
+		if (size) {
+			int tsize = size / 2;
+			temp.size = tsize;
+			temp.arr = new double[tsize];
+
+			for (int i = 0; i < tsize; i++)
+				temp.arr[i] = arr[1 + 2 * i];
 		}
+		return temp;
 	}
 
-	void subarray() {
-		int k = 0;
-		for (int i = 0; i < size; i++)
-		{
-			if (i % 2 == 0)
-			{
-				DeleteElement(arr, i - k, size);
-				k++;
-			}
-		}
-		for (int i = 0; i < size - k; i++)
-		{
-			cout << arr[i] << " ";
-		}
-		size = size - k;
-		cout << "\n";
+	~dynamic_array() {
+		if (size)
+			delete[] arr;
 	}
 };
 
@@ -113,31 +122,40 @@ int main()
 	cout << "Enter the array size" << endl;
 	cin >> size;
 
-	dynamic_array a;
-	a.SetSize(size);
+	dynamic_array a(size);
+	a.set_size(size);
+
 
 	while (choice != 0) {
-		cout << "Press 1 to find out the size of the array\nPress 2 to set an array element by its index\nPress 3 to get array element by its index\nPress 4 to find the minimum element of the array\nPress 5 to check if the array is sorted\nPress 6 to extract from the array a subarray with elements at odd indices\nPress 7 to display the array\nPress 0 to exit\n" << endl;
+		cout << "Press 1 to enter array size\nPress 2 to find out the size of the array\nPress 3 to set an array element by its index\nPress 4 to get array element by its index\nPress 5 to find the minimum element of the array\nPress 6 to check if the array is sorted\nPress 7 to extract from the array a subarray with elements at odd indices\nPress 8 to display the array\nPress 0 to exit\n" << endl;
 		cin >> choice;
 		switch (choice)
 		{
 		case 1:
 		{
+			cout << "Enter the array size" << endl;
+			cin >> size;
+			a.resize(size);
+			break;
+		}
+		case 2:
+		{
 			cout << a.array_size() << "\n" << endl;
 			break;
 		}
 
-		case 2:
+		case 3:
 		{
 			int i;
 			cout << "Enter the element index" << endl;
 			cin >> i;
+			cout << "Write elements:";
 			cout << a.input_index(i) << endl;
 
 			break;
 		}
 
-		case 3:
+		case 4:
 		{
 			int i;
 			cout << "Enter the element index" << endl;
@@ -147,29 +165,30 @@ int main()
 			break;
 		}
 
-		case 4:
+		case 5:
 		{
 			cout << a.min_element() << "\n" << endl;
 			break;
 		}
 
-		case 5:
+		case 6:
 		{
 			cout << a.is_ordered() << "\n" << endl;
 			break;
 		}
 
-		case 6:
+		case 7:
 		{
 			a.subarray();
 			break;
 		}
 
-		case 7:
+		case 8:
 		{
-			a.output();
+			a.out_put();
 			break;
 		}
+
 		default:
 			break;
 		}
