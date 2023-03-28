@@ -36,7 +36,7 @@ public:
 		for (int i = 0; i < size; i++)
 			menu[i] = "";
 	}
-	Menu(Menu& other)
+	Menu(const Menu& other)
 	{
 		size = other.size;
 		punkt = other.punkt;
@@ -44,7 +44,45 @@ public:
 			menu[i] = other.menu[i];
 	}
 	~Menu() { delete[] menu; }
-	void set_size(int Size) { size = Size; }
+	void set_size(int Size) 
+	{ 
+		if (Size == size)
+			return;
+		else if(Size > size)
+		{
+			string* temp = new string[size];
+			for (int i = 0; i < size; i++)
+			{
+				temp[i] = menu[i];
+			}
+			menu = new string[Size];
+			for (int i = 0; i < size; i++)
+			{
+				menu[i] = temp[i];
+			}
+			for (int i = size; i < Size; i++)
+			{
+				menu[i] = "";
+			}
+			size = Size;
+			delete[] temp;
+		}
+		else if (Size < size)
+		{
+			string* temp = new string[Size];
+			for (int i = 0; i < Size; i++)
+			{
+				temp[i] = menu[i];
+			}
+			menu = new string[Size];
+			for (int i = 0; i < Size; i++)
+			{
+				menu[i] = temp[i];
+			}
+			size = Size;
+			delete[] temp;
+		}
+	}
 	int get_size() { return size; }
 	void set_name(int index, string name) { menu[index] = name; }
 	string get_name(int index) { return menu[index]; }
@@ -56,6 +94,7 @@ public:
 		bool flag = true;
 		while(flag)
 		{
+			textcolor(LIGHTGRAY);
 			cout << "-----------------" << endl;
 			for (int i = 0; i < size; i++)
 			{
@@ -65,6 +104,7 @@ public:
 					textcolor(LIGHTGRAY);
 				cout << i + 1 << ". " << menu[i] << endl;
 			}
+			textcolor(LIGHTGRAY);
 			cout << "-----------------" << endl;
 			ch = _getch();
 			if (ch == -32)
@@ -110,6 +150,9 @@ void main()
 	lunch.set_name(3, "Cheesecake");
 	lunch.print_menu();
 	cout << "Last selected item:" << lunch.get_last_punkt() << endl;
+	lunch.set_size(3);
+	system("PAUSE");
+	system("cls");
 	lunch.print_menu();
 	cout << "Last selected item:" << lunch.get_last_punkt() << endl;
 	system("PAUSE");
