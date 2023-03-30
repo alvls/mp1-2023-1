@@ -10,10 +10,10 @@ using namespace std;
 
 enum Keycodes
 {
-    NUMLOCK = -32,
-    ENTER = 13,
-    UP = 72,
-    DOWN = 80
+	NUMLOCK = -32,
+	ENTER = 13,
+	UP = 72,
+	DOWN = 80
 };
 
 Menu::Menu(int size, COORD menu_area, COORD work_area)
@@ -44,8 +44,8 @@ MenuItem& Menu::get_item(int index) // Возвращает команду
 
 void Menu::add_item(MenuItem item) // Добавление команды
 {
-    set_size(size + 1);
-    items[size - 1] = item;
+	set_size(size + 1);
+	items[size - 1] = item;
 }
 
 void Menu::set_size(int size) // Задать число команд
@@ -58,7 +58,7 @@ void Menu::set_size(int size) // Задать число команд
 	MenuItem* new_items = new MenuItem[size]();
 	std::copy(items, &items[size < this->size ? size : this->size], new_items);
 
-    this->size = size;
+	this->size = size;
 
 	delete[] items;
 	items = new_items;
@@ -71,48 +71,48 @@ int Menu::get_size() const // Получить число команд
 
 void Menu::listen() // Вывод меню и выбор пункта
 {
-    hidecursor();
+	hidecursor();
 
-    int i;
-    char ch = 0;
-    while (ch != ENTER)
-    {
-        for (i = 0; i < size; i++)
-        {
-            gotoxy(menu_area.X, menu_area.Y + i);
-            textcolor(i == selected ? YELLOW : LIGHTGREEN);
-            cout << i + 1 << ". " << items[i].title;
-        }
+	int i;
+	char ch = 0;
+	while (ch != ENTER)
+	{
+		for (i = 0; i < size; i++)
+		{
+			gotoxy(menu_area.X, menu_area.Y + i);
+			textcolor(i == selected ? YELLOW : LIGHTGREEN);
+			cout << i + 1 << ". " << items[i].title;
+		}
 
-        ch = _getch();
-        if (ch == NUMLOCK)
-        {
-            ch = _getch();
-        }
+		ch = _getch();
+		if (ch == NUMLOCK)
+		{
+			ch = _getch();
+		}
 
-        if (ch != UP && ch != DOWN)
-        {
-            continue;
-        }
+		if (ch != UP && ch != DOWN)
+		{
+			continue;
+		}
 
-        selected += ch == UP ? -1 : 1;
-        
-        if (selected < 0)
-        {
-            selected = size - 1;
-        }
-        else
-        {
-            selected %= size;
-        }
-    }
+		selected += ch == UP ? -1 : 1;
+		
+		if (selected < 0)
+		{
+			selected = size - 1;
+		}
+		else
+		{
+			selected %= size;
+		}
+	}
 
-    textcolor(LIGHTGRAY);
+	textcolor(LIGHTGRAY);
 
-    gotoxy(work_area.X, work_area.Y);
-    showcursor();
+	gotoxy(work_area.X, work_area.Y);
+	showcursor();
 
-    items[selected].handler();
+	items[selected].handler();
 }
 
 int Menu::get_selection() const // Получить номер последнего выбранного пункта
