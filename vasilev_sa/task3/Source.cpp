@@ -25,21 +25,21 @@ public:
 		for (int i = 0; i < size; i++)
 			menu[i] = Another.menu[i];
 	}
-	~Menu() 
-	{ 
+	~Menu()
+	{
 		delete[] menu;
 	}
-	void Set_size(int Size) 
-	{ 
-		size = Size; 
+	void Set_size(int Size)
+	{
+		size = Size;
 	}
-	int Get_size() 
-	{ 
-		return size; 
+	int Get_size()
+	{
+		return size;
 	}
-	void Set_name(int Point, std::string Name) 
-	{ 
-		menu[Point] = Name; 
+	void Set_name(int Point, std::string Name)
+	{
+		menu[Point] = Name;
 	}
 	void Print(int x = 0, int y = 0)
 	{
@@ -79,7 +79,7 @@ public:
 				system("cls");
 				gotoxy(x, y);
 				textcolor(LIGHTGRAY);
-				std::cout << "You choosed " << point + 1 << "menu item" << std::endl;
+				std::cout << "You choosed " << point + 1 << " menu item" << std::endl;
 				gotoxy(x, y + 1);
 				system("PAUSE");
 				break;
@@ -89,3 +89,15 @@ public:
 		}
 	}
 };
+
+int main()
+{
+	hidecursor();
+	Menu my_list(3);
+	my_list.Set_name(0, "Nissan");
+	my_list.Set_name(1, "Lada");
+	my_list.Set_name(2, "Range Rover");
+	my_list.Print(10, 10);
+	system("pause");
+	return 0;
+}
