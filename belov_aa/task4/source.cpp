@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -192,10 +192,10 @@ public:
         os << left;
 
         os << setw(10) << " ";
-        os << setw(32) << "ФИО:";
-        os << setw(16) << "Телефон:";
-        os << setw(17) << "Дата рождения:";
-        os << setw(10) << "Избранный?" << endl;
+        os << setw(32) << "Р¤РРћ:";
+        os << setw(16) << "РўРµР»РµС„РѕРЅ:";
+        os << setw(17) << "Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ:";
+        os << setw(10) << "РР·Р±СЂР°РЅРЅС‹Р№?" << endl;
 
         for (Contact contact : c.contacts)
         {
@@ -254,21 +254,21 @@ public:
         return in;
     }
 
-    // Cоздать новый контакт
+    // CРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ РєРѕРЅС‚Р°РєС‚
     void add_contact(Contact contact)
     {
         contacts.push_back(contact);
         sort(contacts.begin(), contacts.end());
     }
 
-    // Изменить выбранный контакт
+    // РР·РјРµРЅРёС‚СЊ РІС‹Р±СЂР°РЅРЅС‹Р№ РєРѕРЅС‚Р°РєС‚
     void edit_contact(int index, Contact contact)
     {
         contacts[index] = contact;
         sort(contacts.begin(), contacts.end());
     }
 
-    // Найти контакт по ФИО
+    // РќР°Р№С‚Рё РєРѕРЅС‚Р°РєС‚ РїРѕ Р¤РРћ
     Contact* find_contact_by_name(string last_name, string first_name, string middle_name)
     {
         for (Contact& contact : contacts)
@@ -281,7 +281,7 @@ public:
         return nullptr;
     }
 
-    // Найти контакт по телефону
+    // РќР°Р№С‚Рё РєРѕРЅС‚Р°РєС‚ РїРѕ С‚РµР»РµС„РѕРЅСѓ
     Contact* find_contact_by_phone(string phone)
     {
         for (Contact& contact : contacts)
@@ -294,7 +294,7 @@ public:
         return nullptr;
     }
 
-    // Выдать все контакты на заданную букву
+    // Р’С‹РґР°С‚СЊ РІСЃРµ РєРѕРЅС‚Р°РєС‚С‹ РЅР° Р·Р°РґР°РЅРЅСѓСЋ Р±СѓРєРІСѓ
     vector<Contact*> get_contacts_starting_with(char letter)
     {
         vector<Contact*> result;
@@ -308,25 +308,25 @@ public:
         return result;
     }
 
-    // Узнать текущее число контактов
+    // РЈР·РЅР°С‚СЊ С‚РµРєСѓС‰РµРµ С‡РёСЃР»Рѕ РєРѕРЅС‚Р°РєС‚РѕРІ
     size_t get_number_of_contacts()
     {
         return contacts.size();
     }
 
-    // Внести контакт в список избранных
+    // Р’РЅРµСЃС‚Рё РєРѕРЅС‚Р°РєС‚ РІ СЃРїРёСЃРѕРє РёР·Р±СЂР°РЅРЅС‹С…
     void add_contact_to_favorites(int index)
     {
         contacts[index].set_favorite(true);
     }
 
-    // Удалить контакт из списка избранных
+    // РЈРґР°Р»РёС‚СЊ РєРѕРЅС‚Р°РєС‚ РёР· СЃРїРёСЃРєР° РёР·Р±СЂР°РЅРЅС‹С…
     void remove_contact_from_favorites(int index)
     {
         contacts[index].set_favorite(false);
     }
 
-    // Выдать все избранные контакты
+    // Р’С‹РґР°С‚СЊ РІСЃРµ РёР·Р±СЂР°РЅРЅС‹Рµ РєРѕРЅС‚Р°РєС‚С‹
     vector<Contact*> favorite_contacts()
     {
         vector<Contact*> result;
@@ -340,7 +340,7 @@ public:
         return result;
     }
 
-    // Удалить контакт
+    // РЈРґР°Р»РёС‚СЊ РєРѕРЅС‚Р°РєС‚
     void delete_contact(string phone_number)
     {
         for (size_t i = 0; i < contacts.size(); i++)
@@ -357,15 +357,15 @@ int main()
 {
     setlocale(LC_ALL, "RU");
 
-    // Сохранить контакты в файл
+    // РЎРѕС…СЂР°РЅРёС‚СЊ РєРѕРЅС‚Р°РєС‚С‹ РІ С„Р°Р№Р»
     ofstream out("outfile.txt");
 
     Contacts list;
 
-    Contact c1("Коновалов", "Даниил", "Дмитриевич", "+79527475893", { 10, 12, 1997 }, 1);
-    Contact c2("Яковлев", "Алексей", "Кириллович", "+79995751845", { 14, 10, 2002 }, 0);
-    Contact c3("Попов", "Кирилл", "Владимирович", "+79050297351", { 9, 4, 1982 }, 0);
-    Contact c4("Белов", "Артём", "Алексеевич", "+79961234567", { 6, 7, 2004 }, 1);
+    Contact c1("РљРѕРЅРѕРІР°Р»РѕРІ", "Р”Р°РЅРёРёР»", "Р”РјРёС‚СЂРёРµРІРёС‡", "+79527475893", { 10, 12, 1997 }, 1);
+    Contact c2("РЇРєРѕРІР»РµРІ", "РђР»РµРєСЃРµР№", "РљРёСЂРёР»Р»РѕРІРёС‡", "+79995751845", { 14, 10, 2002 }, 0);
+    Contact c3("РџРѕРїРѕРІ", "РљРёСЂРёР»Р»", "Р’Р»Р°РґРёРјРёСЂРѕРІРёС‡", "+79050297351", { 9, 4, 1982 }, 0);
+    Contact c4("Р‘РµР»РѕРІ", "РђСЂС‚С‘Рј", "РђР»РµРєСЃРµРµРІРёС‡", "+79961234567", { 6, 7, 2004 }, 1);
 
     list.add_contact(c1);
     list.add_contact(c2);
@@ -375,7 +375,7 @@ int main()
     out << list;
     out.close();
 
-    cout << *list.find_contact_by_name("Коновалов", "Даниил", "Дмитриевич") << endl;
+    cout << *list.find_contact_by_name("РљРѕРЅРѕРІР°Р»РѕРІ", "Р”Р°РЅРёРёР»", "Р”РјРёС‚СЂРёРµРІРёС‡") << endl;
     system("PAUSE");
     system("cls");
 
@@ -388,14 +388,14 @@ int main()
     system("PAUSE");
     system("cls");
 
-    for (Contact* contact : list.get_contacts_starting_with('К'))
+    for (Contact* contact : list.get_contacts_starting_with('Рљ'))
         cout << *contact << endl;
     system("PAUSE");
     system("cls");
 
     cout << list << endl;
 
-    // Считать контакты из файла
+    // РЎС‡РёС‚Р°С‚СЊ РєРѕРЅС‚Р°РєС‚С‹ РёР· С„Р°Р№Р»Р°
 
     ifstream file("data.txt");
     if (!file.is_open())
