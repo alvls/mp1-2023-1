@@ -8,7 +8,7 @@ using namespace std;
 
 class Dictionary {
 
-	map<string, string>Translition;
+	map<string, string>Translation;
 	string path;
 
 public:
@@ -17,24 +17,24 @@ public:
 
 	void SetWord(string word, string translation)
 	{
-		Translition[word] = translation;
+		Translation[word] = translation;
 	}
 
 	void ChangeTranslation(string word, string translation)
 	{
-		Translition[word] = translation;
+		Translation[word] = translation;
 	}
 
 	string GetTranslation(string word)
 	{
-		return Translition[word];
+		return Translation[word];
 	}
 
 	void FindWord(string word) {
 
-		auto it = Translition.find(word);
+		auto it = Translation.find(word);
 
-		if (it != Translition.end())
+		if (it != Translation.end())
 		{
 			cout << "The element is in the dictionary\n" << endl;
 		}
@@ -46,7 +46,7 @@ public:
 
 	int GetSize() {
 
-		return Translition.size();
+		return Translation.size();
 	}
 
 	void SaveDictionary(string path) {
@@ -60,7 +60,7 @@ public:
 		}
 		else
 		{
-			for (map<string, string>::iterator i = Translition.begin(); i != Translition.end(); ++i)
+			for (map<string, string>::iterator i = Translation.begin(); i != Translation.end(); ++i)
 			{
 				fout << i->first << " " << i->second << "\n";
 			}
@@ -80,10 +80,10 @@ public:
 		}
 		else
 		{
-			string Word, Translit;
-			while (fin >> Word >> Translit) {
-				Translition[Word] = Translit;
-				cout << Translition[Word];
+			string word, translation;
+			while (fin >> word >> translation) {
+				Translation[word] = translation;
+				cout << Translation[word];
 			}
 		}
 

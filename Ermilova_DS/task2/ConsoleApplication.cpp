@@ -6,11 +6,8 @@ using namespace std;
 
 class dynamic_array
 {
-
 	int size;
 	double* arr;
-
-
 public:
 	dynamic_array() {
 		size = 0;
@@ -53,6 +50,7 @@ public:
 	void set_size(int size)
 	{
 		this->size = size;
+		resize(size);
 	}
 
 	void out_put() {
@@ -65,8 +63,8 @@ public:
 		return size;
 	}
 
-	string input_index(int i) {
-		cin >> arr[i];
+	string input_index(int i, double value) {
+		arr[i] = value;
 		return "\n";
 	}
 
@@ -147,11 +145,12 @@ int main()
 		case 3:
 		{
 			int i;
+			double value;
 			cout << "Enter the element index" << endl;
 			cin >> i;
 			cout << "Write elements:";
-			cout << a.input_index(i) << endl;
-
+			cin >> value;
+			cout << a.input_index(i, value) << endl;
 			break;
 		}
 
@@ -161,7 +160,6 @@ int main()
 			cout << "Enter the element index" << endl;
 			cin >> i;
 			cout << a.output_index(i) << "\n" << endl;
-
 			break;
 		}
 
