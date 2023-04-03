@@ -1,40 +1,16 @@
 #pragma once
 #include <windows.h>
 #include <iostream>
-#include <memory>
-#include <cmath>
 #include <locale>
 #include <string>
 #include <conio.h>
 #include <vector>
-#include <memory>
 #include <fstream>
 using namespace std;
 enum TColor {
     BLACK, BLUE, GREEN, CYAN, RED, MAGENTA, BROWN, LIGHTGRAY,
     DARKGRAY, LIGHTBLUE, LIGHTGREEN, LIGHTCYAN, LIGHTRED,
     LIGHTMAGENTA, YELLOW, WHITE
-};
-enum en_side
-{
-    _right = 1,
-    _left = 2,
-    _mid = 3,
-};
-enum en_fnc
-{
-    _line = 1,
-    _exp = 2,
-    _sin = 3,
-    _cos = 4,
-    _tan = 5,
-    _atan = 6,
-    _sqrt = 7
-};
-enum en_exit
-{
-    _new = 1,
-    _ex_file = 2,
 };
 COORD wherexy(void);
 void clrscr(void);
@@ -76,39 +52,9 @@ public:
     void print_contact();
     void print_contact_lite();
     Contacts& operator=(const Contacts& c);
-    bool operator!=(const Contacts& c)
-    {
-        if (name != c.name || surname != c.surname || patronymic != c.patronymic)
-            return true;
-        else
-            return false;
-    }
-    bool operator==(const Contacts& c)
-    {
-        if (name == c.name && surname == c.surname && patronymic == c.patronymic)
-            return true;
-        else
-            return false;
-    }
-    bool operator<(const Contacts& c)
-    {
-        if (surname < c.surname)
-            return true;
-        else
-            if (surname > c.surname)
-                return false;
-            else
-                if (name < c.name)
-                    return true;
-                else
-                    if (name > c.name)
-                        return false;
-                    else
-                        if (patronymic < c.patronymic)
-                            return true;
-                        else
-                            return false;
-    }
+    bool operator!=(const Contacts& c);
+    bool operator==(const Contacts& c);
+    bool operator<(const Contacts& c);
 };
 
 class Storage

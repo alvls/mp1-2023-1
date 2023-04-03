@@ -91,3 +91,36 @@ Contacts& Contacts::operator=(const Contacts& c)
 	favourite = c.favourite;
 	return *this;
 }
+bool Contacts::operator!=(const Contacts& c)
+{
+	if (name != c.name || surname != c.surname || patronymic != c.patronymic)
+		return true;
+	else
+		return false;
+}
+bool Contacts::operator==(const Contacts& c)
+{
+	if (name == c.name && surname == c.surname && patronymic == c.patronymic)
+		return true;
+	else
+		return false;
+}
+bool Contacts::operator<(const Contacts& c)
+{
+	if (surname < c.surname)
+		return true;
+	else
+		if (surname > c.surname)
+			return false;
+		else
+			if (name < c.name)
+				return true;
+			else
+				if (name > c.name)
+					return false;
+				else
+					if (patronymic < c.patronymic)
+						return true;
+					else
+						return false;
+}

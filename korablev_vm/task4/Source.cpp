@@ -68,6 +68,7 @@ int main()
 						cin >> month;
 						cin >> year;
 						storage.change_contact(name, surname, patronymic, phone, day, month, year, storage[func_list].favourite_contact(), func_list);
+						active_contact = false;
 						break;
 					case 2:
 						if (storage[func_list].favourite_contact())
