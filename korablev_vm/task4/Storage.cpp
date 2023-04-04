@@ -17,15 +17,6 @@ void Storage::print_favourite_contacts()
             contacts[i].print_contact();
 }
 
-size_t Storage::get_index(Contacts& contact)
-{
-    int i = 0;
-    for (i = 0; i < contacts.size(); i++)
-        if (contact.get_phone() == contacts[i].get_phone())
-            return i;
-    return -1;
-}
-
 void Storage::print_storage()
 {
     int i = 0;
@@ -61,15 +52,20 @@ void Storage::create_contact(Contacts& contact)
 
 void Storage::change_contact(string _name, string _surname, string _patronymic, string _phone, int _day, int _month, int _year, bool _favourite, int i)
 {
-    contacts[i].set_name(_name);
-    contacts[i].set_surname(_surname);
-    contacts[i].set_patronymic(_patronymic);
-    contacts[i].set_phone(_phone);
-    contacts[i].set_day(_day);
-    contacts[i].set_month(_month);
-    contacts[i].set_year(_year);
-    contacts[i].set_favourite(_favourite);
-    sort_contacts();
+    Contacts temp;
+    temp.set_name(_name);
+    temp.set_surname(_surname);
+    temp.set_patronymic(_patronymic);
+    temp.set_phone(_phone);
+    temp.set_day(_day);
+    temp.set_month(_month);
+    temp.set_year(_year);
+    temp.set_favourite(_favourite);
+    if (!is_exist(temp))
+    {
+        contacts[i]=temp;
+        sort_contacts();
+    }
 }
 
 void Storage::sort_contacts()
@@ -93,12 +89,10 @@ void Storage::sort_contacts()
 Contacts Storage::contacts_by_name(string _name, string _surname, string _patronymic)
 {
     int i = 0;
-    bool check = false;
     Contacts answer;
     for (i = 0; i < contacts.size(); i++)
         if (contacts[i].get_name() == _name && contacts[i].get_surname() == _surname && contacts[i].get_patronymic() == _patronymic)
         {
-            check = true;
             contacts[i].print_contact();
             answer = contacts[i];
         }
@@ -108,12 +102,10 @@ Contacts Storage::contacts_by_name(string _name, string _surname, string _patron
 Contacts Storage::contacts_by_phone(string _phone)
 {
     int i = 0;
-    bool indicator = false;
     Contacts answer;
     for (i = 0; i < contacts.size(); i++)
         if (contacts[i].get_phone() == _phone)
         {
-            indicator = 1;
             contacts[i].print_contact();
             answer = contacts[i];
         }
@@ -123,7 +115,6 @@ Contacts Storage::contacts_by_phone(string _phone)
 vector <Contacts> Storage::contacts_by_letter(char _letter)
 {
     int i = 0;
-    bool indicator = false;
     vector <Contacts> temp_list;
     for (i = 0; i < contacts.size(); i++)
         if (contacts[i].get_surname()[0] == _letter)
@@ -131,8 +122,6 @@ vector <Contacts> Storage::contacts_by_letter(char _letter)
             contacts[i].print_contact_lite();
             temp_list.push_back(contacts[i]);
         }
-    if (temp_list.size())
-        indicator = 1;
     return temp_list;
 }
 
@@ -163,6 +152,7 @@ int Storage::load_file(string way)
             contacts.push_back(temp_contact);
     }
     in.close();
+    sort_contacts();
     return 1;
 }
 

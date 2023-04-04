@@ -106,6 +106,7 @@ int main()
 			system("pause");
 			break;
 		case 4:
+			system("cls");
 			cout << "\nВведите номер телефона в формате +00000000000" << endl;
 			cin >> phone;
 			storage.contacts_by_phone(phone);

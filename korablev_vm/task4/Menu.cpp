@@ -157,7 +157,7 @@ void create_new_contact(Contacts& contact, Storage& list)
 	string name, surname, patronymic, phone;
 	string YesNo[] = { "\t\t Добавить в избранное?", "> Да", "> Нет" };
 	int day, month, year, func_prev;
-	bool favourite;
+	bool favourite = false;
 	system("cls");
 	cout << "Введите ФИО контакта:" << endl;
 	cin >> surname;
@@ -196,11 +196,6 @@ void create_new_contact(Contacts& contact, Storage& list)
 	contact.set_year(year);
 	contact.set_favourite(favourite);
 	list.create_contact(contact);
-	if (list.is_exist(contact))
-	{
-		cout << "Ошибка. Этот контакт уже есть в вашей телефонной книге" << endl;
-		system("pause");
-	}
 }
 string get_way()
 {
