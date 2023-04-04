@@ -162,7 +162,6 @@ void Options()
 			cout << "Новые значения заданы" << endl;
 			system("cls");
 			slag = *m2;
-			slag.SumMatrix(*m1);
 			cout << "Результат сложения матриц:" << endl;
 			slag.PrintMatr();
 			delete m2;
