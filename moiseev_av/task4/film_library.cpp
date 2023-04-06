@@ -102,41 +102,41 @@ film_library::film_t* film_library::get_film(string name, int year) {
     return nullptr;
 }
 
-vector<film_library::film_t> film_library::films_with_year(int year) {
+vector<film_library::film_t*> film_library::films_with_year(int year) {
 
-    vector<film_t> films;
+    vector<film_t*> films;
 
     for (auto& a : films_library)
     {
-        if (year == a.year) films.push_back(a);
+        if (year == a.year) films.push_back(&a);
     }
 
     return films;
 }
 
-vector<film_library::film_t> film_library::films_with_director(string director) {
+vector<film_library::film_t*> film_library::films_with_director(string director) {
 
-    vector<film_t> films;
+    vector<film_t*> films;
 
     for (auto& a : films_library)
     {
-        if (director == a.director) films.push_back(a);
+        if (director == a.director) films.push_back(&a);
     }
 
     return films;
 }
 
-vector<film_library::film_t> film_library::largest_fees_in_year(int films_quantity, int year) {
+vector<film_library::film_t*> film_library::largest_fees_in_year(int films_quantity, int year) {
 
     sort_to_fees(films_quantity);
-    vector<film_t> films;
+    vector<film_t*> films;
 
     int cnt = 0;
     for (int i = 0; i < films_library.size(); i++)
     {
         if (films_library[i].year == year)
         {
-            films.push_back(films_library[i]);
+            films.push_back(&films_library[i]);
             cnt++;
 
             if (cnt == 3) break;
@@ -145,12 +145,12 @@ vector<film_library::film_t> film_library::largest_fees_in_year(int films_quanti
     return films;
 }
 
-vector<film_library::film_t> film_library::largest_fees(int films_quantity) {
+vector<film_library::film_t*> film_library::largest_fees(int films_quantity) {
 
     sort_to_fees(films_quantity);
-    vector<film_t> films;
+    vector<film_t*> films;
 
-    for (int i = 0; i < films_quantity; i++) films.push_back(films_library[i]);
+    for (int i = 0; i < films_quantity; i++) films.push_back(&films_library[i]);
 
     return films;
 }

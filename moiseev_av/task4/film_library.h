@@ -42,13 +42,13 @@ public:
 
     film_t* get_film(string name, int year);
 
-    vector<film_t> films_with_year(int year);
+    vector<film_t*> films_with_year(int year);
 
-    vector<film_t> films_with_director(string director);
+    vector<film_t*> films_with_director(string director);
 
-    vector<film_t> largest_fees_in_year(int films_quantity, int year);
+    vector<film_t*> largest_fees_in_year(int films_quantity, int year);
 
-    vector<film_t> largest_fees(int films_quantity);
+    vector<film_t*> largest_fees(int films_quantity);
 
     film_t& operator [](int i);
 
