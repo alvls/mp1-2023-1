@@ -180,13 +180,6 @@ public:
 			i++;
 		}
 		in.close();
-		for (int i = 0; i < history.size(); i++) {
-			cout << history[i].username << endl;
-			cout << history[i].D.day << endl;
-			cout << history[i].D.month << endl;
-			cout << history[i].D.year << endl;
-			cout << history[i].weight << endl;
-		}
 	}
 };
 
