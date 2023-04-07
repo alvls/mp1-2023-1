@@ -407,7 +407,6 @@ int main()
 	s.Add(s5);
 	s.Add(s6);
 
-
 	cout << s1;
 	system("PAUSE");
 
@@ -433,7 +432,6 @@ int main()
 	cout << (s.Performer_Songs("Дайте танк(!)"));
 	system("pause");
 	
-
 	system("cls");
 	cout << "Запись песенника в файл (появится File.txt в папке проекта)" << endl;
 	s.SaveFile("File.txt");
