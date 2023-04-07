@@ -343,7 +343,7 @@ private:
 
 void main() 
 {
-	setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "Russian_Russia.1251");
 
 	Time t;
 
