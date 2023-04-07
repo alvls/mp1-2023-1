@@ -221,7 +221,7 @@ public:
 		{
 			for (int j = 0; j < songs.size() - 1; j++)
 			{
-				if (songs[j].GetSongName() > songs[j + 1].GetSongName())
+				if (songs[j] > songs[j + 1])
 				{
 					x = songs[j + 1];
 					songs[j + 1] = songs[j];
@@ -406,6 +406,7 @@ int main()
 	s.Add(s4);
 	s.Add(s5);
 	s.Add(s6);
+
 
 	cout << s1;
 	system("PAUSE");
