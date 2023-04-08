@@ -60,7 +60,7 @@ public:
 		}
 	}
 
-	int GetValue(int day, int month, int year, int hour)
+	double GetValue(int day, int month, int year, int hour)
 	{
 		for (Observation Observation : Value)
 		{
@@ -72,10 +72,10 @@ public:
 		return -999;
 	}
 
-	int AverageTemperatureDate(int day, int month, int year)
+	double AverageTemperatureDate(int day, int month, int year)
 	{
 		int cnt = 0;
-		int sum = 0;
+		double sum = 0;
 		for (int i = 1; i < 25; i++)
 		{
 			if (GetValue(day, month, year, i) != -999)
@@ -93,10 +93,10 @@ public:
 		}
 	}
 
-	int AverageTemperatureMonth(int month)
+	double AverageTemperatureMonth(int month)
 	{
 		int cnt = 0;
-		int sum = 0;
+		double sum = 0;
 		for (int i = 1; i < 32; i++)
 		{
 			if (AverageTemperatureDate(i, month, StartYear) != -999)
@@ -114,10 +114,10 @@ public:
 		}
 	}
 
-	int AverageTemperatureHistory()
+	double AverageTemperatureHistory()
 	{
 		int cnt = 0;
-		int sum = 0;
+		double sum = 0;
 		for (int i = 1; i < 13; i++)
 		{
 			if (AverageTemperatureMonth(i) != -999)
@@ -135,10 +135,10 @@ public:
 		}
 	}
 
-	int AverageNightTemperature(int month)
+	double AverageNightTemperature(int month)
 	{
 		int cnt = 0;
-		int sum = 0;
+		double sum = 0;
 		for (int i = 0; i < 4; i++)
 		{
 			if (AverageTemperatureDate(i, month, StartYear) != -999)
@@ -156,10 +156,10 @@ public:
 		}
 	}
 
-	int AverageDayTemperature(int month)
+	double AverageDayTemperature(int month)
 	{
 		int cnt = 0;
-		int sum = 0;
+		double sum = 0;
 		for (int i = 12; i < 17; i++)
 		{
 			if (AverageTemperatureDate(i, month, StartYear) != -999)
