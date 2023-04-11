@@ -95,15 +95,3 @@ void Deposit::Close(Client& client) {
         client.SetInterestAmount(0);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

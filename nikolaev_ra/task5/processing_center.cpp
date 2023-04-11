@@ -9,7 +9,3 @@ void ProcessingCenter::AddClient(const Client& client) {
 const std::vector<Client>& ProcessingCenter::GetClients() const {
     return clients;
 }
-
-
-
-

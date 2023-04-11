@@ -109,5 +109,3 @@ void Client::SetInterestAmount(int interestAmount) {
 void Client::SetIsOpened(bool isOpened) {
     depositInfo.isOpened = isOpened;
 }
-
-
