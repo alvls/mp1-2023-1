@@ -12,9 +12,9 @@ struct date
 	int year;
 };
 struct observation {
-	string username=" ";
+	string username = " ";
 	date D;
-	double weight=0;
+	double weight = 0;
 };
 
 class scales {
@@ -22,7 +22,7 @@ class scales {
 	int len = 0;
 	string family[5] = { "Add","Add","Add","Add","Add" };
 	int usercode = 0;
-	double kg=0;
+	double kg = 0;
 	date D;
 public:
 	// –абота с акаунтами пользователей
@@ -38,7 +38,7 @@ public:
 	}
 	void adduser(string user) {
 		for (int i = 0; i < 5; i++) {
-			if (family[i]=="Add") {
+			if (family[i] == "Add") {
 				family[i] = user;
 				usercode = i;
 				return;
@@ -51,10 +51,10 @@ public:
 	}
 	// ”становление даты
 	void getdate() {
-		cout << D.day<<" день " << D.month<<" мес€ц " << D.year <<" год "<< endl;
+		cout << D.day << " день " << D.month << " мес€ц " << D.year << " год " << endl;
 		return;
 	}
-	void setdate(int d,int mo,int y) {
+	void setdate(int d, int mo, int y) {
 		D.day = d;
 		D.month = mo;
 		D.year = y;
@@ -64,8 +64,8 @@ public:
 		observation T;
 		len = history.size() - 1;
 		if (history.size() > 0) {
-			if (history[history.size()-1].username == family[usercode]) {
-				if (history[history.size()-1].D.day == D.day) {
+			if (history[history.size() - 1].username == family[usercode]) {
+				if (history[history.size() - 1].D.day == D.day) {
 					if (history[len].D.month == D.month) {
 						if (history[len].D.year == D.year) {
 							history.pop_back();
@@ -88,7 +88,7 @@ public:
 		int counter = 0;
 		for (int i = 0; i < history.size(); i++) {
 			if (history[i].username == family[usercode]) {
-				if (mod == 1){
+				if (mod == 1) {
 					if ((history[i].D.month == mounth) && (history[i].D.month == y)) {
 						value += history[i].weight;
 						counter += 1;
@@ -108,7 +108,7 @@ public:
 	double findmin(int mod, int mounth, int year) {
 		double minweight = 1000000000;
 		for (int i = 0; i < history.size(); i++) {
-			cout << history[i].weight << "    "<<i << endl;
+			cout << history[i].weight << "    " << i << endl;
 			if (history[i].username == family[usercode]) {
 				if ((mod == 1)) {
 					if ((history[i].D.month == mounth) && (history[i].D.month == year)) {
@@ -127,10 +127,10 @@ public:
 		return minweight;
 	};
 	double findmax(int mod, int mounth, int year) {
-		double maxweight=0;
+		double maxweight = 0;
 		for (int i = 0; i < history.size(); i++) {
 			if (history[i].username == family[usercode]) {
-				if ((mod == 1)){
+				if ((mod == 1)) {
 					if ((history[i].D.month == mounth) && (history[i].D.month == year)) {
 						if (history[i].weight > maxweight) {
 							maxweight = history[i].weight;
@@ -141,7 +141,7 @@ public:
 				else {
 					if (history[i].weight > maxweight) {
 						maxweight = history[i].weight;
-					
+
 					}
 				}
 			}
@@ -149,19 +149,19 @@ public:
 		return maxweight;
 	}
 	void savefile() {
-		ofstream out;          
+		ofstream out;
 		out.open("123.txt");
 		for (int i = 0; i < history.size(); i++) {
 			out << "«апись номер " << i << endl;
 			out << history[i].username << endl;
-			out << history[i].D.day<<" день "<<history[i].D.month<<" мес€ц "<<history[i].D.year<<" год" << endl;
+			out << history[i].D.day << " день " << history[i].D.month << " мес€ц " << history[i].D.year << " год" << endl;
 			out << history[i].weight << endl;
 		}
 		out.close();
 	}
 	void openfile() {
 		ifstream in("123.txt");
-		string name,x="12";
+		string name, x = "12";
 		int d, m, y;
 		double w;
 		observation T;
@@ -182,7 +182,6 @@ public:
 		in.close();
 	}
 };
-
 void main() {
 	setlocale(LC_ALL, "Russian");
 	string username;
@@ -193,7 +192,7 @@ void main() {
 	int number, day, mounth, year;
 	int mod;
 	double w = 0;
-	int m=0,y=0;
+	int m = 0, y = 0;
 	observation tmp;
 	mounth = 0;
 	while (flag) {
@@ -227,8 +226,8 @@ void main() {
 			cout << W.getuser() << endl;
 		case 4:
 			cout << "¬ведите день мес€ц и год\n";
-			cin >>  day >> mounth >> year;
-			W.setdate( day, mounth, year);
+			cin >> day >> mounth >> year;
+			W.setdate(day, mounth, year);
 			break;
 		case 5:
 			W.getdate();
@@ -244,7 +243,7 @@ void main() {
 			cout << W.findobser(number) << endl;
 			break;
 		case 8:
-			cout << "1) «а мес€ц"<< endl;
+			cout << "1) «а мес€ц" << endl;
 			cout << "2) «а все врем€" << endl;
 			cin >> mod;
 			if (mod == 1) {
@@ -252,7 +251,7 @@ void main() {
 				cin >> m;
 				cin >> y;
 			}
-			cout << W.findavvalue(mod, m,y)<<endl;
+			cout << W.findavvalue(mod, m, y) << endl;
 			break;
 		case 9:
 			cout << "1) «а мес€ц" << endl;
@@ -263,7 +262,7 @@ void main() {
 				cin >> m;
 				cin >> y;
 			}
-			cout << W.findmin(mod, m, y)<<endl;
+			cout << W.findmin(mod, m, y) << endl;
 			break;
 		case 10:
 			cout << "1) «а мес€ц" << endl;
@@ -274,7 +273,7 @@ void main() {
 				cin >> m;
 				cin >> y;
 			}
-			cout << W.findmax(mod, m, y)<<endl;
+			cout << W.findmax(mod, m, y) << endl;
 			break;
 		case 11:
 			W.savefile();
@@ -288,8 +287,7 @@ void main() {
 		default:
 			break;
 		}
-		
-	}
 
+	}
 	system("pause");
 }
