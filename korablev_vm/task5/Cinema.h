@@ -1,4 +1,4 @@
-#include "Header.h"
+ï»¿#include "Header.h"
 
 struct Film
 {
@@ -51,11 +51,11 @@ ostream& operator<<(ostream& out, const Film& film)
 {
 	out << "/////////////////////////////////" << endl;
 	out << "\t" << film.film_name << endl;
-	out << "Äàòà: " << film.session_date << endl;
-	out << "Âðåìÿ íà÷àëà: " << film.start_time << endl;
+	out << "Ð”Ð°Ñ‚Ð°: " << film.session_date << endl;
+	out << "Ð’Ñ€ÐµÐ¼Ñ Ð½Ð°Ñ‡Ð°Ð»Ð°: " << film.start_time << endl;
 	out << film.film_hall << endl;
-	out << "Ìåñò (ñòàíäàðòíûå): " << film.free_base << endl;
-	out << "Ìåñò (âèï): " << film.free_vip << endl;
+	out << "ÐœÐµÑÑ‚ (ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð½Ñ‹Ðµ): " << film.free_base << endl;
+	out << "ÐœÐµÑÑ‚ (Ð²Ð¸Ð¿): " << film.free_vip << endl;
 	out << "/////////////////////////////////" << endl;
 	out << endl;
 	return out;
@@ -89,8 +89,8 @@ public:
 		size_t count = 13;
 		if (sessions[i].film_name.size() > 15)
 			count -= sessions[i].film_name.size() - 15;
-		cout << sessions[i].session_date << " - " << sessions[i].film_name << "." << setw(count) << setfill(' ') << "Çàë: "
-			<< sessions[i].hall_number << ". Âðåìÿ: " << sessions[i].start_time << "\n\n";
+		cout << sessions[i].session_date << " - " << sessions[i].film_name << "." << setw(count) << setfill(' ') << "Ð—Ð°Ð»: "
+			<< sessions[i].hall_number << ". Ð’Ñ€ÐµÐ¼Ñ: " << sessions[i].start_time << "\n\n";
 	}
 	void sessions_for_day_and_time(const MyDate& date, const MyTime& time)
 	{

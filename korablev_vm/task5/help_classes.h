@@ -1,4 +1,4 @@
-#include <windows.h>
+п»ї#include <windows.h>
 #include <iostream>
 #include <locale>
 #include <string>
@@ -111,8 +111,8 @@ class MyDate
 	int day;
 	int month;
 	int month_long[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
-	string month_list[13] = {"","января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
-	"октября", "ноября", "декабря" };
+	string month_list[13] = {"","СЏРЅРІР°СЂСЏ", "С„РµРІСЂР°Р»СЏ", "РјР°СЂС‚Р°", "Р°РїСЂРµР»СЏ", "РјР°СЏ", "РёСЋРЅСЏ", "РёСЋР»СЏ", "Р°РІРіСѓСЃС‚Р°", "СЃРµРЅС‚СЏР±СЂСЏ",
+	"РѕРєС‚СЏР±СЂСЏ", "РЅРѕСЏР±СЂСЏ", "РґРµРєР°Р±СЂСЏ" };
 	friend class Cinema;
 	friend class TicketOffice;
 	friend ostream& operator<<(ostream& out, const MyDate& date);
@@ -273,25 +273,25 @@ public:
 
 ostream& operator<<(ostream& out, const Hall& hall)
 {
-	out << "Зал: " << hall.number << endl;
-	out << "Начальная цена (стандарт): " << hall.price << " рублей" << endl;
-	out << "Начальная цена (вип): " << hall.price+150 << " рублей";
+	out << "Р—Р°Р»: " << hall.number << endl;
+	out << "РќР°С‡Р°Р»СЊРЅР°СЏ С†РµРЅР° (СЃС‚Р°РЅРґР°СЂС‚): " << hall.price << " СЂСѓР±Р»РµР№" << endl;
+	out << "РќР°С‡Р°Р»СЊРЅР°СЏ С†РµРЅР° (РІРёРї): " << hall.price+150 << " СЂСѓР±Р»РµР№";
 	return out;
 }
 
 void exit_prog()
 {
 	system("cls");
-	cout << "Спасибо за использование программы!" << endl;
-	cout << "До свидания" << endl;
+	cout << "РЎРїР°СЃРёР±Рѕ Р·Р° РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РїСЂРѕРіСЂР°РјРјС‹!" << endl;
+	cout << "Р”Рѕ СЃРІРёРґР°РЅРёСЏ" << endl;
 	system("pause");
 	exit(0);
 }
 void hello()
 {
 	system("cls");
-	cout << "Добро пожаловать в программу-кинотеатр" << endl;
-	cout << "Важная информация! Сеансы заполнены с 1 марта по 2 апреля" << endl;
+	cout << "Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ РІ РїСЂРѕРіСЂР°РјРјСѓ-РєРёРЅРѕС‚РµР°С‚СЂ" << endl;
+	cout << "Р’Р°Р¶РЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ! РЎРµР°РЅСЃС‹ Р·Р°РїРѕР»РЅРµРЅС‹ СЃ 1 РјР°СЂС‚Р° РїРѕ 2 Р°РїСЂРµР»СЏ" << endl;
 	system("pause");
 	system("cls");
 }
