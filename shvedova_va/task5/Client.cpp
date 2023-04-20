@@ -7,7 +7,7 @@ Client::Client()
 	Client::PIN = "0000";
 	Client::status = 1;
 }
-Client::Client(const string number, const string fio, size_t b, const string pin, bool s)
+Client::Client(const string number, const string fio, int b, const string pin, bool s)
 {
 	Client::CardNumber = number;
 	Client::FIO = fio;
@@ -24,7 +24,7 @@ const string Client::GetFIO()
 {
 	return FIO;
 }
-size_t Client::GetBalance()
+int Client::GetBalance()
 {
 	return balance;
 }
