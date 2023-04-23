@@ -471,8 +471,6 @@ int input_of_payroll_account_number_and_password(string& _payroll_account_number
 {
 	vector <string> choice = { "Выберите действие:", "Ввести номер зарплатного счета заново", "Выйти" };
 	int i = 0;
-	//cin.clear();
-	//while (getchar() != '\n');
 	while (i == 0)
 	{
 		cout << "Введите номер зарплатного счета: ";
