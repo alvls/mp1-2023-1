@@ -20,7 +20,15 @@ struct Time
 
     bool operator <(const Time& other) const
     {
-        return hour < other.hour&& minute < other.minute;
+        if (hour < other.hour)
+        {
+            return true;
+        }
+        if (hour == other.hour)
+        {
+            return minute < other.minute;
+        }
+        return false;
     }
 
     bool operator <=(const Time& other) const

@@ -109,7 +109,7 @@ public:
 		if ((date - today > ticket_sell_days)
 			|| (date == today && time_diff.hour == 0 && time_diff.minute > ticket_sell_show_minutes))
 		{
-			throw runtime_error("Билеты на этот сеанс больше не доступны");
+			throw runtime_error("Билеты на этот сеанс недоступны");
 		}
 
 
