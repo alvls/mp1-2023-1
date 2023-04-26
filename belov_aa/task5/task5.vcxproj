@@ -111,6 +111,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cinema.h" />
+    <ClInclude Include="CinemaShow.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="DateTime.h" />
+    <ClInclude Include="TicketOffice.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
