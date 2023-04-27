@@ -1,6 +1,20 @@
 #include <iostream>
 #include <iomanip>
 
+bool is_valid_date(int day, int mon)
+{
+  if (day < 1 || day > 31 || mon < 1 || mon > 12)
+    return false;
+  std::time_t now = std::time(nullptr);
+  std::tm* local_time = std::localtime(&now);
+  int curr_mon = local_time->tm_mon + 1;
+  int curr_day = local_time->tm_mday;
+  int mon_diff = mon - curr_mon;
+  int day_diff = day - curr_day;
+  int total_diff = mon_diff * 30 + day_diff;
+  return total_diff >= 0 && total_diff < 30;
+}
+
 enum Vagon_type
 {
   birdvagon = 1,

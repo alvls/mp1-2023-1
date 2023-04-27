@@ -7,17 +7,32 @@ class Ticket(-//-)
 	* ФИО пассажира
 	* станция отправления
 	* станция прибытия
+
 class Vagon(int Type)
-	* int[] Places - true или false в зависимости от 
+  * int Number - номер вагона
+	* int Type - тип вагона
+	* vector<bool> Places true зарезервировано иначе false
+	* int Size - количество мест
+	* int Free_size - количество свободных мест
+
 class Train(int Type)
-	* vector Vagons
+	* int Number - номер поезда
+	* int Type - тип поезда
+	* Size - количество вагонов
+	* vector<Vagon> Vagons - Size объектов класса Vagon;
+
 class Railway(): все поезда и билеты на конкретный день, здесь же стоимость билетов для всех типов
-	* vector Trains
-	* vector Tickets
-	* struct Cost
-class Data(): расписание на 30 дней вперед в dat файле, в начале работы программы загружаются
-	* vector Railways
-class Cassa(): обращение к Data -> Railway -> Train -> Vagon -> Places
+	* Railway_data Data - собственная структура для хранения даты
+	* int Count_trains - количество поездов
+	* int Count_tickets - количество зарезервированных билетов
+	* vector<Train> Trains - Count_trains объектов класса Train
+	* vector<Ticket> Tickets - Count_tickets объектов класса Ticket
+
+class Data(): расписание на 30 дней вперед
+	* int Size - количество дней (по умолчанию 30)
+	* vector<Railway> Railways - Size объектов класса Railway
+
+class Cassa(Data): подключение к Data, затем получение по указателям -> Railway -> Train -> Vagon -> Places
 	* принять данные покупателя: дату, поезд, тип вагона (если есть выбор), количество билетов каждого возможного вида (если есть выбор), ФИО пассажиров 
 	* проверить наличие свободных мест по запросу покупателя (при невозможности выдать все билеты в одном вагоне, считать заказ невыполнимым), 
 	* зарезервировать места, 
@@ -31,9 +46,9 @@ class Cassa(): обращение к Data -> Railway -> Train -> Vagon -> Places
 #include <string>
 #include <iostream>
 #include <ctime>
-#include "Header.h"
 #include <Windows.h>
 #include <sstream>
+#include "Header.h"
 
 class Ticket
 {
@@ -47,51 +62,47 @@ private:
 	std::string Departure_station;
 	std::string Arrival_station;
 public:
+	//конструктор по умолчанию
 	Ticket() : Cost(), Data(), Train_number(0), Vagon_number(0), Place_number(0), Name(), Departure_station(""), Arrival_station("") {}
 
+	//конструктор класса
 	Ticket(int cost, Railway_data data, int train_number, int vagon_number, int place_number, FIO name,std::string departure_station, std::string arrival_station) : Cost(cost), Data(data), Train_number(train_number), Vagon_number(vagon_number), Place_number(place_number), Name(name), Departure_station(departure_station), Arrival_station(arrival_station) {}
 
-
+	//вернуть дату
 	Railway_data Get_data()
 	{
 		return Data;
 	}
 
+	//вернуть ФИО
 	FIO Get_name()
 	{
 		return Name;
 	}
 
+	//вернуть цену
 	int Get_price()
 	{
 		return Cost;
 	}
 
+	//вернуть номер поезда
 	int Get_train_number()
 	{
 		return Train_number;
 	}
 
+	//вернуть номер вагона
 	int Get_vagon_number()
 	{
 		return Vagon_number;
 	}
 
+	//вернуть номер места
 	int Get_place_number()
 	{
 		return Place_number;
 	}
-
-	/*void Print_info()
-	{
-		std::cout << "Дата: " << Data << std::endl;
-		std::cout << "Номер поеда: " << Train_number << std::endl;
-		std::cout << "Номер вагона: " << Vagon_number << std::endl;
-		std::cout << "Номер места: " << Place_number << std::endl;
-		std::cout << "ФИО: " << Name << std::endl;
-		std::cout << "Станция отправления: " << Departure_station << std::endl;
-		std::cout << "Станция прибытия: " << Arrival_station << std::endl;
-	}*/
 };
 
 class Vagon
@@ -171,7 +182,7 @@ public:
 		return Places.at(index);
 	}
 
-	//изменить состояние места в вагоне по индексу
+	//забронировать место по индексу
 	void Reserve_place(int index)
 	{
 		if (!Places.at(index))
@@ -181,6 +192,7 @@ public:
 		}
 	}
 
+	//разбронирровать место по индексу
 	void Anreserve_place(int index)
 	{
 		if (Places.at(index))
@@ -190,34 +202,13 @@ public:
 		}
 	}
 
-	//выводит в консоль схему вагона
-	/*void Print_vagon()
+	//вывести на экран не забронированные места
+	void Print_suitable_places()
 	{
-		for (int i = 0; i < Size; i += 2)
-			std::cout << "(" << (i + 1) << ") - " << Places.at(i) << "   |   " << "(" <<  (i + 2) << ") - " << Places.at(i + 1) << std::endl;
-	}*/
-
-	//выводит в консоль информацию про вагон (тип, места, номер)
-	/*void Print_info()
-	{
-		std::string type;
-		switch (Type)
-		{
-		case birdvagon:
-			type = "Ласточка";
-			break;
-		case pzkrt:
-			type = "Плацкарт";
-			break;
-		case cupe:
-			type = "Купе";
-			break;
-		case sv:
-			type = "СВ";
-			break;
-		}
-		std::cout << "    Вагон №" << Number << " (" << Size << " мест, тип " << type << ")" << std::endl;
-	}*/
+		for (int i = 0; i < Size; i++)
+			if (!Places.at(i))
+				std::cout << "Место №" << i + 1 << std::endl;
+	}
 
 	//перегрузка операторов
 	Vagon& operator=(const Vagon& vagon)
@@ -225,6 +216,7 @@ public:
 		if (Size < vagon.Size)
 			Places.resize(vagon.Size);
 		Number = vagon.Number;
+		Free_size = vagon.Free_size;
 		Type = vagon.Type;
 		Size = vagon.Size;
 		Places = vagon.Places;
@@ -232,6 +224,7 @@ public:
 			Places.at(i) = vagon.Places.at(i);
 		return *this;
 	}
+
 	bool operator==(const Vagon& vagon)
 	{
 		if (Size != vagon.Size)
@@ -249,7 +242,6 @@ private:
 	int Type;
 	int Size;
 	std::vector<Vagon> Vagons;
-
 	//найти индекс вагона по номеру или вернуть -1
 	int Found_vagon(int number) 
 	{
@@ -328,42 +320,23 @@ public:
 		return Size;
 	}
 
-	//указать номер поезда
-	/*void Set_number(int number)
-	{
-		Number = number;
-	}*/
-
 	//проверяет есть ли в поезде подходящие вагоны
 	bool Check_free_vagons(int count_peoples)
 	{
 		for (int i = 0; i < Size; i++)
-			if(Vagons.at(i).Get_free_size() > count_peoples)
+			if (Vagons.at(i).Get_free_size() > count_peoples)
 				return true;
 		return false;
 	}
-	
-	//вывести в консоль информацию о поезде и вагонах поезда
-	/*void Print_info()
-	{
-		std::string type;
-		switch (Type)
-		{
-		case birdtrain:
-			type = "Ласточка";
-			break;
-		case firmtrain:
-			type = "Фирменный";
-			break;
-		case fasttrain:
-			type = "Скорый";
-			break;
-		}
-		std::cout << "  Поезд №" << Number << " тип: " << type << std::endl;
-		for (int i = 0; i < Size; i++)
-			Vagons.at(i).Print_info();
-	}*/
 
+	//напечатать в консоль все подходящие по условиям вагоны
+	void Print_suitable_vagons(int vagon_type, int places_count)
+	{
+		for (Vagon i : Vagons)
+			if (i.Get_free_size() >= places_count)
+				std::cout << "Вагон №" << i.Get_number() << std::endl;
+	}
+	
 	//перегрузка операторов
 	Train& operator=(const Train train)
 	{
@@ -376,6 +349,7 @@ public:
 			Vagons.at(i) = train.Vagons.at(i);
 		return *this;
 	}
+
 	bool operator==(const Train train)
 	{
 		if (Type != train.Type)
@@ -394,14 +368,6 @@ private:
 	int Count_tickets;
 	std::vector<Train> Trains;
 	std::vector<Ticket> Tickets;
-	//найти индекс поезда по номеру или вернуть -1
-	int Found_train(int number)
-	{
-		for (int i = 0; i < Count_trains; i++)
-			if (Trains.at(i).Get_number() == number)
-				return i;
-		return -1;
-	}
 public:
 	//конструктор по умолчанию
 	Railway() : Data(), Count_trains(0), Count_tickets(0) {}
@@ -412,6 +378,23 @@ public:
 		Data = data;
 		Count_trains = 0;
 		Count_tickets = 0;
+	}
+
+	//найти индекс поезда по номеру или вернуть -1
+	int Found_train(int number)
+	{
+		for (int i = 0; i < Count_trains; i++)
+			if (Trains.at(i).Get_number() == number)
+				return i;
+		return -1;
+	}
+
+	//написать в консоль все подходящие по параметрам поезда
+	void Print_suitable_trains(int train_type, int places_count)
+	{
+		for (Train i : Trains)
+			if (i.Get_type() == train_type && i.Check_free_vagons(places_count))
+				std::cout << "Поезд №" << i.Get_number() << std::endl;
 	}
 
 	//получить поезд по номеру
@@ -463,6 +446,7 @@ public:
 			if (Tickets.at(i).Get_train_number() == train && Tickets.at(i).Get_vagon_number() == vagon && Tickets.at(i).Get_place_number() == place)
 			{
 				Tickets.erase(Tickets.begin() + i);
+				Count_tickets--;
 				return;
 			}
 		}
@@ -508,26 +492,6 @@ public:
 		return 0;
 	}
 
-	int Total_price()
-	{
-		int result = 0;
-		for (int i = 0; i < Count_tickets; i++)
-			result += Tickets.at(i).Get_price();
-		return result;
-	}
-
-	//вывести в консоль информацию о дне (поезда и билеты)
-	/*void Print_info()
-	{
-		std::cout << "Количество проданных билетов на "<< Data <<": " << Count_tickets << std::endl;
-		if (Count_trains != 0)
-			std::cout << "Поезда на сегодня:" << std::endl;
-		else
-			std::cout << "В этот день поездов нет" << std::endl;
-		for (int i = 0; i < Count_trains; i++)
-			Trains.at(i).Print_info();
-	}*/
-
 	//перегрузка операторов
 	Railway& operator=(const Railway railway)
 	{
@@ -552,20 +516,6 @@ private:
 	int Size;
 	std::vector<Railway> Railways;
 
-	//проверить корректность вводимой даты
-	bool is_valid_date(int day, int mon)
-	{
-		if (day < 1 || day > 31 || mon < 1 || mon > 12)
-			return false;
-		std::time_t now = std::time(nullptr);
-		std::tm* local_time = std::localtime(&now);
-		int curr_mon = local_time->tm_mon + 1;
-		int curr_day = local_time->tm_mday;
-		int mon_diff = mon - curr_mon;
-		int day_diff = day - curr_day;
-		int total_diff = mon_diff * 30 + day_diff;
-		return total_diff >= 0 && total_diff < 30;
-	}
 public:
 	//конструктор по умолчаннию
 	Data()
@@ -580,7 +530,7 @@ public:
 			Railways.push_back(Railway(today++));
 	}
 
-	//получить конкретный день по дню и месяцу
+	//получить конкретный Railway по дню и месяцу
 	Railway* Get_railway(int day, int mon) 
 	{
 		if (!is_valid_date(day, mon)) {
@@ -596,186 +546,296 @@ public:
 		std::cout << "Ошибка: расписание на указанную дату отсутствует" << std::endl;
 		return nullptr;
 	}
-
-	//вывести в консоль информацию про все дни месяца
-	/*void Print_info()
-	{
-		std::cout << "Рассписание на месяц" << std::endl;
-		for (int i = 0; i < Size; i++)
-			Railways.at(i).Print_info();
-	}*/
 };
 
 class Cassa
 {
 	Data Calendar;
-	bool Initialization = false;
+	Railway Today_railway;
+	bool Initialization;
 
 	Railway_data Today_data;
 	int Train_type;
+	int Train_num;
 	int Vagon_type;
-	int Tickets_count;
+	int Vagon_num;
+	int Places_count;
 	int Total_cost;
 	std::vector <FIO> Names;
+	int Names_size;
 	std::vector <int> Places;
+	int Places_size;
+	std::vector <int> Prices;
+	int Prices_size;
 	std::string Departure_station;
 	std::string Arrival_station;
+	int Reserved_place_size;
 
 public:
-	Railway Today_railway;
-	Cassa(Data data) { Calendar = data; }
+	//конструктор класса
+	Cassa(Data data) : Calendar(data), Initialization(false), Today_data(), Train_type(0), Train_num(0), Vagon_type(0), Vagon_num(0), Places_count(0), Total_cost(0), Names_size(0), Places_size(0), Departure_station(""), Arrival_station(""), Reserved_place_size(0) {}
 
+	//получить данные пользователя и занести всё в базу Data Calendar
 	void Get_user_info()
 	{
 		if (Initialization)
 			return;
 		char ch;
 		int mon, day;
-		std::cout << "Введите месяц: ";
-		std::cin >> mon;
-		while (ch = getchar() != '\n');
 		std::cout << "Введите день: ";
 		std::cin >> day;
 		while (ch = getchar() != '\n');
+		std::cout << "Введите месяц: ";
+		std::cin >> mon;
+		while (ch = getchar() != '\n');
+		if (!is_valid_date(day, mon))
+		{
+			std::cout << "Ошибка: неверная дата, либо рассписание на этот день отсутствует" << std::endl;
+			return;
+		}
 		Today_data = Railway_data(day, mon);
 		Today_railway = *Calendar.Get_railway(day, mon);
-				
-		std::string input;
-		std::string word1, word2;
-		std::cout << "Введите станцию отправления: ";
-		std::getline(std::cin, input);
-		std::istringstream iss(input);
-		iss >> word1 >> word2;
-		Departure_station = word1 + " " + word2;
-		if (Departure_station == "Нижний Новгород")
-			Arrival_station = "Москва";
-		else
-			Arrival_station = "Нижний Новгород";
 
-		std::cout << "Выберите тип поезда: ";
+		int station;
+		std::cout << "Выберите станцию отправления (1 - Нижний Новгород | 2 - Москва): ";
+		std::cin >> station;
+		if (station == 1)
+		{
+			Departure_station = "Нижний Новгород";
+			Arrival_station = "Москва";
+		}
+		else if (station == 2)
+		{
+			Departure_station = "Москва";
+			Arrival_station = "Нижний Новгород";
+		}
+		else
+		{
+			std::cout << "Ошибка: введено не корректное значение" << std::endl;
+			return;
+		}
+
+		std::cout << "Выберите тип поезда (1 - 'Ласточка' | 2 - Скорый| 3 - Фирменный): ";
 		std::cin >> Train_type;
 		while (ch = getchar() != '\n');
-		std::cout << "Выберите тип вагона: ";
-		std::cin >> Vagon_type;
-		while (ch = getchar() != '\n');
+		if (Train_type < 1 && Train_type > 3)
+		{
+			std::cout << "Ошибка: введено не корректное значение" << std::endl;
+			return;
+		}
+		switch (Train_type)
+		{
+		case birdtrain:
+			Vagon_type = birdvagon;
+			break;
+		case fasttrain:
+		case firmtrain:
+			std::cout << "Выберите тип вагона (2 - плацкарт | 3 - купе| 4 - св): ";
+			std::cin >> Vagon_type;
+			while (ch = getchar() != '\n');
+			if (Vagon_type < 2 && Vagon_type > 4)
+			{
+				std::cout << "Ошибка: введено не корректное значение" << std::endl;
+				return;
+			}
+		}
+		
 		std::cout << "Введите количество пассажиров: ";
-		std::cin >> Tickets_count;
+		std::cin >> Places_count;
 		while (ch = getchar() != '\n');
+		if (Places_count <= 0 || Places_count > 100)
+		{
+			std::cout << "Ошибка: введено не корректное значение" << std::endl;
+			return;
+		}
 		Initialization = true;
+		for (int i = 0; i < Places_count; i++)
+			Reserve_place();
 	}
 
-	void Check_free_place(int train_num, int vagon_num, int place_num)
+	//проверить конкретное место в вагоне (только после одного Reserve_place)
+	void Check_free_place(int place_num)
 	{
 		if (!Initialization)
 			return;
-		Train train = *Today_railway.Get_train(train_num);
-		Vagon vagon = *train.Get_vagon(vagon_num);
-		if (train.Check_free_vagons(Tickets_count))
+		if (Reserved_place_size < 1)
+		{
+			std::cout << "Сперва забронируйте хотябы одно место" << std::endl;
+			return;
+		}
+		Train train = *Today_railway.Get_train(Train_num);
+		Vagon vagon = *train.Get_vagon(Vagon_num);
+		if (train.Check_free_vagons(Places_count))
+		{
 			std::cout << "В поезде нет вагонов с подходящим количеством свободных мест" << std::endl;
-		if (vagon.Get_free_size() < Tickets_count)
+			return;
+		}
+		if (vagon.Get_free_size() < Places_count)
+		{
 			std::cout << "В вагоне нет нужного количества свободных мест" << std::endl;
+			return;
+		}
 		if (vagon.Check_place(place_num))
 			std::cout << "Занято" << std::endl;
 		else
 			std::cout << "Свободно" << std::endl;
 	}
 
-	void Reserve_place(int train_num, int vagon_num, int place_num)
+	//забронировать место в вагоне
+	void Reserve_place()
 	{
 		if (!Initialization)
-			return;
-		if (Today_railway.Get_train(train_num)->Get_vagon(vagon_num)->Check_place(place_num))
-			std::cout << "Место уже забронировано" << std::endl;
-		else
 		{
-			char ch;
-			int train_type = Today_railway.Get_train(train_num)->Get_type();
-			int vagon_type = Today_railway.Get_train(train_num)->Get_vagon(vagon_num)->Get_type();
-			int cost = Today_railway.Check_price(train_type, vagon_type, place_num);
-			std::string f_name, i_name, o_name;
-			std::cout << "Ваша фамилия: ";
-			std::cin >> f_name;
-			while (ch = getchar() != '\n');
-			std::cout << "Ваше имя: ";
-			std::cin >> i_name;
-			while (ch = getchar() != '\n');
-			std::cout << "Ваше отчество: ";
-			std::cin >> o_name;
-			while (ch = getchar() != '\n');
-			
-			Today_railway.Get_train(train_num)->Get_vagon(vagon_num)->Reserve_place(place_num);
-			std::cout << "Место забронировано" << std::endl;
-			FIO fio(f_name, i_name, o_name);
-			bool flag = false;
-			for (FIO i : Names)
-				if (i == fio)
-					flag = true;
-			if (!flag)
-				Names.push_back(fio);
-			Places.push_back(place_num);
-			Today_railway.Append_ticket(Ticket(cost, Today_data, train_num, vagon_num, place_num, fio, Departure_station, Arrival_station));
+			std::cout << "Ошибка: касса не инициализирована" << std::endl;
+			return;
 		}
+		char ch;
+		if (Train_num == 0)
+		{
+			std::cout << "Выберите номер поезда из подходящих для вас" << std::endl;
+			Today_railway.Print_suitable_trains(Train_type, Places_count);
+			std::cout << "Ваш выбор: ";
+			std::cin >> Train_num;
+			while (ch = getchar() != '\n');
+
+			std::cout << "Выберите номер вагона из подходящих для вас" << std::endl;
+			Today_railway.Get_train(Train_num)->Print_suitable_vagons(Vagon_type, Places_count);
+			std::cout << "Ваш выбор: ";
+			std::cin >> Vagon_num;
+			while (ch = getchar() != '\n');
+		}
+		int Place_num;
+		std::cout << "Выберите номер места из подходящих для вас" << std::endl;
+		Today_railway.Get_train(Train_num)->Get_vagon(Vagon_num)->Print_suitable_places();
+		std::cout << "Ваш выбор: ";
+		std::cin >> Place_num;
+		while (ch = getchar() != '\n');
+		Place_num--;
+		int train_type = Today_railway.Get_train(Train_num)->Get_type();
+		int vagon_type = Today_railway.Get_train(Train_num)->Get_vagon(Vagon_num)->Get_type();
+		int cost = Today_railway.Check_price(train_type, vagon_type, Place_num);
+
+		std::string input;
+		std::cout << "Введите ваше ФИО в формате 'Фамилия Имя Отчество': ";
+		std::getline(std::cin, input);
+
+		std::string f_name, i_name, o_name;
+		std::istringstream iss(input);
+		iss >> f_name >> i_name >> o_name;
+			
+		Today_railway.Get_train(Train_num)->Get_vagon(Vagon_num)->Reserve_place(Place_num);
+		std::cout << "Место забронировано" << std::endl;
+		FIO fio(f_name, i_name, o_name);
+		Names.push_back(fio);
+		Names_size++;
+		Places.push_back(Place_num + 1);
+		Places_size++;
+		Prices.push_back(cost);
+		Prices_size++;
+		Reserved_place_size++;
+		Today_railway.Append_ticket(Ticket(cost, Today_data, Train_num, Vagon_num, Place_num + 1, fio, Departure_station, Arrival_station));
 	}
 
-	void Cancel_ticket_order(int train_num, int vagon_num, int place_num)
+	//отменить бронь
+	void Cancel_ticket_order(int place_num)
 	{
 		if (!Initialization)
 			return;
-		if (!Today_railway.Get_train(train_num)->Get_vagon(vagon_num)->Check_place(place_num))
+		if (!Today_railway.Get_train(Train_num)->Get_vagon(Vagon_num)->Check_place(place_num))
 		{
 			std::cout << "Место не забронировано" << std::endl;
 		}
 		else
 		{
-			Today_railway.Get_train(train_num)->Get_vagon(vagon_num)->Anreserve_place(place_num);
-			Today_railway.Delete_ticket(train_num, vagon_num, place_num);
+			Today_railway.Get_train(Train_num)->Get_vagon(Vagon_num)->Anreserve_place(place_num);
+			Today_railway.Delete_ticket(Train_num, Vagon_num, place_num);
+			for (int i = 0; i < Places.size(); i++)
+				if (Places.at(i) == place_num)
+				{
+					Places.erase(Places.begin() + i);
+					Places_size--;
+					Names.erase(Names.begin() + i);
+					Names_size--;
+					Prices.erase(Prices.begin() + i);
+					Prices_size--;
+					break;
+				}
 			std::cout << "Бронь с места снята" << std::endl;
 		}
 	}
 
+	//посчитать общую цену всех билетов
 	void Calculate_total_price()
 	{
 		if (!Initialization)
 			return;
-		std::cout << "Итого билеты на стоимость: " << Today_railway.Total_price() << "р." << std::endl;
+		Total_cost = 0;
+		for (int i : Prices)
+			Total_cost += i;
 	}
 	
-	void Generate_ticket(int train_num, int vagon_num, int place_num)
+	//выдать чек
+	void Generate_ticket()
 	{
 		if (!Initialization)
 			return;
-		std::cout << "Дата: " << Today_data << std::endl;
-		std::cout << "Номер поеда: " << train_num << std::endl;
-		std::cout << "Номер вагона: " << vagon_num << std::endl;
-		std::cout << "Номера мест";
-		for (int i : Places)
-			std::cout << " | " << i;
-		std::cout << std::endl;
+		std::cout << "______________БИЛЕТ______________" << std::endl;
+		std::cout << "Дата: " << Today_data;
+		std::cout << " Поезд №" << Train_num;
+		std::cout << " Вагон №" << Vagon_num << std::endl;
+		
+		std::cout << "ФИО пассажиров:";
+		for (int i = 0; i < Names_size; i++)
+		{
+			if (i < Names.size() - 1)
+				std::cout << " " << Names.at(i) << ",";
+			else
+				std::cout << " " << Names.at(i) << std::endl;
+		}
 
-		std::cout << "ФИО";
-		for (FIO i : Names)
-			std::cout << " | " << i;
-		std::cout << std::endl;
+		std::cout << "Номера мест";
+		for (int i = 0; i < Places_size; i++)
+		{
+			if (i < Places.size() - 1)
+				std::cout << " " << Places.at(i) << ",";
+			else
+				std::cout << " " << Places.at(i) << std::endl;
+		}		
 
 		std::cout << "Станция отправления: " << Departure_station << std::endl;
 		std::cout << "Станция прибытия: " << Arrival_station << std::endl;
+		if (Total_cost == 0)
+			Calculate_total_price();
+		std::cout << "Итоговая стоимость билетов: " << Total_cost << "р." << std::endl;
+		std::cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << std::endl;
 	}
 };
 
 int main()
 {
-	SetConsoleOutputCP(1251); // установка кодировки для вывода
-	SetConsoleCP(1251); // установка кодировки для ввода
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
 
+	//создаем объект класса data, в котором содержатся 30 дней (Railway) вперед начиная со дня запуска программы
 	Data data;
+  //заполняем нашу "базу данных", занеся в определенные дни поезда (изначально каждый Railway пуст)
 	data.Get_railway(27, 04)->Append_train(Train(1, birdtrain));
+	data.Get_railway(27, 04)->Append_train(Train(2, birdtrain));
+	data.Get_railway(27, 04)->Append_train(Train(3, birdtrain));
+	data.Get_railway(27, 04)->Append_train(Train(4, birdtrain));
+	data.Get_railway(27, 04)->Append_train(Train(5, fasttrain));
+	data.Get_railway(27, 04)->Append_train(Train(6, fasttrain));
+	data.Get_railway(27, 04)->Append_train(Train(7, fasttrain));
+	data.Get_railway(27, 04)->Append_train(Train(8, firmtrain));
+	data.Get_railway(27, 04)->Append_train(Train(9, firmtrain));
+
+	//"подключаем" к нашей кассе data, с которой будем работать
 	Cassa cassa(data);
+	//получить информацию пользователя и создать билеты
 	cassa.Get_user_info();
-	system("pause");
-
-	cassa.Reserve_place(1, 1, 2);
-
-	cassa.Calculate_total_price();
-	cassa.Generate_ticket(1, 1, 1);
+	//удалить билет с номером места 2 в ранее выбранном вагоне
+	cassa.Cancel_ticket_order(2);
+	//сгенерировать билет
+	cassa.Generate_ticket();
 	system("pause");
 }
