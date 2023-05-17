@@ -1,7 +1,6 @@
 ﻿#include "Header.h"
 
 Cinema session_list;
-//TicketOffice manager;
 void create_sessions();
 
 int main()
