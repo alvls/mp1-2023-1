@@ -111,6 +111,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Border.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\BufferedConsoleGameScreen.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Console.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\ConsoleGameScreen.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Food.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Game.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\GameObject.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\GameScreen.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Score.h" />
+    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Snake.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Desktop\CodeTest\snaketest\Console.cpp" />
+    <ClCompile Include="..\..\..\Desktop\CodeTest\snaketest\Game.cpp" />
+    <ClCompile Include="..\..\..\Desktop\CodeTest\snaketest\source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
