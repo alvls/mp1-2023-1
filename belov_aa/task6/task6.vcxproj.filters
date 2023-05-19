@@ -11,45 +11,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Border.h">
+    <ClInclude Include="Border.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\BufferedConsoleGameScreen.h">
+    <ClInclude Include="BufferedConsoleGameScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Console.h">
+    <ClInclude Include="Console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\ConsoleGameScreen.h">
+    <ClInclude Include="ConsoleGameScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Food.h">
+    <ClInclude Include="Food.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Game.h">
+    <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\GameObject.h">
+    <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\GameScreen.h">
+    <ClInclude Include="GameScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Score.h">
+    <ClInclude Include="Score.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Desktop\CodeTest\snaketest\Snake.h">
+    <ClInclude Include="Snake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Desktop\CodeTest\snaketest\Console.cpp">
+    <ClCompile Include="Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Desktop\CodeTest\snaketest\Game.cpp">
+    <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Desktop\CodeTest\snaketest\source.cpp">
+    <ClCompile Include="source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
