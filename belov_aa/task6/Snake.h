@@ -125,9 +125,9 @@ public:
 	{
 		bool vertical = is_vertical();
 
+		game.get_screen()->set_pixel_foreground(GameScreen::GREEN);
 		for (int i = 1; i < body.size(); i++)
 		{
-			game.get_screen()->set_pixel_foreground(GameScreen::GREEN);
 			game.get_screen()->set_pixel(body[i].x, body[i].y, 'o');
 		}
 
