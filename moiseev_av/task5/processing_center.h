@@ -45,6 +45,8 @@ private:
 
     template <class T>
     friend ostream& operator <<(ostream& stream, const T& source) {
+        //constexpr bool is_int_or_double_v =
+        //    is_same<T, client>::value || is_same<T, encoded_client>::value;
 
         stream << "Клиент № " << source.id << endl << "Номер карты: " << source.card_number << endl;
         stream << "ФИО: " << source.name << endl << "Баланс: " << source.amount << endl;
