@@ -60,8 +60,6 @@ void returnToMenu() {
     menu();
 }
 
-
-
 void programInfo() {
     system("cls");
     std::cout << "This program implements the game \"Bulls and Cows\"." << std::endl;
@@ -98,7 +96,7 @@ void game() {
             std::cin >> n;
             cleanCin();
         }
-        game.set_n(n);
+        player.choose_n(n);
 
         game.setValue(computer.getRandomNumber());
 

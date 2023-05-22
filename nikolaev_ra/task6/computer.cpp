@@ -1,13 +1,13 @@
 #include "computer.h"
 
-int Computer::hasValue(std::vector<int> items, int val) {
+int Computer::hasValue(const std::vector<int>& items, int val) {
     for (int item : items) {
         if (item == val) { return true; }
     }
     return false;
 }
 
-int Computer::formValueFromVector(std::vector<int> items, int length) {
+int Computer::formValueFromVector(const std::vector<int>& items, int length) {
     int result = 0;
     for (int item : items) {
         result += item * pow(10, --length);
@@ -23,8 +23,8 @@ int Computer::getRandomNumber() {
         while (true) {
             int digit = rand() % 10;
             if (!((i == 0 && digit == 0) || Computer::hasValue(digits, digit))) {
-               digits.push_back(digit);
-               break;
+                digits.push_back(digit);
+                break;
             }
         }
     }
@@ -40,7 +40,7 @@ std::pair<int, int> Computer::getBullsAndCows(int guess) {
 
         for (int i = 0; i < game->get_n(); i++) {
             if (strVal[i] == strGuess[i]) { bulls++; }
-            // cows searching
+                // cows searching
             else {
                 for (char item : strVal) {
                     if (strGuess[i] == item) {

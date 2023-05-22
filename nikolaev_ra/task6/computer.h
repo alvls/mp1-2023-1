@@ -9,8 +9,8 @@
 
 class Computer {
 private:
-    static int hasValue(std::vector<int> items, int item);
-    static int formValueFromVector(std::vector<int> items, int length);
+    static int hasValue(const std::vector<int>& items, int item);
+    static int formValueFromVector(const std::vector<int>& items, int length);
 
     Game* game;
 

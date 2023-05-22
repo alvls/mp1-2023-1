@@ -14,11 +14,11 @@ private:
 
 public:
     void set_n(int _n);
-    int get_n() const;
+    [[nodiscard]] int get_n() const;
 
-    int getValue() const;
+    [[nodiscard]] int getValue() const;
     void setValue(int _value);
 
-    bool isValidValue(int val);
+    [[nodiscard]] bool isValidValue(int val) const;
     static bool isValid_n(int n);
 };
