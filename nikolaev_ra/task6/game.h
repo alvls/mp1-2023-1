@@ -4,7 +4,7 @@
 #include <unordered_set>
 #include <string>
 
-const int MIN_N = 0;
+const int MIN_N = 1;
 const int MAX_N = 5;
 
 class Game {

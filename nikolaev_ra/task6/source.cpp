@@ -21,12 +21,11 @@ void game();
 void programExit();
 
 void greeting() {
-    std::cout << "Hello!\nWelcome to the game \"Bulls and Cows\":)\n" << std::endl;
+    std::cout << "Hello!\nWelcome to the game \"Bulls and Cows\" :)\n" << std::endl;
 }
 
 void menu()
 {
-
     std::cout << "What do you want to do?\n" << std::endl;
     std::cout << "1 - read the description of the program" << std::endl;
     std::cout << "2 - play the game" << std::endl;
