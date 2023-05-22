@@ -77,7 +77,7 @@ public:
 		}
 	}
 
-	void Ñheck() {
+	void Check() {
 		bulls = 0;
 		cows = 0;
 		for (int i = 0; i < n; i++) {
@@ -119,7 +119,7 @@ void main() {
 		cout << "Enter a suggested answer\n";
 		cin >> ans;
 		player.Answer(ans);
-		player.Ñheck();
+		player.Check();
 		cout << "Number of bulls:" << player.GetBulls() << endl;
 		cout << "Number of cows:" << player.GetCows() << endl;
 	}
