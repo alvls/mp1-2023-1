@@ -13,7 +13,7 @@ public:
     void update() override {}
     void draw() override
     {
-        auto str = "Length: " + std::to_string(game.score);
+        auto str = "Length: " + std::to_string(game.score) + "/" + std::to_string(game.win_score);
 
         auto* screen = game.get_screen();
         screen->set_pixel_foreground(GameScreen::YELLOW);

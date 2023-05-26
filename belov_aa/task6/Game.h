@@ -14,22 +14,21 @@ class Game
 private:
 	GameScreen* screen;
 	std::vector<std::unique_ptr<GameObject>> game_objects;
+	void on_stop();
 
 public:
 	bool is_running;
 	bool is_win;
 	int score;
-	int win_score;
+	const int win_score;
 
-	Rect field;
+	const Rect field;
 	Point food;
 
 	Game(GameScreen* screen, Rect field, int win_score);
 
 	void start();
 	void stop();
-
-	void on_stop();
 
 	void repaint();
 	GameScreen* get_screen();
