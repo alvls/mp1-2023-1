@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <stdlib.h>
 #include <vector>
-#include <locale.h>
 #include <math.h>
 #include <string>
 using namespace std;
@@ -27,7 +26,6 @@ public:
 			tmp2--;
 			figures.erase(figures.begin() + tmp1);
 		}
-		cout << number << endl;
 	}
 
 	virtual ~Randomnumber() = 0 {}
@@ -71,12 +69,13 @@ void main() {
 	cin >> n;
 	bullandcow M(n);
 	int ans = -1;
+
 	while (1)
 	{
-		cout << "Введите предположение\n";
+		cout << "Введите число с неповторяющимися цифрами\n";
 		cin >> ans;
-		cout << "Количество быков " << M.bull(ans) << endl;
-		cout << "Количество коров " << M.cow(ans) << endl;
+		cout << "Количество быков (цифры угаданные с позициями)" << M.bull(ans) << endl;
+		cout << "Количество коров (цыфры угаданные на на своих позициях)" << M.cow(ans) << endl;
 		if (M.is_win(ans)) {
 			cout << "Ты победил";
 			break;
