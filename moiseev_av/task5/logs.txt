@@ -1,0 +1,4 @@
+Card ¹6000 is in, at: 2023.4.27 13:43:3
+Get 18200 rub from card ¹6000, at: 2023.4.27 13:43:3
+Take 18200 rub to card ¹6000, at: 2023.4.27 13:43:3
+Card ¹6000 is out, at: 2023.4.27 13:43:3
