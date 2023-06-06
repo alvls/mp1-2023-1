@@ -1,44 +1,44 @@
 /*
 class Ticket(-//-)
-	* дата
-	* номер поезда
-	* номер вагона
-	* номер места
-	* ФИО пассажира
-	* станция отправления
-	* станция прибытия
+	* Г¤Г ГІГ 
+	* Г­Г®Г¬ГҐГ° ГЇГ®ГҐГ§Г¤Г 
+	* Г­Г®Г¬ГҐГ° ГўГ ГЈГ®Г­Г 
+	* Г­Г®Г¬ГҐГ° Г¬ГҐГ±ГІГ 
+	* Г”Г€ГЋ ГЇГ Г±Г±Г Г¦ГЁГ°Г 
+	* Г±ГІГ Г­Г¶ГЁГї Г®ГІГЇГ°Г ГўГ«ГҐГ­ГЁГї
+	* Г±ГІГ Г­Г¶ГЁГї ГЇГ°ГЁГЎГ»ГІГЁГї
 
 class Vagon(int Type)
-  * int Number - номер вагона
-	* int Type - тип вагона
-	* vector<bool> Places true зарезервировано иначе false
-	* int Size - количество мест
-	* int Free_size - количество свободных мест
+  * int Number - Г­Г®Г¬ГҐГ° ГўГ ГЈГ®Г­Г 
+	* int Type - ГІГЁГЇ ГўГ ГЈГ®Г­Г 
+	* vector<bool> Places true Г§Г Г°ГҐГ§ГҐГ°ГўГЁГ°Г®ГўГ Г­Г® ГЁГ­Г Г·ГҐ false
+	* int Size - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¬ГҐГ±ГІ
+	* int Free_size - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ Г¬ГҐГ±ГІ
 
 class Train(int Type)
-	* int Number - номер поезда
-	* int Type - тип поезда
-	* Size - количество вагонов
-	* vector<Vagon> Vagons - Size объектов класса Vagon;
+	* int Number - Г­Г®Г¬ГҐГ° ГЇГ®ГҐГ§Г¤Г 
+	* int Type - ГІГЁГЇ ГЇГ®ГҐГ§Г¤Г 
+	* Size - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГўГ ГЈГ®Г­Г®Гў
+	* vector<Vagon> Vagons - Size Г®ГЎГєГҐГЄГІГ®Гў ГЄГ«Г Г±Г±Г  Vagon;
 
-class Railway(): все поезда и билеты на конкретный день, здесь же стоимость билетов для всех типов
-	* Railway_data Data - собственная структура для хранения даты
-	* int Count_trains - количество поездов
-	* int Count_tickets - количество зарезервированных билетов
-	* vector<Train> Trains - Count_trains объектов класса Train
-	* vector<Ticket> Tickets - Count_tickets объектов класса Ticket
+class Railway(): ГўГ±ГҐ ГЇГ®ГҐГ§Г¤Г  ГЁ ГЎГЁГ«ГҐГІГ» Г­Г  ГЄГ®Г­ГЄГ°ГҐГІГ­Г»Г© Г¤ГҐГ­Гј, Г§Г¤ГҐГ±Гј Г¦ГҐ Г±ГІГ®ГЁГ¬Г®Г±ГІГј ГЎГЁГ«ГҐГІГ®Гў Г¤Г«Гї ГўГ±ГҐГµ ГІГЁГЇГ®Гў
+	* Railway_data Data - Г±Г®ГЎГ±ГІГўГҐГ­Г­Г Гї Г±ГІГ°ГіГЄГІГіГ°Г  Г¤Г«Гї ГµГ°Г Г­ГҐГ­ГЁГї Г¤Г ГІГ»
+	* int Count_trains - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГ®ГҐГ§Г¤Г®Гў
+	* int Count_tickets - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г§Г Г°ГҐГ§ГҐГ°ГўГЁГ°Г®ГўГ Г­Г­Г»Гµ ГЎГЁГ«ГҐГІГ®Гў
+	* vector<Train> Trains - Count_trains Г®ГЎГєГҐГЄГІГ®Гў ГЄГ«Г Г±Г±Г  Train
+	* vector<Ticket> Tickets - Count_tickets Г®ГЎГєГҐГЄГІГ®Гў ГЄГ«Г Г±Г±Г  Ticket
 
-class Data(): расписание на 30 дней вперед
-	* int Size - количество дней (по умолчанию 30)
-	* vector<Railway> Railways - Size объектов класса Railway
+class Data(): Г°Г Г±ГЇГЁГ±Г Г­ГЁГҐ Г­Г  30 Г¤Г­ГҐГ© ГўГЇГҐГ°ГҐГ¤
+	* int Size - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¤Г­ГҐГ© (ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ 30)
+	* vector<Railway> Railways - Size Г®ГЎГєГҐГЄГІГ®Гў ГЄГ«Г Г±Г±Г  Railway
 
-class Cassa(Data): подключение к Data, затем получение по указателям -> Railway -> Train -> Vagon -> Places
-	* принять данные покупателя: дату, поезд, тип вагона (если есть выбор), количество билетов каждого возможного вида (если есть выбор), ФИО пассажиров 
-	* проверить наличие свободных мест по запросу покупателя (при невозможности выдать все билеты в одном вагоне, считать заказ невыполнимым), 
-	* зарезервировать места, 
-	* рассчитать общую стоимость билетов, 
-	* отменить заказ билетов, 
-	* сформировать билеты (каждый билет включает: дату, номер поезда, номер вагона, номер места, ФИО пассажира, станция отправления, станция прибытия).
+class Cassa(Data): ГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ ГЄ Data, Г§Г ГІГҐГ¬ ГЇГ®Г«ГіГ·ГҐГ­ГЁГҐ ГЇГ® ГіГЄГ Г§Г ГІГҐГ«ГїГ¬ -> Railway -> Train -> Vagon -> Places
+	* ГЇГ°ГЁГ­ГїГІГј Г¤Г Г­Г­Г»ГҐ ГЇГ®ГЄГіГЇГ ГІГҐГ«Гї: Г¤Г ГІГі, ГЇГ®ГҐГ§Г¤, ГІГЁГЇ ГўГ ГЈГ®Г­Г  (ГҐГ±Г«ГЁ ГҐГ±ГІГј ГўГ»ГЎГ®Г°), ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЎГЁГ«ГҐГІГ®Гў ГЄГ Г¦Г¤Г®ГЈГ® ГўГ®Г§Г¬Г®Г¦Г­Г®ГЈГ® ГўГЁГ¤Г  (ГҐГ±Г«ГЁ ГҐГ±ГІГј ГўГ»ГЎГ®Г°), Г”Г€ГЋ ГЇГ Г±Г±Г Г¦ГЁГ°Г®Гў 
+	* ГЇГ°Г®ГўГҐГ°ГЁГІГј Г­Г Г«ГЁГ·ГЁГҐ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ Г¬ГҐГ±ГІ ГЇГ® Г§Г ГЇГ°Г®Г±Гі ГЇГ®ГЄГіГЇГ ГІГҐГ«Гї (ГЇГ°ГЁ Г­ГҐГўГ®Г§Г¬Г®Г¦Г­Г®Г±ГІГЁ ГўГ»Г¤Г ГІГј ГўГ±ГҐ ГЎГЁГ«ГҐГІГ» Гў Г®Г¤Г­Г®Г¬ ГўГ ГЈГ®Г­ГҐ, Г±Г·ГЁГІГ ГІГј Г§Г ГЄГ Г§ Г­ГҐГўГ»ГЇГ®Г«Г­ГЁГ¬Г»Г¬), 
+	* Г§Г Г°ГҐГ§ГҐГ°ГўГЁГ°Г®ГўГ ГІГј Г¬ГҐГ±ГІГ , 
+	* Г°Г Г±Г±Г·ГЁГІГ ГІГј Г®ГЎГ№ГіГѕ Г±ГІГ®ГЁГ¬Г®Г±ГІГј ГЎГЁГ«ГҐГІГ®Гў, 
+	* Г®ГІГ¬ГҐГ­ГЁГІГј Г§Г ГЄГ Г§ ГЎГЁГ«ГҐГІГ®Гў, 
+	* Г±ГґГ®Г°Г¬ГЁГ°Г®ГўГ ГІГј ГЎГЁГ«ГҐГІГ» (ГЄГ Г¦Г¤Г»Г© ГЎГЁГ«ГҐГІ ГўГЄГ«ГѕГ·Г ГҐГІ: Г¤Г ГІГі, Г­Г®Г¬ГҐГ° ГЇГ®ГҐГ§Г¤Г , Г­Г®Г¬ГҐГ° ГўГ ГЈГ®Г­Г , Г­Г®Г¬ГҐГ° Г¬ГҐГ±ГІГ , Г”Г€ГЋ ГЇГ Г±Г±Г Г¦ГЁГ°Г , Г±ГІГ Г­Г¶ГЁГї Г®ГІГЇГ°Г ГўГ«ГҐГ­ГЁГї, Г±ГІГ Г­Г¶ГЁГї ГЇГ°ГЁГЎГ»ГІГЁГї).
 */
 
 #pragma warning(disable : 4996)
@@ -62,43 +62,43 @@ private:
 	std::string Departure_station;
 	std::string Arrival_station;
 public:
-	//конструктор по умолчанию
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
 	Ticket() : Cost(), Data(), Train_number(0), Vagon_number(0), Place_number(0), Name(), Departure_station(""), Arrival_station("") {}
 
-	//конструктор класса
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ«Г Г±Г±Г 
 	Ticket(int cost, Railway_data data, int train_number, int vagon_number, int place_number, FIO name,std::string departure_station, std::string arrival_station) : Cost(cost), Data(data), Train_number(train_number), Vagon_number(vagon_number), Place_number(place_number), Name(name), Departure_station(departure_station), Arrival_station(arrival_station) {}
 
-	//вернуть дату
+	//ГўГҐГ°Г­ГіГІГј Г¤Г ГІГі
 	Railway_data Get_data()
 	{
 		return Data;
 	}
 
-	//вернуть ФИО
+	//ГўГҐГ°Г­ГіГІГј Г”Г€ГЋ
 	FIO Get_name()
 	{
 		return Name;
 	}
 
-	//вернуть цену
+	//ГўГҐГ°Г­ГіГІГј Г¶ГҐГ­Гі
 	int Get_price()
 	{
 		return Cost;
 	}
 
-	//вернуть номер поезда
+	//ГўГҐГ°Г­ГіГІГј Г­Г®Г¬ГҐГ° ГЇГ®ГҐГ§Г¤Г 
 	int Get_train_number()
 	{
 		return Train_number;
 	}
 
-	//вернуть номер вагона
+	//ГўГҐГ°Г­ГіГІГј Г­Г®Г¬ГҐГ° ГўГ ГЈГ®Г­Г 
 	int Get_vagon_number()
 	{
 		return Vagon_number;
 	}
 
-	//вернуть номер места
+	//ГўГҐГ°Г­ГіГІГј Г­Г®Г¬ГҐГ° Г¬ГҐГ±ГІГ 
 	int Get_place_number()
 	{
 		return Place_number;
@@ -114,7 +114,7 @@ private:
 	int Size;
 	int Free_size;
 public:
-	//конструктор по умолчанию
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
 	Vagon()
 	{
 		Free_size = 0;
@@ -123,7 +123,7 @@ public:
 		Size = 0;
 	}
 
-	//конструктор по номеру и типу вагона
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® Г­Г®Г¬ГҐГ°Гі ГЁ ГІГЁГЇГі ГўГ ГЈГ®Г­Г 
 	Vagon(int number, int type) : Number(number), Type(type)
 	{
 		switch (Type)
@@ -152,37 +152,37 @@ public:
 			Places.push_back(0);
 	}
 
-	//вернуть количество свободных мест
+	//ГўГҐГ°Г­ГіГІГј ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ Г¬ГҐГ±ГІ
 	int Get_free_size()
 	{
 		return Free_size;
 	}
 
-	//вернуть номер вагона
+	//ГўГҐГ°Г­ГіГІГј Г­Г®Г¬ГҐГ° ГўГ ГЈГ®Г­Г 
 	int Get_number()
 	{
 		return Number;
 	}
 
-	//вернуть тип вагона
+	//ГўГҐГ°Г­ГіГІГј ГІГЁГЇ ГўГ ГЈГ®Г­Г 
 	int Get_type()
 	{
 		return Type;
 	}
 
-	//указать номер вагона
+	//ГіГЄГ Г§Г ГІГј Г­Г®Г¬ГҐГ° ГўГ ГЈГ®Г­Г 
 	void Set_number(int number)
 	{
 		Number = number;
 	}
 
-	//проверить место в вагоне по индексу
+	//ГЇГ°Г®ГўГҐГ°ГЁГІГј Г¬ГҐГ±ГІГ® Гў ГўГ ГЈГ®Г­ГҐ ГЇГ® ГЁГ­Г¤ГҐГЄГ±Гі
 	bool Check_place(int index)
 	{
 		return Places.at(index);
 	}
 
-	//забронировать место по индексу
+	//Г§Г ГЎГ°Г®Г­ГЁГ°Г®ГўГ ГІГј Г¬ГҐГ±ГІГ® ГЇГ® ГЁГ­Г¤ГҐГЄГ±Гі
 	void Reserve_place(int index)
 	{
 		if (!Places.at(index))
@@ -192,7 +192,7 @@ public:
 		}
 	}
 
-	//разбронирровать место по индексу
+	//Г°Г Г§ГЎГ°Г®Г­ГЁГ°Г°Г®ГўГ ГІГј Г¬ГҐГ±ГІГ® ГЇГ® ГЁГ­Г¤ГҐГЄГ±Гі
 	void Anreserve_place(int index)
 	{
 		if (Places.at(index))
@@ -202,15 +202,15 @@ public:
 		}
 	}
 
-	//вывести на экран не забронированные места
+	//ГўГ»ГўГҐГ±ГІГЁ Г­Г  ГЅГЄГ°Г Г­ Г­ГҐ Г§Г ГЎГ°Г®Г­ГЁГ°Г®ГўГ Г­Г­Г»ГҐ Г¬ГҐГ±ГІГ 
 	void Print_suitable_places()
 	{
 		for (int i = 0; i < Size; i++)
 			if (!Places.at(i))
-				std::cout << "Место №" << i + 1 << std::endl;
+				std::cout << "ГЊГҐГ±ГІГ® В№" << i + 1 << std::endl;
 	}
 
-	//перегрузка операторов
+	//ГЇГҐГ°ГҐГЈГ°ГіГ§ГЄГ  Г®ГЇГҐГ°Г ГІГ®Г°Г®Гў
 	Vagon& operator=(const Vagon& vagon)
 	{
 		if (Size < vagon.Size)
@@ -242,7 +242,7 @@ private:
 	int Type;
 	int Size;
 	std::vector<Vagon> Vagons;
-	//найти индекс вагона по номеру или вернуть -1
+	//Г­Г Г©ГІГЁ ГЁГ­Г¤ГҐГЄГ± ГўГ ГЈГ®Г­Г  ГЇГ® Г­Г®Г¬ГҐГ°Гі ГЁГ«ГЁ ГўГҐГ°Г­ГіГІГј -1
 	int Found_vagon(int number) 
 	{
 		for (int i = 0; i < Vagons.size(); i++)
@@ -251,10 +251,10 @@ private:
 		return -1;
 	}
 public:
-	//конструктор по умолчанию
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
 	Train() : Number(0), Type(0), Size(0) {}
 
-	//конструктор по номеру и типу вагона
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® Г­Г®Г¬ГҐГ°Гі ГЁ ГІГЁГЇГі ГўГ ГЈГ®Г­Г 
 	Train(int number, int type): Number(number), Type(type) 
 	{
 		switch (type)
@@ -293,7 +293,7 @@ public:
 		}
 	}
 
-	//получить вагон по номеру
+	//ГЇГ®Г«ГіГ·ГЁГІГј ГўГ ГЈГ®Г­ ГЇГ® Г­Г®Г¬ГҐГ°Гі
 	Vagon* Get_vagon(int number)
 	{
 		int index = Found_vagon(number);
@@ -302,25 +302,25 @@ public:
 		return &Vagons.at(index);
 	}
 
-	//получить номер поезда
+	//ГЇГ®Г«ГіГ·ГЁГІГј Г­Г®Г¬ГҐГ° ГЇГ®ГҐГ§Г¤Г 
 	int Get_number()
 	{
 		return Number;
 	}
 
-	//получить тип поезда
+	//ГЇГ®Г«ГіГ·ГЁГІГј ГІГЁГЇ ГЇГ®ГҐГ§Г¤Г 
 	int Get_type()
 	{
 		return Type;
 	}
 
-	//получить количество вагонов в поезде
+	//ГЇГ®Г«ГіГ·ГЁГІГј ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГўГ ГЈГ®Г­Г®Гў Гў ГЇГ®ГҐГ§Г¤ГҐ
 	int Get_size()
 	{
 		return Size;
 	}
 
-	//проверяет есть ли в поезде подходящие вагоны
+	//ГЇГ°Г®ГўГҐГ°ГїГҐГІ ГҐГ±ГІГј Г«ГЁ Гў ГЇГ®ГҐГ§Г¤ГҐ ГЇГ®Г¤ГµГ®Г¤ГїГ№ГЁГҐ ГўГ ГЈГ®Г­Г»
 	bool Check_free_vagons(int count_peoples)
 	{
 		for (int i = 0; i < Size; i++)
@@ -329,15 +329,15 @@ public:
 		return false;
 	}
 
-	//напечатать в консоль все подходящие по условиям вагоны
+	//Г­Г ГЇГҐГ·Г ГІГ ГІГј Гў ГЄГ®Г­Г±Г®Г«Гј ГўГ±ГҐ ГЇГ®Г¤ГµГ®Г¤ГїГ№ГЁГҐ ГЇГ® ГіГ±Г«Г®ГўГЁГїГ¬ ГўГ ГЈГ®Г­Г»
 	void Print_suitable_vagons(int vagon_type, int places_count)
 	{
 		for (Vagon i : Vagons)
 			if (i.Get_free_size() >= places_count)
-				std::cout << "Вагон №" << i.Get_number() << std::endl;
+				std::cout << "Г‚Г ГЈГ®Г­ В№" << i.Get_number() << std::endl;
 	}
 	
-	//перегрузка операторов
+	//ГЇГҐГ°ГҐГЈГ°ГіГ§ГЄГ  Г®ГЇГҐГ°Г ГІГ®Г°Г®Гў
 	Train& operator=(const Train train)
 	{
 		if (Size < train.Size)
@@ -369,10 +369,10 @@ private:
 	std::vector<Train> Trains;
 	std::vector<Ticket> Tickets;
 public:
-	//конструктор по умолчанию
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
 	Railway() : Data(), Count_trains(0), Count_tickets(0) {}
 
-	//конструктор по дате
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® Г¤Г ГІГҐ
 	Railway(Railway_data data)
 	{
 		Data = data;
@@ -380,7 +380,7 @@ public:
 		Count_tickets = 0;
 	}
 
-	//найти индекс поезда по номеру или вернуть -1
+	//Г­Г Г©ГІГЁ ГЁГ­Г¤ГҐГЄГ± ГЇГ®ГҐГ§Г¤Г  ГЇГ® Г­Г®Г¬ГҐГ°Гі ГЁГ«ГЁ ГўГҐГ°Г­ГіГІГј -1
 	int Found_train(int number)
 	{
 		for (int i = 0; i < Count_trains; i++)
@@ -389,15 +389,15 @@ public:
 		return -1;
 	}
 
-	//написать в консоль все подходящие по параметрам поезда
+	//Г­Г ГЇГЁГ±Г ГІГј Гў ГЄГ®Г­Г±Г®Г«Гј ГўГ±ГҐ ГЇГ®Г¤ГµГ®Г¤ГїГ№ГЁГҐ ГЇГ® ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ ГЇГ®ГҐГ§Г¤Г 
 	void Print_suitable_trains(int train_type, int places_count)
 	{
 		for (Train i : Trains)
 			if (i.Get_type() == train_type && i.Check_free_vagons(places_count))
-				std::cout << "Поезд №" << i.Get_number() << std::endl;
+				std::cout << "ГЏГ®ГҐГ§Г¤ В№" << i.Get_number() << std::endl;
 	}
 
-	//получить поезд по номеру
+	//ГЇГ®Г«ГіГ·ГЁГІГј ГЇГ®ГҐГ§Г¤ ГЇГ® Г­Г®Г¬ГҐГ°Гі
 	Train* Get_train(int number)
 	{
 		int index = Found_train(number);
@@ -406,39 +406,39 @@ public:
 		return &Trains.at(index);
 	}
 
-	//получить дату
+	//ГЇГ®Г«ГіГ·ГЁГІГј Г¤Г ГІГі
 	Railway_data Get_data() const
 	{
 		return Data;
 	}
 
-	//получить количество поездов
+	//ГЇГ®Г«ГіГ·ГЁГІГј ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГ®ГҐГ§Г¤Г®Гў
 	int Get_count_trains()
 	{
 		return Count_trains;
 	}
 
-	//получить количество билетов
+	//ГЇГ®Г«ГіГ·ГЁГІГј ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЎГЁГ«ГҐГІГ®Гў
 	int Get_count_tickets()
 	{
 		return Count_tickets;
 	}
 
-	//добавить поезд
+	//Г¤Г®ГЎГ ГўГЁГІГј ГЇГ®ГҐГ§Г¤
 	void Append_train(Train train)
 	{
 		Trains.push_back(train);
 		Count_trains++;
 	}
 
-	//добавить билет
+	//Г¤Г®ГЎГ ГўГЁГІГј ГЎГЁГ«ГҐГІ
 	void Append_ticket(Ticket ticket)
 	{
 		Tickets.push_back(ticket);
 		Count_tickets++;
 	}
 
-	//удалить билет по дате и номерам поезда, вагона и места
+	//ГіГ¤Г Г«ГЁГІГј ГЎГЁГ«ГҐГІ ГЇГ® Г¤Г ГІГҐ ГЁ Г­Г®Г¬ГҐГ°Г Г¬ ГЇГ®ГҐГ§Г¤Г , ГўГ ГЈГ®Г­Г  ГЁ Г¬ГҐГ±ГІГ 
 	void Delete_ticket(int train, int vagon, int place)
 	{
 		for (int i = 0; i < Count_tickets; i++)
@@ -452,7 +452,7 @@ public:
 		}
 	}
 
-	//проверить цену
+	//ГЇГ°Г®ГўГҐГ°ГЁГІГј Г¶ГҐГ­Гі
 	int Check_price(int train_type, int vagon_type, int place_number)
 	{
 		switch (train_type)
@@ -464,12 +464,12 @@ public:
 			{
 			case pzkrt:
 				if (place_number % 2 == 0)
-					return 1000; //нижнее
-				return 800;//верхнее
+					return 1000; //Г­ГЁГ¦Г­ГҐГҐ
+				return 800;//ГўГҐГ°ГµГ­ГҐГҐ
 			case cupe:
 				if (place_number % 2 == 0)
-					return 1200; //нижнее
-				return 1000;//верхнее
+					return 1200; //Г­ГЁГ¦Г­ГҐГҐ
+				return 1000;//ГўГҐГ°ГµГ­ГҐГҐ
 			case sv:
 				return 1300;
 			}
@@ -479,12 +479,12 @@ public:
 			{
 			case pzkrt:
 				if (place_number % 2 == 0)
-					return 900; //нижнее
-				return 700; //верхнее
+					return 900; //Г­ГЁГ¦Г­ГҐГҐ
+				return 700; //ГўГҐГ°ГµГ­ГҐГҐ
 			case cupe:
 				if (place_number % 2 == 0)
-					return 1100; //нижнее
-				return 900;//верхнее
+					return 1100; //Г­ГЁГ¦Г­ГҐГҐ
+				return 900;//ГўГҐГ°ГµГ­ГҐГҐ
 			case sv:
 				return 1200;
 			}
@@ -492,7 +492,7 @@ public:
 		return 0;
 	}
 
-	//перегрузка операторов
+	//ГЇГҐГ°ГҐГЈГ°ГіГ§ГЄГ  Г®ГЇГҐГ°Г ГІГ®Г°Г®Гў
 	Railway& operator=(const Railway railway)
 	{
 		if (Count_trains < railway.Count_trains)
@@ -517,7 +517,7 @@ private:
 	std::vector<Railway> Railways;
 
 public:
-	//конструктор по умолчаннию
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­Г­ГЁГѕ
 	Data()
 	{
 		std::time_t now = std::time(nullptr);
@@ -530,11 +530,11 @@ public:
 			Railways.push_back(Railway(today++));
 	}
 
-	//получить конкретный Railway по дню и месяцу
+	//ГЇГ®Г«ГіГ·ГЁГІГј ГЄГ®Г­ГЄГ°ГҐГІГ­Г»Г© Railway ГЇГ® Г¤Г­Гѕ ГЁ Г¬ГҐГ±ГїГ¶Гі
 	Railway* Get_railway(int day, int mon) 
 	{
 		if (!is_valid_date(day, mon)) {
-			std::cout << "Ошибка: некорректная дата" << std::endl;
+			std::cout << "ГЋГёГЁГЎГЄГ : Г­ГҐГЄГ®Г°Г°ГҐГЄГІГ­Г Гї Г¤Г ГІГ " << std::endl;
 			return nullptr;
 		}
 
@@ -543,7 +543,7 @@ public:
 			if (Railways.at(i).Get_data() == rd)
 				return &Railways.at(i);
 
-		std::cout << "Ошибка: расписание на указанную дату отсутствует" << std::endl;
+		std::cout << "ГЋГёГЁГЎГЄГ : Г°Г Г±ГЇГЁГ±Г Г­ГЁГҐ Г­Г  ГіГЄГ Г§Г Г­Г­ГіГѕ Г¤Г ГІГі Г®ГІГ±ГіГІГ±ГІГўГіГҐГІ" << std::endl;
 		return nullptr;
 	}
 };
@@ -572,55 +572,55 @@ class Cassa
 	int Reserved_place_size;
 
 public:
-	//конструктор класса
+	//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ«Г Г±Г±Г 
 	Cassa(Data data) : Calendar(data), Initialization(false), Today_data(), Train_type(0), Train_num(0), Vagon_type(0), Vagon_num(0), Places_count(0), Total_cost(0), Names_size(0), Places_size(0), Departure_station(""), Arrival_station(""), Reserved_place_size(0) {}
 
-	//получить данные пользователя и занести всё в базу Data Calendar
+	//ГЇГ®Г«ГіГ·ГЁГІГј Г¤Г Г­Г­Г»ГҐ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї ГЁ Г§Г Г­ГҐГ±ГІГЁ ГўГ±Вё Гў ГЎГ Г§Гі Data Calendar
 	void Get_user_info()
 	{
 		if (Initialization)
 			return;
 		char ch;
 		int mon, day;
-		std::cout << "Введите день: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г¤ГҐГ­Гј: ";
 		std::cin >> day;
 		while (ch = getchar() != '\n');
-		std::cout << "Введите месяц: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г¬ГҐГ±ГїГ¶: ";
 		std::cin >> mon;
 		while (ch = getchar() != '\n');
 		if (!is_valid_date(day, mon))
 		{
-			std::cout << "Ошибка: неверная дата, либо рассписание на этот день отсутствует" << std::endl;
+			std::cout << "ГЋГёГЁГЎГЄГ : Г­ГҐГўГҐГ°Г­Г Гї Г¤Г ГІГ , Г«ГЁГЎГ® Г°Г Г±Г±ГЇГЁГ±Г Г­ГЁГҐ Г­Г  ГЅГІГ®ГІ Г¤ГҐГ­Гј Г®ГІГ±ГіГІГ±ГІГўГіГҐГІ" << std::endl;
 			return;
 		}
 		Today_data = Railway_data(day, mon);
 		Today_railway = *Calendar.Get_railway(day, mon);
 
 		int station;
-		std::cout << "Выберите станцию отправления (1 - Нижний Новгород | 2 - Москва): ";
+		std::cout << "Г‚Г»ГЎГҐГ°ГЁГІГҐ Г±ГІГ Г­Г¶ГЁГѕ Г®ГІГЇГ°Г ГўГ«ГҐГ­ГЁГї (1 - ГЌГЁГ¦Г­ГЁГ© ГЌГ®ГўГЈГ®Г°Г®Г¤ | 2 - ГЊГ®Г±ГЄГўГ ): ";
 		std::cin >> station;
 		if (station == 1)
 		{
-			Departure_station = "Нижний Новгород";
-			Arrival_station = "Москва";
+			Departure_station = "ГЌГЁГ¦Г­ГЁГ© ГЌГ®ГўГЈГ®Г°Г®Г¤";
+			Arrival_station = "ГЊГ®Г±ГЄГўГ ";
 		}
 		else if (station == 2)
 		{
-			Departure_station = "Москва";
-			Arrival_station = "Нижний Новгород";
+			Departure_station = "ГЊГ®Г±ГЄГўГ ";
+			Arrival_station = "ГЌГЁГ¦Г­ГЁГ© ГЌГ®ГўГЈГ®Г°Г®Г¤";
 		}
 		else
 		{
-			std::cout << "Ошибка: введено не корректное значение" << std::endl;
+			std::cout << "ГЋГёГЁГЎГЄГ : ГўГўГҐГ¤ГҐГ­Г® Г­ГҐ ГЄГ®Г°Г°ГҐГЄГІГ­Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ" << std::endl;
 			return;
 		}
 
-		std::cout << "Выберите тип поезда (1 - 'Ласточка' | 2 - Скорый| 3 - Фирменный): ";
+		std::cout << "Г‚Г»ГЎГҐГ°ГЁГІГҐ ГІГЁГЇ ГЇГ®ГҐГ§Г¤Г  (1 - 'Г‹Г Г±ГІГ®Г·ГЄГ ' | 2 - Г‘ГЄГ®Г°Г»Г©| 3 - Г”ГЁГ°Г¬ГҐГ­Г­Г»Г©): ";
 		std::cin >> Train_type;
 		while (ch = getchar() != '\n');
 		if (Train_type < 1 && Train_type > 3)
 		{
-			std::cout << "Ошибка: введено не корректное значение" << std::endl;
+			std::cout << "ГЋГёГЁГЎГЄГ : ГўГўГҐГ¤ГҐГ­Г® Г­ГҐ ГЄГ®Г°Г°ГҐГЄГІГ­Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ" << std::endl;
 			return;
 		}
 		switch (Train_type)
@@ -630,22 +630,22 @@ public:
 			break;
 		case fasttrain:
 		case firmtrain:
-			std::cout << "Выберите тип вагона (2 - плацкарт | 3 - купе| 4 - св): ";
+			std::cout << "Г‚Г»ГЎГҐГ°ГЁГІГҐ ГІГЁГЇ ГўГ ГЈГ®Г­Г  (2 - ГЇГ«Г Г¶ГЄГ Г°ГІ | 3 - ГЄГіГЇГҐ| 4 - Г±Гў): ";
 			std::cin >> Vagon_type;
 			while (ch = getchar() != '\n');
 			if (Vagon_type < 2 && Vagon_type > 4)
 			{
-				std::cout << "Ошибка: введено не корректное значение" << std::endl;
+				std::cout << "ГЋГёГЁГЎГЄГ : ГўГўГҐГ¤ГҐГ­Г® Г­ГҐ ГЄГ®Г°Г°ГҐГЄГІГ­Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ" << std::endl;
 				return;
 			}
 		}
 		
-		std::cout << "Введите количество пассажиров: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГ Г±Г±Г Г¦ГЁГ°Г®Гў: ";
 		std::cin >> Places_count;
 		while (ch = getchar() != '\n');
 		if (Places_count <= 0 || Places_count > 100)
 		{
-			std::cout << "Ошибка: введено не корректное значение" << std::endl;
+			std::cout << "ГЋГёГЁГЎГЄГ : ГўГўГҐГ¤ГҐГ­Г® Г­ГҐ ГЄГ®Г°Г°ГҐГЄГІГ­Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ" << std::endl;
 			return;
 		}
 		Initialization = true;
@@ -653,61 +653,61 @@ public:
 			Reserve_place();
 	}
 
-	//проверить конкретное место в вагоне (только после одного Reserve_place)
+	//ГЇГ°Г®ГўГҐГ°ГЁГІГј ГЄГ®Г­ГЄГ°ГҐГІГ­Г®ГҐ Г¬ГҐГ±ГІГ® Гў ГўГ ГЈГ®Г­ГҐ (ГІГ®Г«ГјГЄГ® ГЇГ®Г±Г«ГҐ Г®Г¤Г­Г®ГЈГ® Reserve_place)
 	void Check_free_place(int place_num)
 	{
 		if (!Initialization)
 			return;
 		if (Reserved_place_size < 1)
 		{
-			std::cout << "Сперва забронируйте хотябы одно место" << std::endl;
+			std::cout << "Г‘ГЇГҐГ°ГўГ  Г§Г ГЎГ°Г®Г­ГЁГ°ГіГ©ГІГҐ ГµГ®ГІГїГЎГ» Г®Г¤Г­Г® Г¬ГҐГ±ГІГ®" << std::endl;
 			return;
 		}
 		Train train = *Today_railway.Get_train(Train_num);
 		Vagon vagon = *train.Get_vagon(Vagon_num);
 		if (train.Check_free_vagons(Places_count))
 		{
-			std::cout << "В поезде нет вагонов с подходящим количеством свободных мест" << std::endl;
+			std::cout << "Г‚ ГЇГ®ГҐГ§Г¤ГҐ Г­ГҐГІ ГўГ ГЈГ®Г­Г®Гў Г± ГЇГ®Г¤ГµГ®Г¤ГїГ№ГЁГ¬ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ®Г¬ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ Г¬ГҐГ±ГІ" << std::endl;
 			return;
 		}
 		if (vagon.Get_free_size() < Places_count)
 		{
-			std::cout << "В вагоне нет нужного количества свободных мест" << std::endl;
+			std::cout << "Г‚ ГўГ ГЈГ®Г­ГҐ Г­ГҐГІ Г­ГіГ¦Г­Г®ГЈГ® ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ  Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ Г¬ГҐГ±ГІ" << std::endl;
 			return;
 		}
 		if (vagon.Check_place(place_num))
-			std::cout << "Занято" << std::endl;
+			std::cout << "Г‡Г Г­ГїГІГ®" << std::endl;
 		else
-			std::cout << "Свободно" << std::endl;
+			std::cout << "Г‘ГўГ®ГЎГ®Г¤Г­Г®" << std::endl;
 	}
 
-	//забронировать место в вагоне
+	//Г§Г ГЎГ°Г®Г­ГЁГ°Г®ГўГ ГІГј Г¬ГҐГ±ГІГ® Гў ГўГ ГЈГ®Г­ГҐ
 	void Reserve_place()
 	{
 		if (!Initialization)
 		{
-			std::cout << "Ошибка: касса не инициализирована" << std::endl;
+			std::cout << "ГЋГёГЁГЎГЄГ : ГЄГ Г±Г±Г  Г­ГҐ ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°Г®ГўГ Г­Г " << std::endl;
 			return;
 		}
 		char ch;
 		if (Train_num == 0)
 		{
-			std::cout << "Выберите номер поезда из подходящих для вас" << std::endl;
+			std::cout << "Г‚Г»ГЎГҐГ°ГЁГІГҐ Г­Г®Г¬ГҐГ° ГЇГ®ГҐГ§Г¤Г  ГЁГ§ ГЇГ®Г¤ГµГ®Г¤ГїГ№ГЁГµ Г¤Г«Гї ГўГ Г±" << std::endl;
 			Today_railway.Print_suitable_trains(Train_type, Places_count);
-			std::cout << "Ваш выбор: ";
+			std::cout << "Г‚Г Гё ГўГ»ГЎГ®Г°: ";
 			std::cin >> Train_num;
 			while (ch = getchar() != '\n');
 
-			std::cout << "Выберите номер вагона из подходящих для вас" << std::endl;
+			std::cout << "Г‚Г»ГЎГҐГ°ГЁГІГҐ Г­Г®Г¬ГҐГ° ГўГ ГЈГ®Г­Г  ГЁГ§ ГЇГ®Г¤ГµГ®Г¤ГїГ№ГЁГµ Г¤Г«Гї ГўГ Г±" << std::endl;
 			Today_railway.Get_train(Train_num)->Print_suitable_vagons(Vagon_type, Places_count);
-			std::cout << "Ваш выбор: ";
+			std::cout << "Г‚Г Гё ГўГ»ГЎГ®Г°: ";
 			std::cin >> Vagon_num;
 			while (ch = getchar() != '\n');
 		}
 		int Place_num;
-		std::cout << "Выберите номер места из подходящих для вас" << std::endl;
+		std::cout << "Г‚Г»ГЎГҐГ°ГЁГІГҐ Г­Г®Г¬ГҐГ° Г¬ГҐГ±ГІГ  ГЁГ§ ГЇГ®Г¤ГµГ®Г¤ГїГ№ГЁГµ Г¤Г«Гї ГўГ Г±" << std::endl;
 		Today_railway.Get_train(Train_num)->Get_vagon(Vagon_num)->Print_suitable_places();
-		std::cout << "Ваш выбор: ";
+		std::cout << "Г‚Г Гё ГўГ»ГЎГ®Г°: ";
 		std::cin >> Place_num;
 		while (ch = getchar() != '\n');
 		Place_num--;
@@ -716,7 +716,7 @@ public:
 		int cost = Today_railway.Check_price(train_type, vagon_type, Place_num);
 
 		std::string input;
-		std::cout << "Введите ваше ФИО в формате 'Фамилия Имя Отчество': ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГўГ ГёГҐ Г”Г€ГЋ Гў ГґГ®Г°Г¬Г ГІГҐ 'Г”Г Г¬ГЁГ«ГЁГї Г€Г¬Гї ГЋГІГ·ГҐГ±ГІГўГ®': ";
 		std::getline(std::cin, input);
 
 		std::string f_name, i_name, o_name;
@@ -724,7 +724,7 @@ public:
 		iss >> f_name >> i_name >> o_name;
 			
 		Today_railway.Get_train(Train_num)->Get_vagon(Vagon_num)->Reserve_place(Place_num);
-		std::cout << "Место забронировано" << std::endl;
+		std::cout << "ГЊГҐГ±ГІГ® Г§Г ГЎГ°Г®Г­ГЁГ°Г®ГўГ Г­Г®" << std::endl;
 		FIO fio(f_name, i_name, o_name);
 		Names.push_back(fio);
 		Names_size++;
@@ -736,14 +736,14 @@ public:
 		Today_railway.Append_ticket(Ticket(cost, Today_data, Train_num, Vagon_num, Place_num + 1, fio, Departure_station, Arrival_station));
 	}
 
-	//отменить бронь
+	//Г®ГІГ¬ГҐГ­ГЁГІГј ГЎГ°Г®Г­Гј
 	void Cancel_ticket_order(int place_num)
 	{
 		if (!Initialization)
 			return;
 		if (!Today_railway.Get_train(Train_num)->Get_vagon(Vagon_num)->Check_place(place_num))
 		{
-			std::cout << "Место не забронировано" << std::endl;
+			std::cout << "ГЊГҐГ±ГІГ® Г­ГҐ Г§Г ГЎГ°Г®Г­ГЁГ°Г®ГўГ Г­Г®" << std::endl;
 		}
 		else
 		{
@@ -760,11 +760,11 @@ public:
 					Prices_size--;
 					break;
 				}
-			std::cout << "Бронь с места снята" << std::endl;
+			std::cout << "ГЃГ°Г®Г­Гј Г± Г¬ГҐГ±ГІГ  Г±Г­ГїГІГ " << std::endl;
 		}
 	}
 
-	//посчитать общую цену всех билетов
+	//ГЇГ®Г±Г·ГЁГІГ ГІГј Г®ГЎГ№ГіГѕ Г¶ГҐГ­Гі ГўГ±ГҐГµ ГЎГЁГ«ГҐГІГ®Гў
 	void Calculate_total_price()
 	{
 		if (!Initialization)
@@ -774,17 +774,17 @@ public:
 			Total_cost += i;
 	}
 	
-	//выдать чек
+	//ГўГ»Г¤Г ГІГј Г·ГҐГЄ
 	void Generate_ticket()
 	{
 		if (!Initialization)
 			return;
-		std::cout << "______________БИЛЕТ______________" << std::endl;
-		std::cout << "Дата: " << Today_data;
-		std::cout << " Поезд №" << Train_num;
-		std::cout << " Вагон №" << Vagon_num << std::endl;
+		std::cout << "______________ГЃГ€Г‹Г…Г’______________" << std::endl;
+		std::cout << "Г„Г ГІГ : " << Today_data;
+		std::cout << " ГЏГ®ГҐГ§Г¤ В№" << Train_num;
+		std::cout << " Г‚Г ГЈГ®Г­ В№" << Vagon_num << std::endl;
 		
-		std::cout << "ФИО пассажиров:";
+		std::cout << "Г”Г€ГЋ ГЇГ Г±Г±Г Г¦ГЁГ°Г®Гў:";
 		for (int i = 0; i < Names_size; i++)
 		{
 			if (i < Names.size() - 1)
@@ -793,7 +793,7 @@ public:
 				std::cout << " " << Names.at(i) << std::endl;
 		}
 
-		std::cout << "Номера мест";
+		std::cout << "ГЌГ®Г¬ГҐГ°Г  Г¬ГҐГ±ГІ";
 		for (int i = 0; i < Places_size; i++)
 		{
 			if (i < Places.size() - 1)
@@ -802,11 +802,11 @@ public:
 				std::cout << " " << Places.at(i) << std::endl;
 		}		
 
-		std::cout << "Станция отправления: " << Departure_station << std::endl;
-		std::cout << "Станция прибытия: " << Arrival_station << std::endl;
+		std::cout << "Г‘ГІГ Г­Г¶ГЁГї Г®ГІГЇГ°Г ГўГ«ГҐГ­ГЁГї: " << Departure_station << std::endl;
+		std::cout << "Г‘ГІГ Г­Г¶ГЁГї ГЇГ°ГЁГЎГ»ГІГЁГї: " << Arrival_station << std::endl;
 		if (Total_cost == 0)
 			Calculate_total_price();
-		std::cout << "Итоговая стоимость билетов: " << Total_cost << "р." << std::endl;
+		std::cout << "Г€ГІГ®ГЈГ®ГўГ Гї Г±ГІГ®ГЁГ¬Г®Г±ГІГј ГЎГЁГ«ГҐГІГ®Гў: " << Total_cost << "Г°." << std::endl;
 		std::cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << std::endl;
 	}
 };
@@ -816,26 +816,26 @@ int main()
 	SetConsoleOutputCP(1251);
 	SetConsoleCP(1251);
 
-	//создаем объект класса data, в котором содержатся 30 дней (Railway) вперед начиная со дня запуска программы
+	//Г±Г®Г§Г¤Г ГҐГ¬ Г®ГЎГєГҐГЄГІ ГЄГ«Г Г±Г±Г  data, Гў ГЄГ®ГІГ®Г°Г®Г¬ Г±Г®Г¤ГҐГ°Г¦Г ГІГ±Гї 30 Г¤Г­ГҐГ© (Railway) ГўГЇГҐГ°ГҐГ¤ Г­Г Г·ГЁГ­Г Гї Г±Г® Г¤Г­Гї Г§Г ГЇГіГ±ГЄГ  ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
 	Data data;
-  //заполняем нашу "базу данных", занеся в определенные дни поезда (изначально каждый Railway пуст)
-	data.Get_railway(27, 04)->Append_train(Train(1, birdtrain));
-	data.Get_railway(27, 04)->Append_train(Train(2, birdtrain));
-	data.Get_railway(27, 04)->Append_train(Train(3, birdtrain));
-	data.Get_railway(27, 04)->Append_train(Train(4, birdtrain));
-	data.Get_railway(27, 04)->Append_train(Train(5, fasttrain));
-	data.Get_railway(27, 04)->Append_train(Train(6, fasttrain));
-	data.Get_railway(27, 04)->Append_train(Train(7, fasttrain));
-	data.Get_railway(27, 04)->Append_train(Train(8, firmtrain));
-	data.Get_railway(27, 04)->Append_train(Train(9, firmtrain));
+  //Г§Г ГЇГ®Г«Г­ГїГҐГ¬ Г­Г ГёГі "ГЎГ Г§Гі Г¤Г Г­Г­Г»Гµ", Г§Г Г­ГҐГ±Гї Гў Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГ­Г­Г»ГҐ Г¤Г­ГЁ ГЇГ®ГҐГ§Г¤Г  (ГЁГ§Г­Г Г·Г Г«ГјГ­Г® ГЄГ Г¦Г¤Г»Г© Railway ГЇГіГ±ГІ)
+	data.Get_railway(27, 06)->Append_train(Train(1, birdtrain));
+	data.Get_railway(27, 06)->Append_train(Train(2, birdtrain));
+	data.Get_railway(27, 06)->Append_train(Train(3, birdtrain));
+	data.Get_railway(27, 06)->Append_train(Train(4, birdtrain));
+	data.Get_railway(27, 06)->Append_train(Train(5, fasttrain));
+	data.Get_railway(27, 06)->Append_train(Train(6, fasttrain));
+	data.Get_railway(27, 06)->Append_train(Train(7, fasttrain));
+	data.Get_railway(27, 06)->Append_train(Train(8, firmtrain));
+	data.Get_railway(27, 06)->Append_train(Train(9, firmtrain));
 
-	//"подключаем" к нашей кассе data, с которой будем работать
+	//"ГЇГ®Г¤ГЄГ«ГѕГ·Г ГҐГ¬" ГЄ Г­Г ГёГҐГ© ГЄГ Г±Г±ГҐ data, Г± ГЄГ®ГІГ®Г°Г®Г© ГЎГіГ¤ГҐГ¬ Г°Г ГЎГ®ГІГ ГІГј
 	Cassa cassa(data);
-	//получить информацию пользователя и создать билеты
+	//ГЇГ®Г«ГіГ·ГЁГІГј ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГѕ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї ГЁ Г±Г®Г§Г¤Г ГІГј ГЎГЁГ«ГҐГІГ»
 	cassa.Get_user_info();
-	//удалить билет с номером места 2 в ранее выбранном вагоне
+	//ГіГ¤Г Г«ГЁГІГј ГЎГЁГ«ГҐГІ Г± Г­Г®Г¬ГҐГ°Г®Г¬ Г¬ГҐГ±ГІГ  2 Гў Г°Г Г­ГҐГҐ ГўГ»ГЎГ°Г Г­Г­Г®Г¬ ГўГ ГЈГ®Г­ГҐ
 	cassa.Cancel_ticket_order(2);
-	//сгенерировать билет
+	//Г±ГЈГҐГ­ГҐГ°ГЁГ°Г®ГўГ ГІГј ГЎГЁГ«ГҐГІ
 	cassa.Generate_ticket();
 	system("pause");
 }
