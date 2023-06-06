@@ -111,6 +111,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Border.h" />
+    <ClInclude Include="BufferedConsoleGameScreen.h" />
+    <ClInclude Include="Console.h" />
+    <ClInclude Include="ConsoleGameScreen.h" />
+    <ClInclude Include="Food.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="Snake.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
